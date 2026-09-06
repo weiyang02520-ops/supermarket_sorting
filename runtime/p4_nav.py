@@ -12,16 +12,21 @@ from datetime import datetime
 from runtime.head_camera_kinematics import AISLE_SCAN_HEAD, AISLE_SCAN_SPINE
 from runtime.grid_planner import GridNavController
 from runtime.lidar_avoid import scan_sectors_from_msg
+from runtime.nav_geometry import GEOMETRY_VERSION, LASER_EXTRINSIC
+from runtime.nav_types import NavGoal
 from runtime.p4_params import (
     BASE_ANG,
     BASE_LIN,
     DEFAULT_TIMEOUT_S,
     HEAD_SETTLE_S,
+    EXPLORE_SPEED_SCALE,
+    KNOWN_SPEED_SCALE,
     LOG_DIR,
     MAX_ANG_CAP,
     RATE_HZ,
     SPEED_SCALE,
     STOP_DIST,
+    UNKNOWN_SPEED_SCALE,
 )
 from runtime.ros_contract import JOINT_STATES_TOPIC, ODOM_TOPIC, SCAN_TOPIC
 from runtime.ros_robot_control import RosRobotController
@@ -34,7 +39,7 @@ from runtime.scene_zones import (
     in_delivery_base,
     in_picking_zone,
 )
-from runtime.waypoint_nav import build_delivery_route, build_shelf_route, pose_from_odom
+from runtime.waypoint_nav import pose_from_odom
 
 
 class _Tee:
@@ -84,7 +89,8 @@ def _goal_spec(goal: str, final_xy=None, final_yaw=None):
         yaw = SHELF_FACE_YAW if final_yaw is None else float(final_yaw)
         return {
             "name": "shelf",
-            "route": build_shelf_route(xy),
+            "kind": "shelf_approach",
+            "xy": (float(xy[0]), float(xy[1])),
             "yaw": yaw,
             "aim_head": True,
         }
@@ -93,7 +99,8 @@ def _goal_spec(goal: str, final_xy=None, final_yaw=None):
         yaw = DELIVERY_FACE_YAW if final_yaw is None else float(final_yaw)
         return {
             "name": "delivery",
-            "route": build_delivery_route(xy),
+            "kind": "delivery_approach",
+            "xy": (float(xy[0]), float(xy[1])),
             "yaw": yaw,
             "aim_head": False,
         }
@@ -106,7 +113,7 @@ def navigate(
     timeout_sec: float = DEFAULT_TIMEOUT_S,
     final_xy=None,
     final_yaw=None,
-    speed_scale: float = SPEED_SCALE,
+    speed_scale: float = KNOWN_SPEED_SCALE,
 ) -> dict:
     from geometry_msgs.msg import Twist
     from nav_msgs.msg import Odometry
@@ -117,6 +124,8 @@ def navigate(
     scale = max(0.1, float(speed_scale))
     max_lin = BASE_LIN * scale
     max_ang = min(MAX_ANG_CAP, BASE_ANG * scale)
+    cruise_lin = BASE_LIN * min(scale, UNKNOWN_SPEED_SCALE)
+    explore_lin = BASE_LIN * min(scale, EXPLORE_SPEED_SCALE)
     node = rclpy_mod.create_node(f"supermarket_p4_{spec['name']}")
     sensors = SensorCache()
     controller = RosRobotController(
@@ -151,18 +160,32 @@ def navigate(
         for _ in range(20):
             rclpy_mod.spin_once(node, timeout_sec=0.05)
         x, y, yaw = pose_from_odom(sensors.odom)
-        goal_xy = spec["route"][-1]
+        goal_xy = spec["xy"]
         nav = GridNavController(
-            goal_xy=(float(goal_xy[0]), float(goal_xy[1])),
+            goal_xy=goal_xy,
             final_yaw=spec["yaw"],
             max_lin=max_lin,
             max_ang=max_ang,
+            cruise_lin=cruise_lin,
+            explore_lin=explore_lin,
+            goal_kind=spec["kind"],
+        )
+        nav.set_goal(
+            NavGoal(
+                goal_id=spec["kind"],
+                kind=spec["kind"],
+                xy=goal_xy,
+                final_yaw=spec["yaw"],
+            )
         )
         print(
             f"p4_{spec['name']}: start xy=({x:.2f},{y:.2f}) yaw={yaw:.2f} "
-            f"goal=({goal_xy[0]:.3f},{goal_xy[1]:.3f}) "
-            f"stop={STOP_DIST:.2f} planner=grid "
-            f"max_lin={max_lin:.2f} max_ang={max_ang:.2f}",
+            f"goal=({goal_xy[0]:.3f},{goal_xy[1]:.3f}) kind={spec['kind']} "
+            f"stop={STOP_DIST:.2f} planner=grid geom={GEOMETRY_VERSION} "
+            f"laser={LASER_EXTRINSIC['status']} "
+            f"max_lin={max_lin:.2f} max_ang={max_ang:.2f} "
+            f"known={scale:.1f}x explore={min(scale, EXPLORE_SPEED_SCALE):.1f}x "
+            f"cruise={UNKNOWN_SPEED_SCALE:.1f}x",
             file=sys.stderr,
         )
         deadline = time.monotonic() + float(timeout_sec)
@@ -179,8 +202,18 @@ def navigate(
                 ranges = scan.ranges
                 angle_min = float(scan.angle_min)
                 angle_inc = float(scan.angle_increment)
+            if last_status.startswith("replan") or last_status.startswith("PLAN") or last_status == "set_goal":
+                controller.publish_velocity(0.0, 0.0)
             linear, angular, arrived, last_status = nav.step(
-                x, y, yaw, ranges, angle_min, angle_inc, dt=period, now=time.monotonic() - start,
+                x,
+                y,
+                yaw,
+                ranges,
+                angle_min,
+                angle_inc,
+                dt=period,
+                now=time.monotonic() - start,
+                scan_id=sensors.scan_id or None,
             )
             if spec["aim_head"]:
                 controller.command_spine(AISLE_SCAN_SPINE)
@@ -197,7 +230,8 @@ def navigate(
                 print(
                     f"p4_{spec['name']}: xy=({x:.2f},{y:.2f}) yaw={yaw:.2f} "
                     f"wp={wp}/{nwp} fwd={fwd:.2f} lin={linear:.2f} ang={angular:.2f} "
-                    f"{last_status} plan_id={nav.plan_id} detours=0 "
+                    f"{last_status} state={nav.state} plan_id={nav.plan_id} "
+                    f"attempts={nav.plan_attempt_id} detours=0 "
                     f"plan_ms={nav.last_plan_ms:.1f}",
                     file=sys.stderr,
                 )
@@ -223,23 +257,37 @@ def navigate(
             "odom_xy": [round(x, 3), round(y, 3)],
             "yaw": round(yaw, 3),
             "head_joints": _head_joints(sensors),
-            "goal_xy": [float(spec["route"][-1][0]), float(spec["route"][-1][1])],
+            "goal_xy": [float(goal_xy[0]), float(goal_xy[1])],
+            "goal_kind": spec["kind"],
             "route": (
                 [[round(px, 3), round(py, 3)] for px, py in nav.follower.waypoints]
                 if nav is not None and nav.follower is not None
-                else [[round(px, 3), round(py, 3)] for px, py in spec["route"]]
+                else []
             ),
             "elapsed_s": round(time.monotonic() - start, 2),
+            "elapsed_wall_s": round(time.monotonic() - start, 2),
+            "elapsed_sim_s": None,
+            "failure_reason": "" if arrived else last_status,
             "status": last_status,
+            "nav_state": nav.state if nav is not None else "",
             "detours": 0,
             "plan_id": int(nav.plan_id) if nav is not None else 0,
+            "plan_attempts": int(nav.plan_attempt_id) if nav is not None else 0,
+            "plan_commits": int(nav.plan_id) if nav is not None else 0,
             "plan_reason": nav.last_plan_reason if nav is not None else "",
+            "geometry_version": GEOMETRY_VERSION,
+            "laser_tf": LASER_EXTRINSIC,
             "speed_scale": scale,
+            "known_speed_scale": KNOWN_SPEED_SCALE,
+            "explore_speed_scale": EXPLORE_SPEED_SCALE,
+            "unknown_speed_scale": UNKNOWN_SPEED_SCALE,
             "max_lin": round(max_lin, 3),
+            "explore_lin": round(explore_lin, 3),
+            "cruise_lin": round(cruise_lin, 3),
             "max_ang": round(max_ang, 3),
             "stop_dist": STOP_DIST,
             "slow_dist": None,
-            "blocked_by_scan": last_status.startswith("safety") or last_status.startswith("blocked"),
+            "blocked_by_scan": last_status.startswith("safety") or last_status.startswith("BLOCKED"),
             "log_json": str(json_path),
             "log_txt": str(log_path),
         }
@@ -258,7 +306,7 @@ def navigate(
 
 
 def drive_to_shelf(rclpy_mod, timeout_sec: float = DEFAULT_TIMEOUT_S, final_xy=SHELF_APPROACH_XY,
-                   final_yaw: float = SHELF_FACE_YAW, speed_scale: float = SPEED_SCALE) -> dict:
+                   final_yaw: float = SHELF_FACE_YAW, speed_scale: float = KNOWN_SPEED_SCALE) -> dict:
     report = navigate(
         rclpy_mod,
         goal="shelf",
@@ -277,7 +325,14 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="P4 lidar corridor navigation")
     parser.add_argument("--goal", choices=["shelf", "delivery"], default="shelf")
     parser.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT_S)
-    parser.add_argument("--speed-scale", type=float, default=SPEED_SCALE)
+    parser.add_argument(
+        "--speed-scale",
+        type=float,
+        default=KNOWN_SPEED_SCALE,
+        help="known-prefix velocity cap as a multiple of 0.30 m/s (default 8). "
+        "Explore/observe paths use up to 4x; recover stays at 1x. "
+        "Pass 1 to keep the whole run slow.",
+    )
     args = parser.parse_args(argv)
 
     import rclpy

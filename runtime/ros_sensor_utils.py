@@ -13,6 +13,9 @@ from typing import Dict, Iterable, Optional, Tuple
 
 import numpy as np
 
+from runtime.nav_types import PoseSample, ScanSample
+from runtime.waypoint_nav import yaw_from_quaternion
+
 
 class SensorDataError(RuntimeError):
     pass
@@ -181,6 +184,17 @@ class SensorSnapshot:
     camera_frame: str
 
 
+def _odom_speeds(message) -> Tuple[float, float]:
+    twist = getattr(message, "twist", None)
+    inner = getattr(twist, "twist", twist)
+    linear = getattr(getattr(inner, "linear", None), "x", 0.0)
+    angular = getattr(getattr(inner, "angular", None), "z", 0.0)
+    try:
+        return float(linear or 0.0), float(angular or 0.0)
+    except (TypeError, ValueError):
+        return 0.0, 0.0
+
+
 class SensorCache:
     """Thread-safe latest sensor values with finite synchronized waits."""
 
@@ -194,8 +208,15 @@ class SensorCache:
         self.joint_names = ()
         self.joint_positions = np.empty(0)
         self.odom = None
+        self.odom_received_at = None
+        self.odom_history: deque = deque(maxlen=80)
         self.task_raw = None
         self.scan = None
+        self.scan_received_at = None
+        self.scan_id = 0
+        self.last_scan_stamp = None
+        self.last_scan_sample: Optional[ScanSample] = None
+        self.last_pose_sample: Optional[PoseSample] = None
 
     def update_rgb(self, message) -> None:
         value = decode_image(message)
@@ -233,8 +254,33 @@ class SensorCache:
             self._condition.notify_all()
 
     def update_odom(self, message) -> None:
+        received = time.monotonic()
+        stamp = message_stamp(message)
+        lin, ang = _odom_speeds(message)
+        pose = PoseSample(
+            stamp_sim=stamp,
+            received_wall=received,
+            frame_id=message_frame(message) or "odom",
+            x=float(message.pose.pose.position.x),
+            y=float(message.pose.pose.position.y),
+            yaw=yaw_from_quaternion(
+                message.pose.pose.orientation.x,
+                message.pose.pose.orientation.y,
+                message.pose.pose.orientation.z,
+                message.pose.pose.orientation.w,
+            ),
+            linear_speed=lin,
+            angular_speed=ang,
+            child_frame_id=str(getattr(message, "child_frame_id", "") or "base_link").lstrip("/"),
+        )
         with self._condition:
             self.odom = message
+            self.odom_received_at = received
+            self.last_pose_sample = pose
+            self.odom_history.append(pose)
+            cutoff = received - 2.0
+            while self.odom_history and self.odom_history[0].received_wall < cutoff:
+                self.odom_history.popleft()
             self._condition.notify_all()
 
     def update_task(self, message) -> None:
@@ -243,9 +289,62 @@ class SensorCache:
             self._condition.notify_all()
 
     def update_scan(self, message) -> None:
+        received = time.monotonic()
+        stamp = message_stamp(message)
         with self._condition:
+            if self.last_scan_stamp is not None and abs(stamp - self.last_scan_stamp) < 1e-9:
+                self.scan = message
+                self.scan_received_at = received
+                self._condition.notify_all()
+                return
+            self.scan_id += 1
+            self.last_scan_stamp = stamp
             self.scan = message
+            self.scan_received_at = received
+            ranges = tuple(float(v) for v in message.ranges)
+            self.last_scan_sample = ScanSample(
+                scan_id=self.scan_id,
+                stamp_sim=stamp,
+                received_wall=received,
+                frame_id=message_frame(message) or "laser",
+                ranges=ranges,
+                angle_min=float(getattr(message, "angle_min", -math.pi)),
+                angle_increment=float(getattr(message, "angle_increment", 0.0)),
+                range_min=float(getattr(message, "range_min", 0.05)),
+                range_max=float(getattr(message, "range_max", 8.0)),
+                time_increment=float(getattr(message, "time_increment", 0.0)),
+            )
             self._condition.notify_all()
+
+    def pose_at(self, stamp_sim: float) -> Optional[PoseSample]:
+        """Interpolate odom at a scan stamp. None if the gap is too large."""
+        with self._condition:
+            history = list(self.odom_history)
+        if not history:
+            return None
+        best = min(history, key=lambda p: abs(p.stamp_sim - float(stamp_sim)))
+        if abs(best.stamp_sim - float(stamp_sim)) > 0.10:
+            return None
+        before = [p for p in history if p.stamp_sim <= stamp_sim]
+        after = [p for p in history if p.stamp_sim >= stamp_sim]
+        if not before or not after:
+            return best
+        a, b = before[-1], after[0]
+        if abs(b.stamp_sim - a.stamp_sim) < 1e-9:
+            return b
+        t = (float(stamp_sim) - a.stamp_sim) / (b.stamp_sim - a.stamp_sim)
+        yaw = a.yaw + t * ((b.yaw - a.yaw + math.pi) % (2.0 * math.pi) - math.pi)
+        return PoseSample(
+            stamp_sim=float(stamp_sim),
+            received_wall=a.received_wall + t * (b.received_wall - a.received_wall),
+            frame_id=b.frame_id,
+            x=a.x + t * (b.x - a.x),
+            y=a.y + t * (b.y - a.y),
+            yaw=yaw,
+            linear_speed=a.linear_speed + t * (b.linear_speed - a.linear_speed),
+            angular_speed=a.angular_speed + t * (b.angular_speed - a.angular_speed),
+            child_frame_id=b.child_frame_id,
+        )
 
     def wait_snapshot(self, timeout: float = 3.0, max_skew: float = 0.15) -> SensorSnapshot:
         deadline = time.monotonic() + float(timeout)

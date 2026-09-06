@@ -1,0 +1,84 @@
+p4_shelf: start xy=(1.90,1.95) yaw=1.58 goal=(0.852,2.475) kind=shelf_approach stop=0.43 planner=grid geom=s0-20260906 laser=TF_REQUIRED max_lin=2.40 max_ang=1.65 known=8.0x explore=4.0x cruise=1.0x
+p4_shelf: xy=(1.90,1.95) yaw=1.58 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan start state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=10.5
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=34 attempts=34 detours=0 plan_ms=12.3
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=86 attempts=86 detours=0 plan_ms=13.6
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=137 attempts=137 detours=0 plan_ms=20.1
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=189 attempts=189 detours=0 plan_ms=12.2
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=241 attempts=241 detours=0 plan_ms=14.2
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=293 attempts=293 detours=0 plan_ms=11.6
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=345 attempts=345 detours=0 plan_ms=14.8
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=397 attempts=397 detours=0 plan_ms=11.5
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=449 attempts=449 detours=0 plan_ms=12.2
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=501 attempts=501 detours=0 plan_ms=12.1
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=553 attempts=553 detours=0 plan_ms=15.1
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=605 attempts=605 detours=0 plan_ms=11.8
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=657 attempts=657 detours=0 plan_ms=11.8
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=709 attempts=709 detours=0 plan_ms=11.2
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=761 attempts=761 detours=0 plan_ms=12.3
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=812 attempts=812 detours=0 plan_ms=12.4
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=864 attempts=864 detours=0 plan_ms=12.2
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=916 attempts=916 detours=0 plan_ms=11.3
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=968 attempts=968 detours=0 plan_ms=11.7
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1019 attempts=1019 detours=0 plan_ms=12.6
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1071 attempts=1071 detours=0 plan_ms=18.8
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1123 attempts=1123 detours=0 plan_ms=15.0
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=1175 attempts=1175 detours=0 plan_ms=11.5
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=1227 attempts=1227 detours=0 plan_ms=11.2
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1279 attempts=1279 detours=0 plan_ms=12.6
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=1331 attempts=1331 detours=0 plan_ms=14.0
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=1383 attempts=1383 detours=0 plan_ms=12.4
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1436 attempts=1436 detours=0 plan_ms=11.9
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1488 attempts=1488 detours=0 plan_ms=10.9
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1540 attempts=1540 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1592 attempts=1592 detours=0 plan_ms=12.1
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=1644 attempts=1644 detours=0 plan_ms=11.5
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=0/5 fwd=1.14 lin=0.00 ang=0.00 replan recover_exit state=FOLLOW plan_id=1696 attempts=1696 detours=0 plan_ms=13.7
+p4_shelf: xy=(1.90,1.95) yaw=1.64 wp=1/5 fwd=1.14 lin=0.00 ang=0.00 TURN_STALLED state=RECOVER plan_id=1748 attempts=1748 detours=0 plan_ms=11.6
+Traceback (most recent call last):
+  File "/workspace/baseline/runtime/p4_nav.py", line 193, in navigate
+    rclpy_mod.spin_once(node, timeout_sec=period)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 208, in spin_once
+    executor.spin_once(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 677, in _wait_for_ready_callbacks
+    wait_set.wait(timeout_nsec)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/baseline/runtime/p4_nav.py", line 342, in main
+    report = navigate(
+  File "/workspace/baseline/runtime/p4_nav.py", line 302, in navigate
+    controller.stop_base()
+  File "/workspace/baseline/runtime/ros_robot_control.py", line 64, in stop_base
+    self.publish_velocity()
+  File "/workspace/baseline/runtime/ros_robot_control.py", line 61, in publish_velocity
+    self.cmd_vel_pub.publish(message)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+    self.__publisher.publish(msg)
+rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/workspace/baseline/runtime/p4_nav.py", line 360, in <module>
+    raise SystemExit(main())
+  File "/workspace/baseline/runtime/p4_nav.py", line 356, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

@@ -9,6 +9,8 @@ from runtime.lidar_avoid import (
     detour_xy,
     pick_detour_side,
     scan_sectors,
+    speed_for_clearance,
+    stop_dist_for_speed,
 )
 from runtime.scene_zones import (
     DELIVERY_APPROACH_XY,
@@ -564,6 +566,14 @@ class LidarAvoidTests(unittest.TestCase):
         self.assertTrue(done)
         self.assertTrue(in_picking_zone((x, y)))
         self.assertGreaterEqual(corridor.detours, 1)
+
+    def test_clearance_allows_eight_x_only_when_far_enough(self):
+        self.assertAlmostEqual(speed_for_clearance(3.0, 2.4, 0.30), 2.4)
+        self.assertAlmostEqual(speed_for_clearance(0.40, 2.4, 0.30), 0.30)
+        mid = speed_for_clearance(0.90, 2.4, 0.30)
+        self.assertGreater(mid, 0.30)
+        self.assertLess(mid, 2.4)
+        self.assertGreater(stop_dist_for_speed(2.4), stop_dist_for_speed(0.30))
 
 
 if __name__ == "__main__":

@@ -8,6 +8,8 @@ from typing import Iterable, Optional, Sequence, Tuple
 
 from runtime.p4_params import (
     AHEAD_CONE_HALF,
+    BASE_LIN,
+    CLEAR_S,
     FORWARD_CONE_HALF,
     JAM_EXTRA_M,
     NUDGE_FAR_M,
@@ -115,9 +117,43 @@ def scan_sectors_from_msg(scan) -> Optional[ScanSectors]:
     )
 
 
-def clear_horizon_m(stop_dist: float, max_lin: float, clear_s: float = 0.30) -> float:
+def clear_horizon_m(stop_dist: float, max_lin: float, clear_s: float = CLEAR_S) -> float:
     """How far ahead must be empty before we treat the cone as clear."""
     return float(stop_dist) + abs(float(max_lin)) * float(clear_s)
+
+
+def brake_horizon_m(speed_mps: float, stop_dist: float = STOP_DIST, clear_s: float = CLEAR_S) -> float:
+    """Minimum verified clearance before this cruise speed is allowed."""
+    return clear_horizon_m(stop_dist, speed_mps, clear_s)
+
+
+def stop_dist_for_speed(speed_mps: float, stop_dist: float = STOP_DIST) -> float:
+    """Widen the hard brake a little at 8×. Not a calibrated a_brake model."""
+    extra = 0.12 * max(0.0, abs(float(speed_mps)) - BASE_LIN)
+    return max(float(stop_dist), min(0.80, float(stop_dist) + extra))
+
+
+def speed_for_clearance(
+    d_free: float,
+    known_lin: float,
+    cruise_lin: float,
+    stop_dist: float = STOP_DIST,
+    clear_s: float = CLEAR_S,
+) -> float:
+    """Use the 8× cap only when the verified prefix can still stop."""
+    known = max(0.0, abs(float(known_lin)))
+    cruise = max(0.0, min(known, abs(float(cruise_lin))))
+    if known <= cruise + 1e-9:
+        return known
+    distance = float(d_free) if math.isfinite(d_free) else 0.0
+    need_known = brake_horizon_m(known, stop_dist=stop_dist, clear_s=clear_s)
+    need_cruise = brake_horizon_m(cruise, stop_dist=stop_dist, clear_s=clear_s)
+    if distance >= need_known:
+        return known
+    if distance <= need_cruise:
+        return cruise
+    blend = (distance - need_cruise) / max(1e-6, need_known - need_cruise)
+    return cruise + blend * (known - cruise)
 
 
 def occlusion_kind(
@@ -159,6 +195,29 @@ def safety_gate(
         horizon = max(0.0, ahead - float(stop_dist))
         return min(float(linear), horizon / 0.25), float(angular), "safety_slow"
     return float(linear), float(angular), "ok"
+
+
+def sweep_gate(
+    linear: float,
+    angular: float,
+    ranges: Sequence[float],
+    angle_min: float,
+    angle_increment: float,
+    stop_dist: float = STOP_DIST,
+    range_min: float = 0.05,
+    range_max: float = 8.0,
+) -> Tuple[float, float, str]:
+    """Scale or zero a (v,w) command. Keeps curvature; never picks a detour side."""
+    lin, ang, status = safety_gate(
+        linear, angular, ranges, angle_min, angle_increment, stop_dist=stop_dist
+    )
+    if status == "safety_stop":
+        # Forward brake must not also freeze a standing turn away from the hit.
+        if abs(float(linear)) <= 0.04:
+            return 0.0, float(ang), status
+        return 0.0, 0.0, status
+    _ = (range_min, range_max)
+    return lin, ang, status
 
 
 def clip_to_nav_bounds(x: float, y: float, bounds=NAV_BOUNDS) -> Tuple[float, float]:
@@ -343,7 +402,7 @@ class CorridorFollower:
             dodge = 0.35
         if dodge == 0.0 or self.follower.idx >= len(self.follower.waypoints):
             return 0.0
-        _dist, route_err, _steer_err, _corner = self.follower._aim_error(x, y, yaw)
+        _dist, route_err, _steer_err, _corner, _remain = self.follower._aim_error(x, y, yaw)
         if abs(route_err) > 0.30:
             return 0.0
         return dodge

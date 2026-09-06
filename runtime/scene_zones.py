@@ -24,6 +24,8 @@ DELIVERY_APPROACH_XY = (-1.940, -2.90)
 DELIVERY_FACE_YAW = -math.pi / 2.0
 # South gap is too tight for the base. Sim logs hit the divider at y≈-2.80
 # and y≈-3.10; the south wall is around y=-3.45. Do not westbound here.
+# S0: this is a bidirectional *centre-forbidden* crossing under the divider,
+# not a physical wall and not a ban on the west corridor or east southbound.
 SOUTH_CROSS_Y = -3.22
 
 # Yellow picking aisle (y=1.70 / 3.25) and the official shelf-approach lane.
@@ -60,7 +62,9 @@ ROUTE_SHELF_TO_DELIVERY = (
 # East stub in front of the north racks. Do not keep driving +Y here.
 EAST_STUB_X_MIN = 1.35
 EAST_STUB_Y_MAX = 2.50
-# Shelf face. Any x this far north is in the racks, not just the east stub.
+# Robot-centre behaviour line, not a surveyed shelf face (S0).
+# SHELF_APPROACH_XY.y is 2.475: 5 mm south of this line. Do not inflate 2.48
+# as a physical surface and do not carve the approach cell to invent a gap.
 NORTH_RACK_Y = 2.48
 # South-east corner: do not keep driving -Y into the south wall.
 SOUTH_EAST_X_MIN = 1.35
@@ -76,7 +80,7 @@ SPAWN_XY = (1.92, -3.17)
 SPAWN_YAW = math.pi / 2.0
 SPAWN_ZONE = {"x": (1.70, 2.20), "y": (-3.45, -2.90)}
 
-# Loose footprint used to keep lidar detours inside the supermarket.
+# Planner search AABB, not physical outer walls (S0).
 NAV_BOUNDS = {"x": (-2.55, 2.35), "y": (-3.85, 3.30)}
 
 
@@ -127,6 +131,11 @@ def near_divider_nw_corner(x: float, y: float) -> bool:
         DIVIDER_NW_X[0] <= float(x) <= DIVIDER_NW_X[1]
         and DIVIDER_NW_Y[0] <= float(y) <= DIVIDER_NW_Y[1]
     )
+
+
+def in_south_gap(x: float, y: float) -> bool:
+    """Centre-forbidden crossing under the divider. Not a west/east corridor ban."""
+    return 0.05 <= float(x) <= float(CENTER_WALL_X[1]) and float(y) <= SOUTH_CROSS_Y + 0.10
 
 
 def in_spawn_zone(xy) -> bool:

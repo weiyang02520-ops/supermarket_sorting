@@ -27,8 +27,9 @@
 | [DG-202606-分工总览.md](./DG-202606-分工总览.md) | 两人拆分、交接物（`supermarket9.pt`）、日历 | 具体采图/导航步骤（看 A/B） |
 | [DG-202606-A-数据采集与YOLO.md](./DG-202606-A-数据采集与YOLO.md) | A 线：采图脚本、仿真标注、YOLOv8s、交付权重。**4060 必须分批加载 3DGS ply** | 编排/限幅/`client_task_1.py` |
 | [DG-202606-B-迁移与算法.md](./DG-202606-B-迁移与算法.md) | B 线：走到货架、雷达、抓放、评分入口 | A 的 `data.yaml` 类别顺序和训练超参 |
-| [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md) | **开 P4 Agent 先贴这篇**：场地区块、可调项、当前策略、提示词 | 赛题 PDF；旧聊天记录当真值 |
-| [DG-202606-P4-导航与全局规划.md](./DG-202606-P4-导航与全局规划.md) | P4 长文：已拍板方案、失败日志、实现细节 | 赛题 PDF；Nav2；未批准的新算法 |
+| [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md) | **开 P4 实现 Agent 先贴这篇**：提示词、S0–S6 摘要、作废路径 | 赛题 PDF；旧「图够了才 A*」当现状 |
+| [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md) | **P4 实现真值**：启动即 A*、状态机、探索/恢复、验收矩阵 | 已落地代码；Nav2；旧局部/黄线 fallback |
+| [DG-202606-P4-导航与全局规划.md](./DG-202606-P4-导航与全局规划.md) | P4 历史：旧方案、失败日志、补丁记录 | 当前实现说明书；未批准的新算法 |
 | [准备工作.txt](./准备工作.txt) | 宿主机/WSL：Docker、NVIDIA 驱动、Container Toolkit | 比赛任务说明 |
 | [server物品清单.csv](./server物品清单.csv) | 核对 9 个 `kind` 与仿真模型路径 | YOLO 训练集（那是 `datasets/`，还没有） |
 
@@ -41,7 +42,7 @@
 | `runtime/p4_params.py` | P4 场景几何与可调项（货架/出生/配送/走廊、膨胀、刹停） |
 | `D:\DG\DG-202606智慧零售赛题说明详细版_20260801\` | 赛题 PDF / 变更说明原文 |
 
-阅读顺序：本文 → BRIEF → 按任务选 A 或 B。P4 先读 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)，细节再看长文。改数只动 `runtime/p4_params.py`。不要从文旅 `vlm_pipeline` 的 Task 脚本开始。
+阅读顺序：本文 → BRIEF → 按任务选 A 或 B。P4 实现先读 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)，按 [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md) 的 S0–S6 做。旧 P4 长文只当背景。不要从文旅 `vlm_pipeline` 的 Task 脚本开始。
 
 ---
 
@@ -141,7 +142,7 @@
 
 已在仿真跑过：预检；P2 干跑 1× `kele` → `DONE`；车开到货架后 P3 在 **GS=1 slim 可乐 + 背景** 下能解 ArUco、YOLO 认出 `kele` 并绑槽。P3 推理必须走 **CPU**（与 Server GS 共享 4060 会 SIGKILL Server）。
 
-P4：黄线第一轮 + 雷达 clear/nudge/approach/face_turn，图够了才 A*。参数在 `runtime/p4_params.py`。`--goal shelf` 能到；`--goal delivery` 仍未稳定到台（`103938` 黄线南切后撞箱）。下一任先读 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)。不要重开 Nav2 / DWA / detour。
+P4 **实现真值已换成** [全图导航实现方案](./DG-202606-P4-全图导航实现方案.md)（启动即 A*、状态机、探索分支、有界恢复）。现码仍是旧路径，仿真未稳定到配送台（`20260906` 北侧 hold；`103938` 南切撞箱）。下一任先读 [P4-AGENT-HANDOFF](./DG-202606-P4-AGENT-HANDOFF.md)，按 S0–S6 改，不要重开 Nav2 / DWA / detour，不要把「图够了才 A*」写回正式路径。
 
 未做：9 类数据集与训练；配送导航闭环；真抓真放；5 单随机；评分主入口。
 

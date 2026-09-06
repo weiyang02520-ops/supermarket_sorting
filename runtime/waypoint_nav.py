@@ -159,8 +159,10 @@ class WaypointFollower:
     global_mode: bool = False
     waypoints: List[Tuple[float, float]] = field(init=False)
     brake_dist: float = field(init=False)
+    last_guard_event: str = field(init=False, default="")
     _prev_yaw_err: float = field(init=False, default=0.0)
     _have_yaw_err: bool = field(init=False, default=False)
+    _route_origin: Optional[Tuple[float, float]] = field(init=False, default=None)
 
     def __post_init__(self) -> None:
         self.waypoints = [(float(x), float(y)) for x, y in self.route]
@@ -175,6 +177,8 @@ class WaypointFollower:
             self.ang_gain = min(self.ang_gain, 1.45)
         if self.lookahead <= 0.0:
             self.lookahead = min(1.40, max(0.80, 0.55 * abs(self.max_lin)))
+        self.last_guard_event = ""
+        self._route_origin = self.waypoints[0] if self.waypoints else None
 
     def _outgoing_cross_track(self, x: float, y: float) -> float:
         if self.idx + 1 >= len(self.waypoints):
@@ -240,7 +244,17 @@ class WaypointFollower:
         return float(y) < WEST_LANE_Y - 0.20
 
     def _skip_near_waypoints(self, x: float, y: float) -> None:
-        """Drop short hops and corners already passed along the route."""
+        """Drop short hops already passed. Global mode does not rewrite the route."""
+        if self.global_mode:
+            while self.idx + 1 < len(self.waypoints):
+                tx, ty = self.waypoints[self.idx]
+                if math.hypot(tx - float(x), ty - float(y)) > max(0.18, self.pos_tol):
+                    break
+                nx, ny = self.waypoints[self.idx + 1]
+                if _segment_crosses_divider(x, y, nx, ny):
+                    break
+                self.idx += 1
+            return
         while self.idx + 1 < len(self.waypoints):
             tx, ty = self.waypoints[self.idx]
             dist = math.hypot(tx - float(x), ty - float(y))
@@ -330,7 +344,7 @@ class WaypointFollower:
         cross = ux * (float(y) - oy) - uy * (float(x) - ox)
         return path_yaw, cross
 
-    def _aim_error(self, x: float, y: float, yaw: float) -> Tuple[float, float, float, bool]:
+    def _aim_error(self, x: float, y: float, yaw: float) -> Tuple[float, float, float, bool, float]:
         """Route heading error, plus a small Stanley steer for cross-track.
 
         ``route_err`` is path_yaw − yaw (realign with the prescribed route).
@@ -349,15 +363,29 @@ class WaypointFollower:
             in_yaw = math.atan2(ty - float(y), tx - float(x))
             if abs(wrap_to_pi(out_yaw - in_yaw)) > 0.55:
                 corner = True
-        return dist, route_err, steer_err, corner
+        remain = dist
+        for index in range(self.idx, len(self.waypoints) - 1):
+            ax, ay = self.waypoints[index]
+            bx, by = self.waypoints[index + 1]
+            remain += math.hypot(bx - ax, by - ay)
+        return dist, route_err, steer_err, corner, remain
 
-    def _linear_for_heading(self, yaw_err: float, dist: float, corner: bool) -> float:
+    def _linear_for_heading(
+        self, yaw_err: float, dist: float, corner: bool, remain: float
+    ) -> float:
         """Forward speed only when already close to the route heading."""
         err = abs(float(yaw_err))
         if err > self.in_place_yaw or math.cos(float(yaw_err)) <= 0.20:
             return 0.0
+        last = self.idx + 1 >= len(self.waypoints)
         brake = max(self.brake_dist, 1.60) if corner else self.brake_dist
-        dist_scale = min(1.0, float(dist) / brake)
+        # Dense A* vertices are 0.1–0.3 m. Braking to the next cell crawled
+        # delivery_20260906_093534 at 0.11–0.50 m/s while fwd was still >2 m.
+        if last or corner:
+            speed_dist = float(dist)
+        else:
+            speed_dist = max(float(dist), float(remain))
+        dist_scale = min(1.0, speed_dist / brake)
         heading = max(0.0, math.cos(float(yaw_err))) ** 2
         if abs(self.max_lin) > 1.0:
             heading *= max(0.50, 1.0 - err / 0.55)
@@ -382,7 +410,9 @@ class WaypointFollower:
     ) -> Tuple[float, float]:
         if self.global_mode:
             if in_center_wall_band(x, y) or in_north_racks(x, y) or in_south_east_stub(x, y):
+                self.last_guard_event = "CENTER_GUARD_VIOLATION"
                 return 0.0, 0.0
+            self.last_guard_event = ""
             return linear, angular
         if in_east_shelf_stub(x, y):
             west_err = wrap_to_pi(math.pi - float(yaw))
@@ -405,7 +435,7 @@ class WaypointFollower:
         if (
             goal_x < 0.0
             and float(x) >= EAST_STUB_X_MIN
-            and float(y) >= WEST_LANE_Y - 0.20
+            and float(y) >= WEST_LANE_Y - 0.06
             and math.sin(float(yaw)) > 0.12
         ):
             west_err = wrap_to_pi(math.pi - float(yaw))
@@ -484,7 +514,7 @@ class WaypointFollower:
                     if abs(yaw_err) < self.turn_tol:
                         return 0.0, 0.0, True
                     return 0.0, _clip(self.ang_gain * yaw_err, self.max_ang), False
-            dist, route_err, steer_err, corner = self._aim_error(x, y, yaw)
+            dist, route_err, steer_err, corner, remain = self._aim_error(x, y, yaw)
             if self.mode == "turn":
                 if abs(route_err) <= self.drive_yaw:
                     self.mode = "drive"
@@ -497,7 +527,7 @@ class WaypointFollower:
                 linear = 0.0
                 angular = self._heading_command(route_err)
             else:
-                linear = self._linear_for_heading(route_err, dist, corner)
+                linear = self._linear_for_heading(route_err, dist, corner, remain)
                 angular = self._heading_command(steer_err)
             linear, angular = self._corridor_guard(x, y, yaw, linear, angular)
             return linear, angular, False
@@ -509,6 +539,8 @@ class WaypointFollower:
 
     def insert_ahead(self, xy: Sequence[float]) -> None:
         """Splice a detour in front of the current waypoint."""
+        if self.global_mode:
+            return
         point = (float(xy[0]), float(xy[1]))
         if self.idx >= len(self.waypoints):
             return
@@ -525,6 +557,8 @@ class WaypointFollower:
         The canned peel is (HUG_WEST_X, SOUTH_PEEL_Y). Skipping back to it
         from x≈-1 drives east through the same boxes we just went around.
         """
+        if self.global_mode:
+            return
         if not self.waypoints or self.waypoints[-1][0] >= 0.0:
             return
         if float(x) >= 0.15:

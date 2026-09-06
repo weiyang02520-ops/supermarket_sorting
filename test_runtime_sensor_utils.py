@@ -47,6 +47,35 @@ class SensorUtilityTests(unittest.TestCase):
             cache.update_joint_state(SimpleNamespace(name=["joint"], position=[np.nan]))
         np.testing.assert_allclose(cache.joint_vector(["joint"]), [0.25])
 
+    def test_scan_id_does_not_advance_on_the_same_stamp(self):
+        cache = SensorCache()
+        header = SimpleNamespace(stamp=SimpleNamespace(sec=1, nanosec=0), frame_id="laser")
+        scan = SimpleNamespace(
+            header=header,
+            ranges=(1.0, 2.0, 3.0),
+            angle_min=-3.14,
+            angle_increment=0.1,
+            range_min=0.05,
+            range_max=8.0,
+            time_increment=0.0,
+        )
+        cache.update_scan(scan)
+        first = cache.scan_id
+        cache.update_scan(scan)
+        self.assertEqual(cache.scan_id, first)
+        header2 = SimpleNamespace(stamp=SimpleNamespace(sec=1, nanosec=50000000), frame_id="laser")
+        scan2 = SimpleNamespace(
+            header=header2,
+            ranges=(1.0, 2.0, 3.0),
+            angle_min=-3.14,
+            angle_increment=0.1,
+            range_min=0.05,
+            range_max=8.0,
+            time_increment=0.0,
+        )
+        cache.update_scan(scan2)
+        self.assertEqual(cache.scan_id, first + 1)
+
 
 if __name__ == "__main__":
     unittest.main()

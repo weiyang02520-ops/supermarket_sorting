@@ -1,0 +1,234 @@
+{
+  "arrived": false,
+  "goal": "delivery",
+  "in_zone": false,
+  "in_picking_zone": false,
+  "in_delivery_base": false,
+  "odom_xy": [
+    -1.168,
+    0.598
+  ],
+  "yaw": -2.073,
+  "head_joints": {
+    "slide": 0.0060630197536246655,
+    "head_yaw": 0.00741476555606705,
+    "head_pitch": 0.003050268401273426
+  },
+  "goal_xy": [
+    -1.94,
+    -2.9
+  ],
+  "goal_kind": "delivery_approach",
+  "route": [
+    [
+      -1.2,
+      0.6
+    ],
+    [
+      -1.3,
+      0.5
+    ],
+    [
+      -1.4,
+      0.5
+    ],
+    [
+      -1.5,
+      0.5
+    ],
+    [
+      -1.6,
+      0.5
+    ],
+    [
+      -1.7,
+      0.4
+    ],
+    [
+      -1.7,
+      0.3
+    ],
+    [
+      -1.7,
+      0.2
+    ],
+    [
+      -1.7,
+      0.1
+    ],
+    [
+      -1.7,
+      0.0
+    ],
+    [
+      -1.7,
+      -0.1
+    ],
+    [
+      -1.7,
+      -0.2
+    ],
+    [
+      -1.7,
+      -0.3
+    ],
+    [
+      -1.6,
+      -0.4
+    ],
+    [
+      -1.5,
+      -0.4
+    ],
+    [
+      -1.4,
+      -0.4
+    ],
+    [
+      -1.3,
+      -0.4
+    ],
+    [
+      -1.2,
+      -0.5
+    ],
+    [
+      -1.1,
+      -0.6
+    ],
+    [
+      -1.0,
+      -0.7
+    ],
+    [
+      -1.0,
+      -0.8
+    ],
+    [
+      -1.0,
+      -0.9
+    ],
+    [
+      -1.0,
+      -1.0
+    ],
+    [
+      -1.0,
+      -1.1
+    ],
+    [
+      -1.0,
+      -1.2
+    ],
+    [
+      -1.0,
+      -1.3
+    ],
+    [
+      -1.0,
+      -1.4
+    ],
+    [
+      -1.0,
+      -1.5
+    ],
+    [
+      -1.0,
+      -1.6
+    ],
+    [
+      -1.0,
+      -1.7
+    ],
+    [
+      -1.0,
+      -1.8
+    ],
+    [
+      -1.0,
+      -1.9
+    ],
+    [
+      -1.0,
+      -2.0
+    ],
+    [
+      -1.1,
+      -2.1
+    ],
+    [
+      -1.2,
+      -2.2
+    ],
+    [
+      -1.3,
+      -2.3
+    ],
+    [
+      -1.4,
+      -2.4
+    ],
+    [
+      -1.5,
+      -2.5
+    ],
+    [
+      -1.6,
+      -2.6
+    ],
+    [
+      -1.7,
+      -2.7
+    ],
+    [
+      -1.8,
+      -2.8
+    ],
+    [
+      -1.9,
+      -2.9
+    ],
+    [
+      -1.94,
+      -2.9
+    ]
+  ],
+  "elapsed_s": 150.54,
+  "elapsed_wall_s": 150.54,
+  "elapsed_sim_s": null,
+  "failure_reason": "replan path_blocked",
+  "status": "replan path_blocked",
+  "nav_state": "FOLLOW",
+  "detours": 0,
+  "plan_id": 128,
+  "plan_attempts": 128,
+  "plan_commits": 128,
+  "plan_reason": "path_blocked",
+  "geometry_version": "s0-20260906",
+  "laser_tf": {
+    "kind": "extrinsic",
+    "source": "unverified",
+    "status": "TF_REQUIRED",
+    "frame_parent": "base_link",
+    "frame_child": "laser",
+    "translation_xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 0.0,
+    "note": "Repo has no official T_base_laser. Runtime must look up TF; unit tests may pass an explicit identity. Do not silently guess zero."
+  },
+  "speed_scale": 8.0,
+  "known_speed_scale": 8.0,
+  "explore_speed_scale": 4.0,
+  "unknown_speed_scale": 1.0,
+  "max_lin": 2.4,
+  "explore_lin": 1.2,
+  "cruise_lin": 0.3,
+  "max_ang": 1.65,
+  "stop_dist": 0.43,
+  "slow_dist": null,
+  "blocked_by_scan": false,
+  "log_json": "/workspace/baseline/outputs/p4/delivery_20260906_091014.json",
+  "log_txt": "/workspace/baseline/outputs/p4/delivery_20260906_091014.log"
+}

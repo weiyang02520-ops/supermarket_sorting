@@ -90,6 +90,33 @@ class WaypointNavTests(unittest.TestCase):
         self.assertGreaterEqual(follower.brake_dist, 1.0)
         self.assertLessEqual(follower.brake_dist, 1.40)
 
+    def test_dense_astar_vertices_do_not_crawl_on_a_straight_path(self):
+        route = [(0.0, 0.2 * index) for index in range(16)]
+        follower = WaypointFollower(
+            route,
+            final_yaw=math.pi / 2.0,
+            max_lin=2.4,
+            max_ang=1.65,
+            global_mode=True,
+        )
+        follower.mode = "drive"
+        linear, _angular, done = follower.step(0.0, 0.05, math.pi / 2.0)
+        self.assertFalse(done)
+        self.assertGreaterEqual(linear, 1.80)
+
+    def test_last_waypoint_still_brakes_for_the_goal(self):
+        follower = WaypointFollower(
+            [(0.0, 0.25)],
+            final_yaw=math.pi / 2.0,
+            max_lin=2.4,
+            max_ang=1.65,
+            global_mode=True,
+        )
+        follower.mode = "drive"
+        linear, _angular, done = follower.step(0.0, 0.05, math.pi / 2.0)
+        self.assertFalse(done)
+        self.assertLess(linear, 0.70)
+
     def test_insert_ahead_splices_a_detour_before_the_current_goal(self):
         follower = WaypointFollower([(1.92, 2.475)], final_yaw=SHELF_FACE_YAW)
         follower.insert_ahead((1.4, -1.0))

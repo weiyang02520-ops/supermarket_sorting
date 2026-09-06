@@ -1,0 +1,123 @@
+p4_shelf: start xy=(1.92,-3.17) yaw=1.57 goal=(0.852,2.475) kind=shelf_approach stop=0.43 planner=grid geom=s0-20260906 laser=TF_REQUIRED max_lin=0.30 max_ang=0.55
+p4_shelf: xy=(1.92,-3.17) yaw=1.57 wp=0/17 fwd=1.43 lin=0.00 ang=0.00 replan start state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=27.1
+p4_shelf: xy=(1.92,-3.14) yaw=1.57 wp=1/17 fwd=1.43 lin=0.21 ang=0.00 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=33.3
+p4_shelf: xy=(1.92,-3.09) yaw=1.57 wp=1/17 fwd=1.43 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=7 attempts=7 detours=0 plan_ms=32.4
+p4_shelf: xy=(1.92,-3.04) yaw=1.57 wp=1/16 fwd=1.43 lin=0.21 ang=0.00 cruise state=FOLLOW plan_id=11 attempts=11 detours=0 plan_ms=35.7
+p4_shelf: xy=(1.92,-2.99) yaw=1.57 wp=1/16 fwd=1.43 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=14 attempts=14 detours=0 plan_ms=30.4
+p4_shelf: xy=(1.92,-2.94) yaw=1.57 wp=0/16 fwd=1.43 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=18 attempts=18 detours=0 plan_ms=27.9
+p4_shelf: xy=(1.92,-2.89) yaw=1.57 wp=1/16 fwd=1.43 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=21 attempts=21 detours=0 plan_ms=26.9
+p4_shelf: xy=(1.92,-2.84) yaw=1.57 wp=1/16 fwd=1.43 lin=0.21 ang=0.00 cruise state=FOLLOW plan_id=24 attempts=24 detours=0 plan_ms=28.5
+p4_shelf: xy=(1.92,-2.78) yaw=1.57 wp=1/16 fwd=1.43 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=28 attempts=28 detours=0 plan_ms=26.6
+p4_shelf: xy=(1.92,-2.73) yaw=1.57 wp=1/16 fwd=1.43 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=31 attempts=31 detours=0 plan_ms=28.7
+p4_shelf: xy=(1.92,-2.67) yaw=1.57 wp=0/16 fwd=1.43 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=35 attempts=35 detours=0 plan_ms=22.5
+p4_shelf: xy=(1.92,-2.61) yaw=1.57 wp=1/15 fwd=1.43 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=38 attempts=38 detours=0 plan_ms=23.8
+p4_shelf: xy=(1.92,-2.55) yaw=1.57 wp=1/15 fwd=1.43 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=41 attempts=41 detours=0 plan_ms=26.2
+p4_shelf: xy=(1.92,-2.50) yaw=1.57 wp=1/15 fwd=1.45 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=45 attempts=45 detours=0 plan_ms=25.1
+p4_shelf: xy=(1.92,-2.45) yaw=1.58 wp=1/15 fwd=1.45 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=48 attempts=48 detours=0 plan_ms=22.1
+p4_shelf: xy=(1.92,-2.40) yaw=1.58 wp=1/15 fwd=1.45 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=51 attempts=51 detours=0 plan_ms=25.4
+p4_shelf: xy=(1.92,-2.34) yaw=1.58 wp=1/15 fwd=1.45 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=55 attempts=55 detours=0 plan_ms=24.2
+p4_shelf: xy=(1.92,-2.29) yaw=1.58 wp=1/15 fwd=1.45 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=58 attempts=58 detours=0 plan_ms=27.0
+p4_shelf: xy=(1.92,-2.25) yaw=1.58 wp=0/15 fwd=1.45 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=62 attempts=62 detours=0 plan_ms=23.5
+p4_shelf: xy=(1.92,-2.20) yaw=1.58 wp=1/15 fwd=1.45 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=65 attempts=65 detours=0 plan_ms=27.9
+p4_shelf: xy=(1.92,-2.15) yaw=1.58 wp=1/15 fwd=1.46 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=68 attempts=68 detours=0 plan_ms=27.4
+p4_shelf: xy=(1.92,-2.10) yaw=1.58 wp=1/14 fwd=1.46 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=72 attempts=72 detours=0 plan_ms=26.0
+p4_shelf: xy=(1.92,-2.05) yaw=1.58 wp=1/14 fwd=1.46 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=75 attempts=75 detours=0 plan_ms=25.6
+p4_shelf: xy=(1.92,-1.99) yaw=1.58 wp=1/14 fwd=1.46 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=78 attempts=78 detours=0 plan_ms=27.1
+p4_shelf: xy=(1.92,-1.94) yaw=1.58 wp=1/14 fwd=1.46 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=82 attempts=82 detours=0 plan_ms=28.7
+p4_shelf: xy=(1.92,-1.90) yaw=1.58 wp=1/14 fwd=1.46 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=85 attempts=85 detours=0 plan_ms=24.1
+p4_shelf: xy=(1.92,-1.84) yaw=1.58 wp=0/14 fwd=1.46 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=89 attempts=89 detours=0 plan_ms=21.0
+p4_shelf: xy=(1.92,-1.79) yaw=1.58 wp=1/14 fwd=1.46 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=92 attempts=92 detours=0 plan_ms=21.5
+p4_shelf: xy=(1.92,-1.73) yaw=1.58 wp=1/13 fwd=1.46 lin=0.21 ang=0.00 cruise state=FOLLOW plan_id=95 attempts=95 detours=0 plan_ms=21.5
+p4_shelf: xy=(1.92,-1.68) yaw=1.58 wp=1/13 fwd=1.46 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=99 attempts=99 detours=0 plan_ms=29.2
+p4_shelf: xy=(1.92,-1.62) yaw=1.58 wp=1/13 fwd=1.46 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=102 attempts=102 detours=0 plan_ms=20.5
+p4_shelf: xy=(1.92,-1.58) yaw=1.58 wp=1/13 fwd=1.46 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=105 attempts=105 detours=0 plan_ms=21.3
+p4_shelf: xy=(1.92,-1.53) yaw=1.58 wp=1/13 fwd=1.46 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=109 attempts=109 detours=0 plan_ms=27.5
+p4_shelf: xy=(1.92,-1.48) yaw=1.58 wp=1/13 fwd=1.46 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=112 attempts=112 detours=0 plan_ms=43.0
+p4_shelf: xy=(1.92,-1.44) yaw=1.58 wp=0/13 fwd=1.46 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=116 attempts=116 detours=0 plan_ms=22.0
+p4_shelf: xy=(1.91,-1.38) yaw=1.58 wp=1/13 fwd=1.46 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=119 attempts=119 detours=0 plan_ms=22.5
+p4_shelf: xy=(1.91,-1.34) yaw=1.58 wp=1/13 fwd=1.46 lin=0.21 ang=0.00 cruise state=FOLLOW plan_id=122 attempts=122 detours=0 plan_ms=20.9
+p4_shelf: xy=(1.91,-1.30) yaw=1.58 wp=1/13 fwd=1.47 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=126 attempts=126 detours=0 plan_ms=22.0
+p4_shelf: xy=(1.91,-1.24) yaw=1.58 wp=1/13 fwd=1.47 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=129 attempts=129 detours=0 plan_ms=21.0
+p4_shelf: xy=(1.91,-1.20) yaw=1.58 wp=1/12 fwd=1.47 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=132 attempts=132 detours=0 plan_ms=24.1
+p4_shelf: xy=(1.91,-1.15) yaw=1.58 wp=1/12 fwd=1.47 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=136 attempts=136 detours=0 plan_ms=20.4
+p4_shelf: xy=(1.91,-1.11) yaw=1.58 wp=1/12 fwd=1.47 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=139 attempts=139 detours=0 plan_ms=20.9
+p4_shelf: xy=(1.91,-1.06) yaw=1.58 wp=1/12 fwd=1.47 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=142 attempts=142 detours=0 plan_ms=26.9
+p4_shelf: xy=(1.91,-1.01) yaw=1.58 wp=1/12 fwd=1.47 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=146 attempts=146 detours=0 plan_ms=21.7
+p4_shelf: xy=(1.91,-0.96) yaw=1.58 wp=1/12 fwd=1.47 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=149 attempts=149 detours=0 plan_ms=22.6
+p4_shelf: xy=(1.91,-0.91) yaw=1.58 wp=0/12 fwd=1.47 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=153 attempts=153 detours=0 plan_ms=19.3
+p4_shelf: xy=(1.91,-0.86) yaw=1.58 wp=1/12 fwd=1.47 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=156 attempts=156 detours=0 plan_ms=19.1
+p4_shelf: xy=(1.91,-0.82) yaw=1.58 wp=1/11 fwd=1.47 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=159 attempts=159 detours=0 plan_ms=22.6
+p4_shelf: xy=(1.91,-0.76) yaw=1.58 wp=1/11 fwd=1.47 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=163 attempts=163 detours=0 plan_ms=23.7
+p4_shelf: xy=(1.91,-0.72) yaw=1.58 wp=1/11 fwd=1.47 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=166 attempts=166 detours=0 plan_ms=18.7
+p4_shelf: xy=(1.91,-0.68) yaw=1.58 wp=1/11 fwd=1.47 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=169 attempts=169 detours=0 plan_ms=19.5
+p4_shelf: xy=(1.91,-0.63) yaw=1.58 wp=1/11 fwd=1.47 lin=0.21 ang=0.00 cruise state=FOLLOW plan_id=173 attempts=173 detours=0 plan_ms=23.4
+p4_shelf: xy=(1.91,-0.58) yaw=1.58 wp=1/11 fwd=1.47 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=176 attempts=176 detours=0 plan_ms=20.1
+p4_shelf: xy=(1.91,-0.53) yaw=1.58 wp=1/11 fwd=1.47 lin=0.21 ang=0.00 cruise state=FOLLOW plan_id=179 attempts=179 detours=0 plan_ms=18.1
+p4_shelf: xy=(1.91,-0.49) yaw=1.58 wp=1/11 fwd=1.48 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=183 attempts=183 detours=0 plan_ms=18.3
+p4_shelf: xy=(1.91,-0.44) yaw=1.58 wp=1/11 fwd=1.48 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=186 attempts=186 detours=0 plan_ms=17.1
+p4_shelf: xy=(1.91,-0.40) yaw=1.58 wp=0/11 fwd=1.48 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=190 attempts=190 detours=0 plan_ms=16.3
+p4_shelf: xy=(1.91,-0.35) yaw=1.58 wp=1/11 fwd=1.48 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=193 attempts=193 detours=0 plan_ms=17.1
+p4_shelf: xy=(1.91,-0.30) yaw=1.58 wp=1/10 fwd=1.48 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=196 attempts=196 detours=0 plan_ms=19.0
+p4_shelf: xy=(1.91,-0.26) yaw=1.58 wp=1/10 fwd=1.48 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=200 attempts=200 detours=0 plan_ms=17.8
+p4_shelf: xy=(1.91,-0.21) yaw=1.58 wp=1/10 fwd=1.48 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=203 attempts=203 detours=0 plan_ms=16.8
+p4_shelf: xy=(1.91,-0.15) yaw=1.58 wp=1/10 fwd=1.48 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=206 attempts=206 detours=0 plan_ms=16.1
+p4_shelf: xy=(1.91,-0.11) yaw=1.58 wp=1/10 fwd=1.48 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=210 attempts=210 detours=0 plan_ms=18.2
+p4_shelf: xy=(1.91,-0.06) yaw=1.58 wp=1/10 fwd=1.48 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=213 attempts=213 detours=0 plan_ms=17.0
+p4_shelf: xy=(1.91,-0.01) yaw=1.58 wp=0/10 fwd=1.48 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=217 attempts=217 detours=0 plan_ms=16.6
+p4_shelf: xy=(1.91,0.04) yaw=1.58 wp=1/10 fwd=1.48 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=220 attempts=220 detours=0 plan_ms=16.8
+p4_shelf: xy=(1.91,0.09) yaw=1.58 wp=1/9 fwd=1.48 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=223 attempts=223 detours=0 plan_ms=18.2
+p4_shelf: xy=(1.91,0.13) yaw=1.58 wp=0/9 fwd=1.48 lin=0.00 ang=0.00 replan stuck state=FOLLOW plan_id=227 attempts=227 detours=0 plan_ms=21.7
+p4_shelf: xy=(1.91,0.17) yaw=1.58 wp=1/9 fwd=1.48 lin=0.21 ang=0.00 cruise state=FOLLOW plan_id=230 attempts=230 detours=0 plan_ms=20.4
+p4_shelf: xy=(1.91,0.21) yaw=1.58 wp=1/9 fwd=1.48 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=233 attempts=233 detours=0 plan_ms=17.6
+p4_shelf: xy=(1.91,0.25) yaw=1.58 wp=1/9 fwd=1.48 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=236 attempts=236 detours=0 plan_ms=16.2
+p4_shelf: xy=(1.91,0.30) yaw=1.58 wp=1/9 fwd=1.48 lin=0.19 ang=0.00 cruise state=FOLLOW plan_id=240 attempts=240 detours=0 plan_ms=20.2
+p4_shelf: xy=(1.91,0.34) yaw=1.58 wp=1/9 fwd=1.48 lin=0.18 ang=0.00 cruise state=FOLLOW plan_id=243 attempts=243 detours=0 plan_ms=17.1
+p4_shelf: xy=(1.91,0.37) yaw=1.58 wp=1/9 fwd=1.49 lin=0.20 ang=0.00 cruise state=FOLLOW plan_id=246 attempts=246 detours=0 plan_ms=15.8
+Traceback (most recent call last):
+  File "/workspace/baseline/runtime/p4_nav.py", line 184, in navigate
+    rclpy_mod.spin_once(node, timeout_sec=period)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 208, in spin_once
+    executor.spin_once(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 677, in _wait_for_ready_callbacks
+    wait_set.wait(timeout_nsec)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/baseline/runtime/p4_nav.py", line 321, in main
+    report = navigate(
+  File "/workspace/baseline/runtime/p4_nav.py", line 288, in navigate
+    controller.stop_base()
+  File "/workspace/baseline/runtime/ros_robot_control.py", line 64, in stop_base
+    self.publish_velocity()
+  File "/workspace/baseline/runtime/ros_robot_control.py", line 61, in publish_velocity
+    self.cmd_vel_pub.publish(message)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+    self.__publisher.publish(msg)
+rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/workspace/baseline/runtime/p4_nav.py", line 339, in <module>
+    raise SystemExit(main())
+  File "/workspace/baseline/runtime/p4_nav.py", line 335, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

@@ -1,0 +1,138 @@
+p4_delivery: start xy=(-1.02,0.56) yaw=0.07 goal=(-1.940,-2.900) kind=delivery_approach stop=0.43 planner=grid geom=s0-20260906 laser=TF_REQUIRED max_lin=2.40 max_ang=1.65 known=8.0x explore=4.0x cruise=1.0x
+p4_delivery: xy=(-1.02,0.56) yaw=0.07 wp=0/11 fwd=0.70 lin=0.00 ang=0.00 replan start state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=100.2
+p4_delivery: xy=(-1.01,0.56) yaw=-0.08 wp=1/11 fwd=0.69 lin=0.07 ang=-0.90 cruise state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=100.2
+p4_delivery: xy=(-1.00,0.56) yaw=-0.29 wp=1/11 fwd=0.68 lin=0.09 ang=-0.61 cruise state=FOLLOW plan_id=1 attempts=2 detours=0 plan_ms=99.4
+p4_delivery: xy=(-0.98,0.55) yaw=-0.44 wp=3/45 fwd=1.38 lin=0.00 ang=-1.65 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.97,0.55) yaw=-0.78 wp=3/45 fwd=1.47 lin=0.00 ang=-1.65 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.97,0.55) yaw=-1.18 wp=3/45 fwd=0.44 lin=0.00 ang=-1.65 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.97,0.55) yaw=-1.57 wp=3/45 fwd=0.43 lin=0.00 ang=-1.14 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.97,0.55) yaw=-1.89 wp=3/45 fwd=0.44 lin=0.00 ang=-0.68 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.97,0.55) yaw=-2.05 wp=3/45 fwd=0.45 lin=0.03 ang=-0.41 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.98,0.54) yaw=-2.16 wp=3/45 fwd=0.45 lin=0.03 ang=-0.26 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.98,0.54) yaw=-2.23 wp=3/45 fwd=0.46 lin=0.03 ang=-0.16 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.98,0.53) yaw=-2.41 wp=4/45 fwd=0.49 lin=0.00 ang=-1.06 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.98,0.53) yaw=-2.69 wp=4/45 fwd=1.39 lin=0.04 ang=-0.42 turn state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-0.99,0.53) yaw=-2.82 wp=4/45 fwd=1.37 lin=0.04 ang=-0.24 cruise state=FOLLOW plan_id=2 attempts=3 detours=0 plan_ms=79.7
+p4_delivery: xy=(-1.01,0.52) yaw=-2.90 wp=4/45 fwd=1.35 lin=0.18 ang=-0.18 cruise state=FOLLOW plan_id=2 attempts=4 detours=0 plan_ms=79.4
+p4_delivery: xy=(-1.05,0.52) yaw=-2.94 wp=4/45 fwd=1.31 lin=0.18 ang=-0.12 cruise state=FOLLOW plan_id=2 attempts=5 detours=0 plan_ms=80.1
+p4_delivery: xy=(-1.11,0.51) yaw=-2.97 wp=5/45 fwd=1.26 lin=0.30 ang=0.00 cruise state=FOLLOW plan_id=2 attempts=5 detours=0 plan_ms=80.1
+p4_delivery: xy=(-1.19,0.49) yaw=-2.98 wp=6/45 fwd=1.18 lin=0.32 ang=0.00 cruise state=FOLLOW plan_id=2 attempts=6 detours=0 plan_ms=76.3
+p4_delivery: xy=(-1.26,0.48) yaw=-2.99 wp=7/45 fwd=1.11 lin=0.35 ang=-0.08 cruise state=FOLLOW plan_id=2 attempts=7 detours=0 plan_ms=70.3
+p4_delivery: xy=(-1.34,0.47) yaw=-3.01 wp=8/45 fwd=1.03 lin=0.34 ang=0.00 cruise state=FOLLOW plan_id=2 attempts=7 detours=0 plan_ms=70.3
+p4_delivery: xy=(-1.41,0.46) yaw=-3.02 wp=8/45 fwd=0.95 lin=0.22 ang=-0.07 cruise state=FOLLOW plan_id=2 attempts=8 detours=0 plan_ms=69.7
+p4_delivery: xy=(-1.48,0.45) yaw=-3.03 wp=9/45 fwd=0.88 lin=0.22 ang=-0.07 cruise state=FOLLOW plan_id=2 attempts=9 detours=0 plan_ms=74.5
+p4_delivery: xy=(-1.54,0.45) yaw=-3.04 wp=10/45 fwd=0.82 lin=0.17 ang=0.00 cruise state=FOLLOW plan_id=2 attempts=10 detours=0 plan_ms=73.0
+p4_delivery: xy=(-1.58,0.44) yaw=-3.04 wp=10/45 fwd=0.78 lin=0.13 ang=-0.07 cruise state=FOLLOW plan_id=2 attempts=10 detours=0 plan_ms=73.0
+p4_delivery: xy=(-1.62,0.44) yaw=-3.05 wp=10/45 fwd=0.74 lin=0.10 ang=0.00 cruise state=FOLLOW plan_id=2 attempts=11 detours=0 plan_ms=67.6
+p4_delivery: xy=(-1.64,0.43) yaw=-2.96 wp=11/45 fwd=0.72 lin=0.12 ang=0.72 cruise state=FOLLOW plan_id=2 attempts=12 detours=0 plan_ms=73.0
+p4_delivery: xy=(-1.67,0.43) yaw=-2.79 wp=11/45 fwd=0.70 lin=0.12 ang=0.50 cruise state=FOLLOW plan_id=2 attempts=13 detours=0 plan_ms=86.3
+p4_delivery: xy=(-1.70,0.41) yaw=-2.65 wp=11/45 fwd=0.68 lin=0.12 ang=0.32 cruise state=FOLLOW plan_id=2 attempts=14 detours=0 plan_ms=70.3
+p4_delivery: xy=(-1.72,0.40) yaw=-2.57 wp=11/45 fwd=0.66 lin=0.11 ang=0.21 cruise state=FOLLOW plan_id=2 attempts=15 detours=0 plan_ms=70.5
+p4_delivery: xy=(-1.75,0.38) yaw=-2.50 wp=12/45 fwd=0.65 lin=0.00 ang=1.35 turn state=FOLLOW plan_id=2 attempts=15 detours=0 plan_ms=70.5
+p4_delivery: xy=(-1.75,0.38) yaw=-2.21 wp=12/45 fwd=0.74 lin=0.00 ang=0.93 turn state=FOLLOW plan_id=2 attempts=16 detours=0 plan_ms=76.1
+p4_delivery: xy=(-1.75,0.38) yaw=-1.99 wp=12/45 fwd=0.94 lin=0.08 ang=0.43 cruise state=FOLLOW plan_id=2 attempts=17 detours=0 plan_ms=81.6
+p4_delivery: xy=(-1.76,0.37) yaw=-1.85 wp=0/0 fwd=1.08 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.12 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=2 attempts=20 detours=0 plan_ms=87.0
+
+{
+  "arrived": false,
+  "goal": "delivery",
+  "in_zone": false,
+  "in_picking_zone": false,
+  "in_delivery_base": false,
+  "odom_xy": [
+    -1.759,
+    0.36
+  ],
+  "yaw": -1.828,
+  "head_joints": {
+    "slide": 0.00606276633170603,
+    "head_yaw": -8.274339753403328e-05,
+    "head_pitch": 0.002624172523333445
+  },
+  "goal_xy": [
+    -1.94,
+    -2.9
+  ],
+  "goal_kind": "delivery_approach",
+  "route": [],
+  "elapsed_s": 150.51,
+  "elapsed_wall_s": 150.51,
+  "elapsed_sim_s": null,
+  "failure_reason": "BLOCKED explore",
+  "status": "BLOCKED explore",
+  "nav_state": "BLOCKED",
+  "detours": 0,
+  "plan_id": 2,
+  "plan_attempts": 20,
+  "plan_commits": 2,
+  "plan_reason": "NO_CONNECTIVITY",
+  "geometry_version": "s0-20260906",
+  "laser_tf": {
+    "kind": "extrinsic",
+    "source": "unverified",
+    "status": "TF_REQUIRED",
+    "frame_parent": "base_link",
+    "frame_child": "laser",
+    "translation_xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 0.0,
+    "note": "Repo has no official T_base_laser. Runtime must look up TF; unit tests may pass an explicit identity. Do not silently guess zero."
+  },
+  "speed_scale": 8.0,
+  "known_speed_scale": 8.0,
+  "explore_speed_scale": 4.0,
+  "unknown_speed_scale": 1.0,
+  "max_lin": 2.4,
+  "explore_lin": 1.2,
+  "cruise_lin": 0.3,
+  "max_ang": 1.65,
+  "stop_dist": 0.43,
+  "slow_dist": null,
+  "blocked_by_scan": true,
+  "log_json": "/workspace/baseline/outputs/p4/delivery_20260906_092050.json",
+  "log_txt": "/workspace/baseline/outputs/p4/delivery_20260906_092050.log"
+}
+p4 log: /workspace/baseline/outputs/p4/delivery_20260906_092050.log

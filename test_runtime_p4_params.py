@@ -24,7 +24,12 @@ from runtime.p4_params import (
     in_west_corridor,
     point_in_zone,
 )
-from runtime.p4_params import SPEED_SCALE
+from runtime.p4_params import (
+    EXPLORE_SPEED_SCALE,
+    KNOWN_SPEED_SCALE,
+    SPEED_SCALE,
+    UNKNOWN_SPEED_SCALE,
+)
 
 
 class P4ParamsTests(unittest.TestCase):
@@ -68,9 +73,18 @@ class P4ParamsTests(unittest.TestCase):
     def test_planner_and_runner_read_the_same_file(self):
         self.assertEqual(GRID_STOP, STOP_DIST)
         self.assertGreater(SPEED_SCALE, 0.0)
+        self.assertEqual(KNOWN_SPEED_SCALE, 8.0)
+        self.assertEqual(EXPLORE_SPEED_SCALE, 4.0)
+        self.assertEqual(UNKNOWN_SPEED_SCALE, 1.0)
+        self.assertEqual(SPEED_SCALE, KNOWN_SPEED_SCALE)
         snap = as_dict()
         self.assertEqual(snap["spawn_xy"], list(SPAWN_XY))
         self.assertEqual(snap["stop_dist"], STOP_DIST)
+        self.assertIn("geometry_version", snap)
+        self.assertEqual(snap["default_speed_scale"], 1.0)
+        self.assertEqual(snap["known_speed_scale"], 8.0)
+        self.assertEqual(snap["explore_speed_scale"], 4.0)
+        self.assertEqual(snap["unknown_speed_scale"], 1.0)
 
 
 if __name__ == "__main__":

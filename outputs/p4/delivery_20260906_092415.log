@@ -1,0 +1,94 @@
+p4_delivery: start xy=(-1.76,0.36) yaw=-1.83 goal=(-1.940,-2.900) kind=delivery_approach stop=0.43 planner=grid geom=s0-20260906 laser=TF_REQUIRED max_lin=2.40 max_ang=1.65 known=8.0x explore=4.0x cruise=1.0x
+p4_delivery: xy=(-1.76,0.36) yaw=-1.83 wp=0/10 fwd=1.13 lin=0.00 ang=0.00 replan start state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=50.2
+p4_delivery: xy=(-1.76,0.35) yaw=-1.79 wp=1/10 fwd=1.15 lin=0.10 ang=0.18 cruise state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=50.2
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+p4_delivery: xy=(-1.77,0.33) yaw=-1.76 wp=0/0 fwd=1.13 lin=0.00 ang=0.00 BLOCKED explore state=BLOCKED plan_id=1 attempts=4 detours=0 plan_ms=45.7
+Traceback (most recent call last):
+  File "/workspace/baseline/runtime/p4_nav.py", line 193, in navigate
+    rclpy_mod.spin_once(node, timeout_sec=period)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 208, in spin_once
+    executor.spin_once(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 808, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 797, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 780, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 677, in _wait_for_ready_callbacks
+    wait_set.wait(timeout_nsec)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/baseline/runtime/p4_nav.py", line 342, in main
+    report = navigate(
+  File "/workspace/baseline/runtime/p4_nav.py", line 302, in navigate
+    controller.stop_base()
+  File "/workspace/baseline/runtime/ros_robot_control.py", line 64, in stop_base
+    self.publish_velocity()
+  File "/workspace/baseline/runtime/ros_robot_control.py", line 61, in publish_velocity
+    self.cmd_vel_pub.publish(message)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+    self.__publisher.publish(msg)
+rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/workspace/baseline/runtime/p4_nav.py", line 360, in <module>
+    raise SystemExit(main())
+  File "/workspace/baseline/runtime/p4_nav.py", line 356, in main
+    rclpy.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 130, in shutdown
+    _shutdown(context=context)
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/utilities.py", line 58, in shutdown
+    return context.shutdown()
+  File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py", line 102, in shutdown
+    self.__context.shutdown()
+rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:241

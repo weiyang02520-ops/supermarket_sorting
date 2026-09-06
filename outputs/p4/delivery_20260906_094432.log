@@ -1,0 +1,76 @@
+p4_delivery: start xy=(-1.93,-2.76) yaw=-1.64 goal=(-1.940,-2.900) kind=delivery_approach stop=0.43 planner=grid geom=s0-20260906 laser=TF_REQUIRED max_lin=2.40 max_ang=1.65 known=8.0x explore=4.0x cruise=1.0x
+p4_delivery: xy=(-1.93,-2.76) yaw=-1.64 wp=0/2 fwd=0.85 lin=0.00 ang=0.00 replan start state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=9.1
+p4_delivery: xy=(-1.94,-2.78) yaw=-1.64 wp=1/2 fwd=0.83 lin=0.12 ang=0.00 cruise state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=9.1
+p4_delivery: xy=(-1.94,-2.79) yaw=-1.62 wp=2/2 fwd=0.81 lin=0.00 ang=0.09 ALIGN_GOAL state=ALIGN_GOAL plan_id=2 attempts=2 detours=0 plan_ms=23.9
+
+{
+  "arrived": true,
+  "goal": "delivery",
+  "in_zone": true,
+  "in_picking_zone": false,
+  "in_delivery_base": true,
+  "odom_xy": [
+    -1.937,
+    -2.795
+  ],
+  "yaw": -1.616,
+  "head_joints": {
+    "slide": 0.0060635446223042695,
+    "head_yaw": 0.0022074330975984905,
+    "head_pitch": 0.002766149072378905
+  },
+  "goal_xy": [
+    -1.94,
+    -2.9
+  ],
+  "goal_kind": "delivery_approach",
+  "route": [
+    [
+      -1.9,
+      -2.8
+    ],
+    [
+      -1.94,
+      -2.9
+    ]
+  ],
+  "elapsed_s": 4.81,
+  "elapsed_wall_s": 4.81,
+  "elapsed_sim_s": null,
+  "failure_reason": "",
+  "status": "arrived",
+  "nav_state": "ARRIVED",
+  "detours": 0,
+  "plan_id": 2,
+  "plan_attempts": 2,
+  "plan_commits": 2,
+  "plan_reason": "stuck",
+  "geometry_version": "s0-20260906",
+  "laser_tf": {
+    "kind": "extrinsic",
+    "source": "unverified",
+    "status": "TF_REQUIRED",
+    "frame_parent": "base_link",
+    "frame_child": "laser",
+    "translation_xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 0.0,
+    "note": "Repo has no official T_base_laser. Runtime must look up TF; unit tests may pass an explicit identity. Do not silently guess zero."
+  },
+  "speed_scale": 8.0,
+  "known_speed_scale": 8.0,
+  "explore_speed_scale": 4.0,
+  "unknown_speed_scale": 1.0,
+  "max_lin": 2.4,
+  "explore_lin": 1.2,
+  "cruise_lin": 0.3,
+  "max_ang": 1.65,
+  "stop_dist": 0.43,
+  "slow_dist": null,
+  "blocked_by_scan": false,
+  "log_json": "/workspace/baseline/outputs/p4/delivery_20260906_094432.json",
+  "log_txt": "/workspace/baseline/outputs/p4/delivery_20260906_094432.log"
+}
+p4 log: /workspace/baseline/outputs/p4/delivery_20260906_094432.log

@@ -83,7 +83,7 @@ supermarket_sorting_baseline/
   test_*.py                 # 仓库根目录 unittest
 ```
 
-文档目录与导读见 [AGENTS.md](./AGENTS.md)。本文是操作手册；分工见 `DG-202606-分工总览.md`。P4 先规划后实现，见 [DG-202606-P4-导航与全局规划.md](./DG-202606-P4-导航与全局规划.md)。
+文档目录与导读见 [AGENTS.md](./AGENTS.md)。本文是操作手册；分工见 `DG-202606-分工总览.md`。P4 实现真值见 [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md)，开新 Agent 先贴 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)。
 
 ## 已完成 / 未做
 
@@ -121,7 +121,7 @@ supermarket_sorting_baseline/
 ## 建议下一刀（按用户意图选线）
 
 - **A：** `scripts/capture_yolo_frames.py`；**`GS=1` + `SUPERMARKET_GS_KINDS` 分批**对着货架采 RGB。不要用红几何体当 9 类训练集。
-- **B：** 底盘从送货区开到货架，让 P3 非空；P4 先把全图方案写入专题文档「已拍板方案」，用户同意后再实现。
+- **B：** 底盘从送货区开到货架，让 P3 非空；P4 按 [全图导航实现方案](./DG-202606-P4-全图导航实现方案.md) 的 S0–S6 实现。
 - **联调：** A 的 `.pt` 就绪后改 `CLASS_NAMES` 为 9 类，换默认权重路径。
 
 Docker 命令、镜像 tag、正式 vs 固定 Baseline：以 `supermarket_sorting_baseline/README.md` 为准，不要凭记忆发明话题名。

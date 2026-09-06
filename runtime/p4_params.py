@@ -12,6 +12,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict
 
+from runtime.nav_geometry import GEOMETRY_VERSION, R_PLAN_REF_M
 from runtime.scene_zones import (
     CARRY_OUT_DIST_M,
     CENTER_WALL_X,
@@ -101,11 +102,13 @@ DELIVERY_PLACE_ZONE = DELIVERY_BOX_ZONE
 # ---------------------------------------------------------------------------
 
 GRID_RES = 0.10
-STATIC_INFLATE_M = 0.30
-INFLATE_M = 0.22
+# R_plan starting reference from S0. Not a measured chassis radius.
+STATIC_INFLATE_M = R_PLAN_REF_M
+INFLATE_M = R_PLAN_REF_M
+# Kept for old logs / compatibility tests. Production must not shrink to this.
 RELAXED_INFLATE_M = 0.18
-SELF_RANGE = 0.25
-HIT_MIN = 0.25
+SELF_RANGE = 0.05
+HIT_MIN = 0.05
 HIT_MAX = 8.0
 LETHAL_SCORE = 3
 SCORE_MAX = 5
@@ -115,7 +118,10 @@ EDGE_COST = 0.15
 CORRIDOR_COST = 0.35
 TURN_COST = 0.15
 CORRIDOR_WIDTH = 0.50
-WALL_ECHO_M = 0.16
+# Lidar hits this close to a catalogued wall are echoes, not boxes.
+# The yellow lane sits ~0.42 m north of the divider; 0.16 left wall-face
+# hits confirmed and the 0.30 inflate then froze (1.56, 2.23).
+WALL_ECHO_M = 0.34
 PATH_SKIP_M = 0.30
 YELLOW_SOUTH_Y = WEST_LANE_Y - 0.18
 
@@ -136,10 +142,22 @@ JAM_EXTRA_M = 0.10
 # 4. 跟线 / 重规划
 # ---------------------------------------------------------------------------
 
-MAP_READY_HITS = 8
+# Retired production gate: A* is allowed on an empty map.
+MAP_READY_HITS = 0
 PLAN_HOLD_S = 1.50
 REPLAN_MIN_S = 0.50
+# Keep a committed branch long enough to turn and take the first step.
+# 0.50 s replans flipped SW↔east in delivery_20260906_091014 / 091258.
+ROUTE_HOLD_S = 2.50
+# Aligned + stopped on a box this long means this connection is dead.
+# Then we may reverse and leave (delivery_20260906_092828 sat 120 s).
+FACE_BLOCK_S = 0.40
 FAIL_BACKOFF_S = 2.00
+SEARCH_BUDGET_MS = 180.0
+SENSOR_WAIT_WALL_S = 8.0
+ARRIVE_HOLD_S = 0.30
+STILL_LIN_M_S = 0.02
+STILL_ANG_RAD_S = 0.05
 OFF_TRACK_M = 0.35
 PROGRESS_WINDOW_S = 1.50
 PROGRESS_EPS_M = 0.05
@@ -153,7 +171,16 @@ PEEK_RAD = 0.55
 RATE_HZ = 20.0
 BASE_LIN = 0.30
 BASE_ANG = 0.55
-SPEED_SCALE = 4.0
+# Known/verified prefix uses the previous 8× cruise (2.40 m/s). This is a
+# velocity cap, not a 8× simulation clock. Recover/align stay at 1×.
+# Paths to an explore/observe pose are already on known-free cells, so they
+# may run faster than 1× but not the full known-prefix 8×.
+KNOWN_SPEED_SCALE = 8.0
+EXPLORE_SPEED_SCALE = 4.0
+UNKNOWN_SPEED_SCALE = 1.0
+SPEED_SCALE = KNOWN_SPEED_SCALE
+# Floor for recover/align and the slow CLI hatch (`--speed-scale 1`).
+DEFAULT_SPEED_SCALE = UNKNOWN_SPEED_SCALE
 MAX_ANG_CAP = 1.65
 HEAD_SETTLE_S = 1.0
 DEFAULT_TIMEOUT_S = 150.0
@@ -195,11 +222,17 @@ def as_dict() -> Dict[str, Any]:
         "hug_west_x": HUG_WEST_X,
         "west_lane_y": WEST_LANE_Y,
         "south_peel_y": SOUTH_PEEL_Y,
+        "geometry_version": GEOMETRY_VERSION,
         "grid_res": GRID_RES,
         "inflate_m": INFLATE_M,
         "static_inflate_m": STATIC_INFLATE_M,
+        "r_plan_ref_m": R_PLAN_REF_M,
         "stop_dist": STOP_DIST,
         "map_ready_hits": MAP_READY_HITS,
+        "default_speed_scale": DEFAULT_SPEED_SCALE,
+        "known_speed_scale": KNOWN_SPEED_SCALE,
+        "explore_speed_scale": EXPLORE_SPEED_SCALE,
+        "unknown_speed_scale": UNKNOWN_SPEED_SCALE,
         "rate_hz": RATE_HZ,
         "speed_scale": SPEED_SCALE,
         "time_limit_s": TIME_LIMIT_S,
