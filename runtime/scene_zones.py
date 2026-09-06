@@ -68,6 +68,13 @@ SOUTH_EAST_Y_MIN = -3.45
 # Center divider. Westbound in this band hits the wall; go around south.
 CENTER_WALL_X = (0.20, 1.45)
 CENTER_WALL_Y = (-3.08, 1.90)
+# Inflated north-west tip of that slab. Used as a path check, not a wall.
+DIVIDER_NW_X = (-0.18, 0.55)
+DIVIDER_NW_Y = (1.40, 2.22)
+# Official spawn in the delivery area, facing +Y (north).
+SPAWN_XY = (1.92, -3.17)
+SPAWN_YAW = math.pi / 2.0
+SPAWN_ZONE = {"x": (1.70, 2.20), "y": (-3.45, -2.90)}
 
 # Loose footprint used to keep lidar detours inside the supermarket.
 NAV_BOUNDS = {"x": (-2.55, 2.35), "y": (-3.85, 3.30)}
@@ -116,4 +123,11 @@ def in_center_wall_band(x: float, y: float) -> bool:
 
 def near_divider_nw_corner(x: float, y: float) -> bool:
     """Inflated north-west tip of the center wall. Southbound here wedges the base."""
-    return -0.18 <= float(x) <= 0.55 and 1.40 <= float(y) <= 2.22
+    return (
+        DIVIDER_NW_X[0] <= float(x) <= DIVIDER_NW_X[1]
+        and DIVIDER_NW_Y[0] <= float(y) <= DIVIDER_NW_Y[1]
+    )
+
+
+def in_spawn_zone(xy) -> bool:
+    return point_in_zone(xy, SPAWN_ZONE)

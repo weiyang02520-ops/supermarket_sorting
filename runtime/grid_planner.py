@@ -15,6 +15,36 @@ from runtime.lidar_avoid import (
     safety_gate,
     scan_sectors,
 )
+from runtime.p4_params import (
+    CORRIDOR_COST,
+    CORRIDOR_WIDTH,
+    EDGE_COST,
+    FAIL_BACKOFF_S,
+    FREE_COST,
+    GRID_RES,
+    HIT_MAX,
+    HIT_MIN,
+    INFLATE_M,
+    LETHAL_SCORE,
+    MAP_READY_HITS,
+    OFF_TRACK_M,
+    PATH_SKIP_M,
+    PEEK_RAD,
+    PEEK_S,
+    PLAN_HOLD_S,
+    PROGRESS_EPS_M,
+    PROGRESS_WINDOW_S,
+    RELAXED_INFLATE_M,
+    REPLAN_MIN_S,
+    SCORE_MAX,
+    SELF_RANGE,
+    STATIC_INFLATE_M,
+    STOP_DIST,
+    TURN_COST,
+    UNKNOWN_COST,
+    WALL_ECHO_M,
+    YELLOW_SOUTH_Y,
+)
 from runtime.scene_zones import (
     CENTER_WALL_X,
     CENTER_WALL_Y,
@@ -34,34 +64,6 @@ from runtime.scene_zones import (
     in_south_east_stub,
 )
 from runtime.waypoint_nav import WaypointFollower, wrap_to_pi
-
-GRID_RES = 0.10
-STATIC_INFLATE_M = 0.30
-INFLATE_M = 0.22
-SELF_RANGE = 0.25
-HIT_MIN = 0.25
-HIT_MAX = 8.0
-LETHAL_SCORE = 3
-SCORE_MAX = 5
-UNKNOWN_COST = 2.5
-FREE_COST = 1.0
-EDGE_COST = 0.15
-CORRIDOR_COST = 0.35
-TURN_COST = 0.15
-CORRIDOR_WIDTH = 0.50
-STOP_DIST = 0.43
-MAP_READY_HITS = 8
-WALL_ECHO_M = 0.16
-PLAN_HOLD_S = 1.50
-REPLAN_MIN_S = 0.50
-FAIL_BACKOFF_S = 2.00
-PATH_SKIP_M = 0.30
-OFF_TRACK_M = 0.35
-RELAXED_INFLATE_M = 0.18
-PROGRESS_WINDOW_S = 1.50
-PROGRESS_EPS_M = 0.05
-YELLOW_SOUTH_Y = WEST_LANE_Y - 0.18
-PEEK_S = 0.90
 
 
 def _world_bounds() -> Tuple[float, float, float, float]:
@@ -944,11 +946,11 @@ class GridNavController:
         if left < need and right < need:
             return False
         if left >= right + 0.10:
-            delta = 0.55
+            delta = PEEK_RAD
         elif right >= left + 0.10:
-            delta = -0.55
+            delta = -PEEK_RAD
         else:
-            delta = 0.55
+            delta = PEEK_RAD
         self._recover_left = PEEK_S
         self._recover_yaw = wrap_to_pi(float(yaw) + delta)
         self.last_status = "recover_scan"

@@ -6,6 +6,15 @@ import math
 from dataclasses import dataclass, field
 from typing import Iterable, Optional, Sequence, Tuple
 
+from runtime.p4_params import (
+    AHEAD_CONE_HALF,
+    FORWARD_CONE_HALF,
+    JAM_EXTRA_M,
+    NUDGE_FAR_M,
+    NUDGE_SPAN_MAX,
+    SIDE_OPEN_M,
+    STOP_DIST,
+)
 from runtime.scene_zones import (
     HUG_WEST_X,
     NAV_BOUNDS,
@@ -87,12 +96,12 @@ def scan_sectors(
     }
     return ScanSectors(
         # Wide cone: slow / shoulder steer. Narrow cone: only this can jam.
-        forward=min_forward_range(cone_half=0.40, **kwargs),
-        ahead=min_forward_range(cone_half=0.22, **kwargs),
+        forward=min_forward_range(cone_half=FORWARD_CONE_HALF, **kwargs),
+        ahead=min_forward_range(cone_half=AHEAD_CONE_HALF, **kwargs),
         left=sector_min(lo=0.50, hi=1.45, **kwargs),
         right=sector_min(lo=-1.45, hi=-0.50, **kwargs),
-        left_front=sector_min(lo=0.22, hi=0.85, **kwargs),
-        right_front=sector_min(lo=-0.85, hi=-0.22, **kwargs),
+        left_front=sector_min(lo=AHEAD_CONE_HALF, hi=0.85, **kwargs),
+        right_front=sector_min(lo=-0.85, hi=-AHEAD_CONE_HALF, **kwargs),
     )
 
 
@@ -116,7 +125,7 @@ def occlusion_kind(
     span: float,
     stop_dist: float,
     clear_horizon: float,
-    jam_extra: float = 0.10,
+    jam_extra: float = JAM_EXTRA_M,
 ) -> str:
     """clear / nudge (steer while driving) / approach (keep speed) / block (stop-turn)."""
     ahead = sectors.ahead if math.isfinite(sectors.ahead) else 8.0
@@ -124,9 +133,9 @@ def occlusion_kind(
         return "clear"
     left_f = sectors.left_front if math.isfinite(sectors.left_front) else 8.0
     right_f = sectors.right_front if math.isfinite(sectors.right_front) else 8.0
-    side_open = left_f > 0.80 or right_f > 0.80
-    small = float(span) <= 0.32
-    far = ahead > 0.90
+    side_open = left_f > SIDE_OPEN_M or right_f > SIDE_OPEN_M
+    small = float(span) <= NUDGE_SPAN_MAX
+    far = ahead > NUDGE_FAR_M
     if side_open and (small or far):
         return "nudge"
     if ahead > float(stop_dist) + float(jam_extra):
@@ -140,10 +149,10 @@ def safety_gate(
     ranges: Sequence[float],
     angle_min: float,
     angle_increment: float,
-    stop_dist: float = 0.43,
+    stop_dist: float = STOP_DIST,
 ) -> Tuple[float, float, str]:
     """Production brake only. Does not steer, insert detours, or rewrite the route."""
-    ahead = min_forward_range(ranges, angle_min, angle_increment, cone_half=0.22)
+    ahead = min_forward_range(ranges, angle_min, angle_increment, cone_half=AHEAD_CONE_HALF)
     if math.isfinite(ahead) and ahead <= float(stop_dist):
         return 0.0, float(angular), "safety_stop"
     if math.isfinite(ahead) and ahead < float(stop_dist) + 0.25 and linear > 0.04:

@@ -8,11 +8,21 @@ import json
 import sys
 import time
 from datetime import datetime
-from pathlib import Path
 
 from runtime.head_camera_kinematics import AISLE_SCAN_HEAD, AISLE_SCAN_SPINE
-from runtime.grid_planner import STOP_DIST, GridNavController
+from runtime.grid_planner import GridNavController
 from runtime.lidar_avoid import scan_sectors_from_msg
+from runtime.p4_params import (
+    BASE_ANG,
+    BASE_LIN,
+    DEFAULT_TIMEOUT_S,
+    HEAD_SETTLE_S,
+    LOG_DIR,
+    MAX_ANG_CAP,
+    RATE_HZ,
+    SPEED_SCALE,
+    STOP_DIST,
+)
 from runtime.ros_contract import JOINT_STATES_TOPIC, ODOM_TOPIC, SCAN_TOPIC
 from runtime.ros_robot_control import RosRobotController
 from runtime.ros_sensor_utils import SensorCache
@@ -25,15 +35,6 @@ from runtime.scene_zones import (
     in_picking_zone,
 )
 from runtime.waypoint_nav import build_delivery_route, build_shelf_route, pose_from_odom
-
-RATE_HZ = 20.0
-BASE_LIN = 0.30
-BASE_ANG = 0.55
-SPEED_SCALE = 4.0
-MAX_ANG_CAP = 1.65
-HEAD_SETTLE_S = 1.0
-DEFAULT_TIMEOUT_S = 150.0
-LOG_DIR = Path(__file__).resolve().parents[1] / "outputs" / "p4"
 
 
 class _Tee:

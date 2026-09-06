@@ -2,7 +2,7 @@
 
 给后续 Agent 和协作者的**第一份文件**。
 
-更新：2026-09-01。当前比赛 **DG-202606 智慧零售**，初赛提交 **2026-09-15**。
+更新：2026-09-06。当前比赛 **DG-202606 智慧零售**，初赛提交 **2026-09-15**。
 
 ---
 
@@ -27,7 +27,8 @@
 | [DG-202606-分工总览.md](./DG-202606-分工总览.md) | 两人拆分、交接物（`supermarket9.pt`）、日历 | 具体采图/导航步骤（看 A/B） |
 | [DG-202606-A-数据采集与YOLO.md](./DG-202606-A-数据采集与YOLO.md) | A 线：采图脚本、仿真标注、YOLOv8s、交付权重。**4060 必须分批加载 3DGS ply** | 编排/限幅/`client_task_1.py` |
 | [DG-202606-B-迁移与算法.md](./DG-202606-B-迁移与算法.md) | B 线：走到货架、雷达、抓放、评分入口 | A 的 `data.yaml` 类别顺序和训练超参 |
-| [DG-202606-P4-导航与全局规划.md](./DG-202606-P4-导航与全局规划.md) | P4：先规划全图思路与实现逻辑；「已拍板」之前不写代码 | 赛题 PDF；Nav2 安装说明；未批准的实现任务 |
+| [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md) | **开 P4 Agent 先贴这篇**：场地区块、可调项、当前策略、提示词 | 赛题 PDF；旧聊天记录当真值 |
+| [DG-202606-P4-导航与全局规划.md](./DG-202606-P4-导航与全局规划.md) | P4 长文：已拍板方案、失败日志、实现细节 | 赛题 PDF；Nav2；未批准的新算法 |
 | [准备工作.txt](./准备工作.txt) | 宿主机/WSL：Docker、NVIDIA 驱动、Container Toolkit | 比赛任务说明 |
 | [server物品清单.csv](./server物品清单.csv) | 核对 9 个 `kind` 与仿真模型路径 | YOLO 训练集（那是 `datasets/`，还没有） |
 
@@ -37,9 +38,10 @@
 | --- | --- |
 | `supermarket_sorting_baseline/README.md` | 官方启动命令、话题表、环境变量（`SUPERMARKET_*`） |
 | `supermarket_sorting_baseline/AGENTS.md` | 短指针，指向 `docs/AGENTS.md` |
+| `runtime/p4_params.py` | P4 场景几何与可调项（货架/出生/配送/走廊、膨胀、刹停） |
 | `D:\DG\DG-202606智慧零售赛题说明详细版_20260801\` | 赛题 PDF / 变更说明原文 |
 
-阅读顺序：本文 → BRIEF → 按任务选 A 或 B。P4 先读 [DG-202606-P4-导航与全局规划.md](./DG-202606-P4-导航与全局规划.md) 做规划，未写入「已拍板方案」前不要改导航代码。不要从文旅 `vlm_pipeline` 的 Task 脚本开始。
+阅读顺序：本文 → BRIEF → 按任务选 A 或 B。P4 先读 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)，细节再看长文。改数只动 `runtime/p4_params.py`。不要从文旅 `vlm_pipeline` 的 Task 脚本开始。
 
 ---
 
@@ -135,11 +137,11 @@
 
 ---
 
-## 当前进度（2026-09-05）
+## 当前进度（2026-09-06）
 
 已在仿真跑过：预检；P2 干跑 1× `kele` → `DONE`；车开到货架后 P3 在 **GS=1 slim 可乐 + 背景** 下能解 ArUco、YOLO 认出 `kele` 并绑槽。P3 推理必须走 **CPU**（与 Server GS 共享 4060 会 SIGKILL Server）。
 
-P4 全图（静态墙 + 雷达栅格 + A*）已在 `runtime/grid_planner.py`。`--goal shelf` 最新一次 `arrived=true`；`--goal delivery` 仍停在西侧箱群约 `(-1.47, 0.48)`。下一任先读 [DG-202606-P4-导航与全局规划.md](./DG-202606-P4-导航与全局规划.md) 的「仿真交接（2026-09-05）」，用文末「完善用」提示词。不要重开 Nav2 / DWA。
+P4：黄线第一轮 + 雷达 clear/nudge/approach/face_turn，图够了才 A*。参数在 `runtime/p4_params.py`。`--goal shelf` 能到；`--goal delivery` 仍未稳定到台（`103938` 黄线南切后撞箱）。下一任先读 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)。不要重开 Nav2 / DWA / detour。
 
 未做：9 类数据集与训练；配送导航闭环；真抓真放；5 单随机；评分主入口。
 
