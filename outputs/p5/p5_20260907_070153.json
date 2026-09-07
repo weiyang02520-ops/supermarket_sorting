@@ -1,0 +1,40 @@
+{
+  "grasped": true,
+  "placed": false,
+  "kind": "kele",
+  "used_json_xyz": false,
+  "nav_shelf": null,
+  "nav_delivery": null,
+  "log_json": "/workspace/baseline/outputs/p5/p5_20260907_070153.json",
+  "note": "placed is the client sequence, not Server referee",
+  "target_id": "item_run_d29fd8aa0112_32",
+  "phase": "held",
+  "slot_hint": null,
+  "lock_attempt": 1,
+  "object_world": [
+    0.9204,
+    3.2431,
+    0.9576
+  ],
+  "deploy_world": [
+    0.9094,
+    3.0231,
+    0.9476
+  ],
+  "creep_stop_y": 3.2781,
+  "place_target_in_box": false,
+  "reason": "held",
+  "elapsed_s": 48.27,
+  "odom_xy": [
+    0.802,
+    2.525
+  ],
+  "yaw": 1.378,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
+  "failed": false,
+  "look_hint": [
+    0.0,
+    -0.6
+  ]
+}

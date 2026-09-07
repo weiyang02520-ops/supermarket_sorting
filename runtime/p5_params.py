@@ -1,0 +1,100 @@
+"""P5 grasp/place constants. Referee table/zones stay in scene_zones."""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+import numpy as np
+
+from runtime.scene_zones import (
+    DELIVERY_APPROACH_XY,
+    DELIVERY_FACE_YAW,
+    DELIVERY_TABLE_XY,
+    DELIVERY_TARGET_XYZ,
+    SHELF_AISLE_Y,
+    SHELF_APPROACH_XY,
+    SHELF_FACE_YAW,
+)
+
+ROOT = Path(__file__).resolve().parents[1]
+LOG_DIR = ROOT / "outputs" / "p5"
+DEFAULT_WEIGHTS = ROOT / "weights" / "kele.pt"
+DEFAULT_KIND = "kele"
+
+GRASP_ARM = "r"
+HEAD_YAW = 0.0
+HEAD_PITCH = -0.6
+SLIDE_GRASP = 0.11
+GRIP_OPEN = 1.0
+GRIP_CLOSE = 0.08
+GRASP_ROT = np.eye(3)
+DEPLOY_OFFSET = np.array([-0.011, -0.220, -0.010])
+CREEP_STOP_DY = 0.035
+
+DETECT_DWELL_S = 1.0
+DETECT_MIN_SAMPLES = 5
+LOCK_TIMEOUT_S = 12.0
+LOCK_ATTEMPTS = 3
+
+REACH_FWD_MIN = 0.30
+REACH_FWD_MAX = 1.50
+REACH_LATERAL_MAX = 0.14
+REACH_Z_MIN = 0.70
+REACH_Z_MAX = 1.15
+VISION_SURFACE_TO_CENTER_FWD = 0.0265
+
+DEPLOY_CART_TOL = 0.065
+DEPLOY_JOINT_TOL = 0.080
+DEPLOY_ROT_TOL = 0.35
+DEPLOY_SLIDE_TOL = 0.025
+DEPLOY_DWELL_S = 0.40
+
+CREEP_SPEED = 0.06
+CREEP_YAW_KP = 4.0
+LIFT_AMOUNT = 0.05
+RETREAT_SPEED = 0.20
+RETREAT_Y = SHELF_AISLE_Y
+POS_TOL = 0.06
+GRASP_YAW = SHELF_FACE_YAW
+
+INIT_ARM_L = np.array([0.0, -0.166, 0.032, 0.0, 1.571, 2.223])
+INIT_ARM_R = np.array([0.0, -0.166, 0.032, 0.0, -1.571, -2.223])
+INIT_DWELL_S = 0.60
+
+RATE_HZ = 30.0
+JOINT_SLEW = 1.2
+MAX_LIN = 0.35
+MAX_ANG = 0.65
+MAX_LIN_ACC = 0.80
+MAX_ANG_ACC = 5.0
+
+CLOSE_HOLD_S = 0.80
+PLACE_OPEN_HOLD_S = 0.80
+PLACE_DEPLOY_Z = 0.92
+PLACE_LOWER_Z = 0.85
+PLACE_RETRACT_FWD = 0.18
+PLACE_CART_TOL = 0.080
+GRASP_TIMEOUT_S = 60.0
+PLACE_TIMEOUT_S = 30.0
+NAV_TIMEOUT_S = 150.0
+
+# Layer/column look hints for a lock retry. These are head joints, not xyz.
+SLOT_LAYER_PITCH = {1: -0.12, 2: -0.28, 3: -0.50}
+SLOT_COLUMN_YAW = {1: 0.30, 2: 0.0, 3: -0.30}
+
+__all__ = [
+    "CREEP_SPEED",
+    "DEFAULT_KIND",
+    "DEFAULT_WEIGHTS",
+    "DELIVERY_APPROACH_XY",
+    "DELIVERY_FACE_YAW",
+    "DELIVERY_TABLE_XY",
+    "DELIVERY_TARGET_XYZ",
+    "GRASP_YAW",
+    "LOG_DIR",
+    "MAX_ANG",
+    "MAX_LIN",
+    "NAV_TIMEOUT_S",
+    "SHELF_APPROACH_XY",
+    "SHELF_FACE_YAW",
+]

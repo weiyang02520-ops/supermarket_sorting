@@ -2,7 +2,7 @@
 
 给后续 Agent 和协作者的**第一份文件**。
 
-更新：2026-09-06。当前比赛 **DG-202606 智慧零售**，初赛提交 **2026-09-15**。
+更新：2026-09-07。当前比赛 **DG-202606 智慧零售**，初赛提交 **2026-09-15**。
 
 ---
 
@@ -10,13 +10,13 @@
 
 零售文档有两处同名拷贝。**改评分代码、开新 Agent 时以代码仓为准：**
 
-`D:\DG\supermarket_sorting_baseline\docs\`
+`D:\DG\supermarket_sorting\docs\`
 
-`D:\DG\vlm_pipeline\docs\` 是较早的团队文档落点，文件名相同。两份不一致时，**只改代码仓 `supermarket_sorting_baseline/docs`，不要在文旅仓库里并行改一版。** 评分源码仍在 `supermarket_sorting_baseline/` 根下（`runtime/`、`perception/` 等），不要把 Client 写进 `vlm_pipeline/`。
+旧目录名 `supermarket_sorting_baseline` 已不再使用。`D:\DG\vlm_pipeline\docs\` 是较早的团队文档落点，文件名相同。两份不一致时，**只改代码仓 `supermarket_sorting/docs`，不要在文旅仓库里并行改一版。** 评分源码在 `supermarket_sorting/` 根下（`runtime/`、`perception/` 等），不要把 Client 写进 `vlm_pipeline/`。
 
-工作区根目录不再放 `AGENTS.md`。零售仓库根目录的 `supermarket_sorting_baseline/AGENTS.md` 只是指针，会指到 `docs/AGENTS.md`。
+工作区根目录不再放 `AGENTS.md`。第一份文件就是本目录这份。
 
-### `supermarket_sorting_baseline/docs` 里每份做什么
+### `supermarket_sorting/docs` 里每份做什么
 
 在代码仓打开文档时，下面相对路径就是当前文件夹。在文旅 `vlm_pipeline/docs` 打开时，同名文件用途相同，但请改去代码仓那份。
 
@@ -27,9 +27,10 @@
 | [DG-202606-分工总览.md](./DG-202606-分工总览.md) | 两人拆分、交接物（`supermarket9.pt`）、日历 | 具体采图/导航步骤（看 A/B） |
 | [DG-202606-A-数据采集与YOLO.md](./DG-202606-A-数据采集与YOLO.md) | A 线：采图脚本、仿真标注、YOLOv8s、交付权重。**4060 必须分批加载 3DGS ply** | 编排/限幅/`client_task_1.py` |
 | [DG-202606-B-迁移与算法.md](./DG-202606-B-迁移与算法.md) | B 线：走到货架、雷达、抓放、评分入口 | A 的 `data.yaml` 类别顺序和训练超参 |
-| [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md) | **开 P4 实现 Agent 先贴这篇**：提示词、S0–S6 摘要、作废路径 | 赛题 PDF；旧「图够了才 A*」当现状 |
-| [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md) | **P4 实现真值**：启动即 A*、状态机、探索/恢复、验收矩阵 | 已落地代码；Nav2；旧局部/黄线 fallback |
+| [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md) | **开 P4 / 抓放 Agent 先贴这篇**：现状、提示词、作废路径 | 赛题 PDF；「现码仍是旧路径」；未批准的新算法 |
+| [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md) | P4 设计真值（S0–S6）。落地状态看 HANDOFF | Nav2；旧局部/黄线 fallback；把第 2 节 9 月 6 日 hold 当现状 |
 | [DG-202606-P4-导航与全局规划.md](./DG-202606-P4-导航与全局规划.md) | P4 历史：旧方案、失败日志、补丁记录 | 当前实现说明书；未批准的新算法 |
+| [DG-202606-P5-抓放设计讨论.md](./DG-202606-P5-抓放设计讨论.md) | **P5 讨论稿**：问题、9 类碰撞尺寸、待拍板项。定稿前不要当实现说明书 | 已验收的抓放；赛题 PDF；把 `placed=true` 当裁判 |
 | [准备工作.txt](./准备工作.txt) | 宿主机/WSL：Docker、NVIDIA 驱动、Container Toolkit | 比赛任务说明 |
 | [server物品清单.csv](./server物品清单.csv) | 核对 9 个 `kind` 与仿真模型路径 | YOLO 训练集（那是 `datasets/`，还没有） |
 
@@ -37,12 +38,12 @@
 
 | 路径 | 用途 |
 | --- | --- |
-| `supermarket_sorting_baseline/README.md` | 官方启动命令、话题表、环境变量（`SUPERMARKET_*`） |
-| `supermarket_sorting_baseline/AGENTS.md` | 短指针，指向 `docs/AGENTS.md` |
+| `supermarket_sorting/README.md` | 官方启动命令、话题表、环境变量（`SUPERMARKET_*`） |
 | `runtime/p4_params.py` | P4 场景几何与可调项（货架/出生/配送/走廊、膨胀、刹停） |
+| `runtime/grid_planner.py` | P4 占用栅格 + A* + 导航状态机 |
 | `D:\DG\DG-202606智慧零售赛题说明详细版_20260801\` | 赛题 PDF / 变更说明原文 |
 
-阅读顺序：本文 → BRIEF → 按任务选 A 或 B。P4 实现先读 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)，按 [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md) 的 S0–S6 做。旧 P4 长文只当背景。不要从文旅 `vlm_pipeline` 的 Task 脚本开始。
+阅读顺序：本文 → BRIEF → 按任务选 A 或 B。P4 **不要从 S0 重写**；先读 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md) 的现状。方案原文仍是 [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md)。P5 先读 [DG-202606-P5-抓放设计讨论.md](./DG-202606-P5-抓放设计讨论.md)，不要把初版预览当评分抓放。旧 P4 长文只当背景。不要从文旅 `vlm_pipeline` 的 Task 脚本开始。
 
 ---
 
@@ -102,7 +103,7 @@
 1. **先做的是文旅 DG-202612**（`vlm_pipeline`）：三色箱、指令带 `place_world`、双臂 hug、无雷达、DashScope。平台层（限幅、急停、`MMK2Kdl`、头相机外参）已经打磨过。
 2. **零售初赛更早截止（9 月 15 日）**。文旅还没做完的部分（三任务闭环、hug 插货架、色箱 HSV）正好**带不进零售**。继续把文旅做完再迁，会把联调时间耗在错误物体和错误场景上。
 3. **2026-08-29 起转向零售**：底座用官方 `supermarket_sorting_baseline`，把搬运工程的控制/IK/相机**思想迁过去**，任务层重写。文旅评分 Client 暂停。
-4. **零售文档主副本在 `supermarket_sorting_baseline/docs/`**（与代码同仓）。`vlm_pipeline/docs/` 可能还有同名拷贝；不一致时以代码仓为准。文旅源码仓库本身不是零售 Client。
+4. **零售文档主副本在 `supermarket_sorting/docs/`**（与代码同仓）。`vlm_pipeline/docs/` 可能还有同名拷贝；不一致时以代码仓为准。文旅源码仓库本身不是零售 Client。
 
 已完成 **P0–P3**（镜像、预检、取送状态机干跑、ArUco 绑定 + 可乐 YOLO）。缺两块核心，并已按人拆开：
 
@@ -119,11 +120,11 @@
 
 **做**
 
-- 只改 `supermarket_sorting_baseline/` 里的评分代码。新逻辑放 `runtime/` 和新的 `scripts/run_*.sh`（**LF**）。
+- 只改 `supermarket_sorting/` 里的评分代码。新逻辑放 `runtime/` 和新的 `scripts/run_*.sh`（**LF**）。
 - 任务当 `id`+`kind` 解析；槽位 ArUco 0–44；商品本地 YOLO；导航用雷达。
 - 底盘指令走 `runtime/ros_robot_control.py`（±0.35 / ±0.65）。
 - `source /opt/ros/humble/setup.bash` **之后**才能 `set -u`。Server 调试挂载 `patches/simulator.py`。
-- 改完：`cd supermarket_sorting_baseline && python -m unittest discover -v`。
+- 改完：`cd supermarket_sorting && python -m unittest discover -v`。
 
 **不要**
 
@@ -138,12 +139,17 @@
 
 ---
 
-## 当前进度（2026-09-06）
+## 当前进度（2026-09-07）
 
 已在仿真跑过：预检；P2 干跑 1× `kele` → `DONE`；车开到货架后 P3 在 **GS=1 slim 可乐 + 背景** 下能解 ArUco、YOLO 认出 `kele` 并绑槽。P3 推理必须走 **CPU**（与 Server GS 共享 4060 会 SIGKILL Server）。
 
-P4 **实现真值已换成** [全图导航实现方案](./DG-202606-P4-全图导航实现方案.md)（启动即 A*、状态机、探索分支、有界恢复）。现码仍是旧路径，仿真未稳定到配送台（`20260906` 北侧 hold；`103938` 南切撞箱）。下一任先读 [P4-AGENT-HANDOFF](./DG-202606-P4-AGENT-HANDOFF.md)，按 S0–S6 改，不要重开 Nav2 / DWA / detour，不要把「图够了才 A*」写回正式路径。
+P4 全图路径已落地（`runtime/grid_planner.py` 启动即 A*、跟随只读、雷达只刹停）。仿真已到配送接近点：
 
-未做：9 类数据集与训练；配送导航闭环；真抓真放；5 单随机；评分主入口。
+- `delivery_20260906_093534`：从箱区残留位 `(-1.82,-0.37)` 进 `in_delivery_base`，150 s 超时，`arrived=false`（距 `(-1.94,-2.90)` 约 16 cm）。`in_zone` **不等于** `arrived`。
+- `delivery_20260906_094432`：同点再跑，**4.81 s** 报 `arrived=true`，`odom≈(-1.937,-2.795)`，`detours=0`。直段已按剩余路径给速，不再对每个密 A* 点刹车。
 
-下一步：A 按 [DG-202606-A-数据采集与YOLO.md](./DG-202606-A-数据采集与YOLO.md) **分批 GS 采图**；B 先把 P4 送到配送台，再接可乐取放。操作细节以 [AGENT-BRIEF](./DG-202606-AGENT-BRIEF.md) 为准。
+`arrived` 要求：距接近点 ≤0.12 m、朝向误差 ≤0.05 rad、在 `delivery_base`、底盘停稳 0.30 s。桌心 `(-1.94,-3.41)` 和地上黄框是放货区，导航目标是桌子**北侧**接近点。不要把「看起来靠上桌子」当到达。
+
+未做：出生/货架 → 配送的新速度整段日志；S0 底盘/外参/制动核定；完整 DFS 探索栈；9 类数据集与训练；真抓真放；5 单随机；评分主入口。
+
+下一步：A 按 [DG-202606-A-数据采集与YOLO.md](./DG-202606-A-数据采集与YOLO.md) **分批 GS 采图**；B 用 `kele.pt` 接一次真抓真放，并补货架往返。P4 不要重开 Nav2 / DWA / 黄线 fallback。操作细节以 [AGENT-BRIEF](./DG-202606-AGENT-BRIEF.md) 为准，P4 现状以 [P4-AGENT-HANDOFF](./DG-202606-P4-AGENT-HANDOFF.md) 为准。

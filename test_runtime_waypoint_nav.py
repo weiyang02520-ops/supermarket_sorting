@@ -441,6 +441,51 @@ class WaypointNavTests(unittest.TestCase):
         self.assertFalse(done)
         self.assertLess(linear, 0.0)
 
+    def test_global_mode_turns_west_before_the_racks(self):
+        follower = WaypointFollower(
+            [(1.92, 2.32), (0.85, 2.32), SHELF_APPROACH_XY],
+            final_yaw=SHELF_FACE_YAW,
+            max_lin=2.4,
+            max_ang=1.65,
+            global_mode=True,
+        )
+        follower.mode = "drive"
+        linear, angular, done = follower.step(1.92, 2.14, math.pi / 2.0)
+        self.assertFalse(done)
+        self.assertEqual(linear, 0.0)
+        self.assertGreater(abs(angular), 0.20)
+
+    def test_global_mode_north_racks_reverse_instead_of_zeroing(self):
+        follower = WaypointFollower(
+            [(1.86, 2.32), (0.85, 2.32), SHELF_APPROACH_XY],
+            final_yaw=SHELF_FACE_YAW,
+            max_lin=2.4,
+            max_ang=1.65,
+            global_mode=True,
+        )
+        follower.mode = "drive"
+        linear, angular, done = follower.step(1.86, 2.73, math.pi / 2.0)
+        self.assertFalse(done)
+        self.assertLess(linear, 0.0)
+        self.assertNotEqual(angular, 0.0)
+        self.assertEqual(follower.last_guard_event, "")
+
+    def test_lookahead_turn_slows_before_the_yellow_corner(self):
+        route = [(1.92, 0.2 * index) for index in range(12)]
+        route.append((1.92, 2.32))
+        route.append((0.85, 2.32))
+        follower = WaypointFollower(
+            route,
+            final_yaw=SHELF_FACE_YAW,
+            max_lin=2.4,
+            max_ang=1.65,
+            global_mode=True,
+        )
+        follower.mode = "drive"
+        linear, _angular, done = follower.step(1.92, 1.20, math.pi / 2.0)
+        self.assertFalse(done)
+        self.assertLess(linear, 1.80)
+
     def test_unicycle_from_east_spawn_turns_before_the_north_racks(self):
         follower = WaypointFollower(
             build_shelf_route(),

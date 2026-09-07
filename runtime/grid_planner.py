@@ -59,6 +59,7 @@ from runtime.scene_zones import (
     NAV_BOUNDS,
     WEST_LANE_Y,
     in_center_wall_band,
+    in_north_racks,
 )
 from runtime.waypoint_nav import WaypointFollower, wrap_to_pi
 
@@ -1489,6 +1490,12 @@ class GridNavController:
                 self.state = "BLOCKED"
                 self.last_status = "BLOCKED recover"
                 return 0.0, 0.0, False, self.last_status
+            elif in_north_racks(x, y):
+                south_err = wrap_to_pi(-math.pi / 2.0 - float(yaw))
+                back = -min(0.45, 0.20 * abs(self.max_lin)) if math.sin(float(yaw)) > 0.12 else 0.0
+                ang = max(-self.max_ang, min(self.max_ang, 1.8 * south_err))
+                self.last_status = "RECOVER reverse"
+                return back, ang, False, self.last_status
             else:
                 self.last_status = "RECOVER CENTER_GUARD_VIOLATION"
                 return 0.0, 0.0, False, self.last_status

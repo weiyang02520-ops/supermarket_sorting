@@ -1,0 +1,82 @@
+{
+  "arrived": false,
+  "goal": "shelf",
+  "in_zone": true,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
+  "odom_xy": [
+    1.853,
+    2.751
+  ],
+  "yaw": 1.568,
+  "head_joints": {
+    "slide": 0.11577393676584069,
+    "head_yaw": -9.089666210345232e-05,
+    "head_pitch": -0.11629512731460151
+  },
+  "goal_xy": [
+    0.852,
+    2.475
+  ],
+  "goal_kind": "shelf_approach",
+  "route": [
+    [
+      1.853,
+      2.751
+    ],
+    [
+      1.9,
+      2.4
+    ],
+    [
+      1.45,
+      2.4
+    ],
+    [
+      1.0,
+      2.4
+    ],
+    [
+      0.852,
+      2.475
+    ]
+  ],
+  "elapsed_s": 151.52,
+  "elapsed_wall_s": 151.52,
+  "elapsed_sim_s": null,
+  "failure_reason": "CENTER_GUARD_VIOLATION",
+  "status": "CENTER_GUARD_VIOLATION",
+  "nav_state": "RECOVER",
+  "detours": 0,
+  "plan_id": 5969,
+  "plan_attempts": 5969,
+  "plan_commits": 5969,
+  "plan_reason": "recover_exit",
+  "geometry_version": "s0-20260906",
+  "laser_tf": {
+    "kind": "extrinsic",
+    "source": "unverified",
+    "status": "TF_REQUIRED",
+    "frame_parent": "base_link",
+    "frame_child": "laser",
+    "translation_xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 0.0,
+    "note": "Repo has no official T_base_laser. Runtime must look up TF; unit tests may pass an explicit identity. Do not silently guess zero."
+  },
+  "speed_scale": 8.0,
+  "known_speed_scale": 8.0,
+  "explore_speed_scale": 4.0,
+  "unknown_speed_scale": 1.0,
+  "max_lin": 2.4,
+  "explore_lin": 1.2,
+  "cruise_lin": 0.3,
+  "max_ang": 1.65,
+  "stop_dist": 0.43,
+  "slow_dist": null,
+  "blocked_by_scan": false,
+  "log_json": "/workspace/baseline/outputs/p4/shelf_20260907_065127.json",
+  "log_txt": "/workspace/baseline/outputs/p4/shelf_20260907_065127.log"
+}

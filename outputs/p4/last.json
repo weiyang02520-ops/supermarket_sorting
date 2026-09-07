@@ -1,44 +1,44 @@
 {
   "arrived": true,
-  "goal": "delivery",
+  "goal": "shelf",
   "in_zone": true,
-  "in_picking_zone": false,
-  "in_delivery_base": true,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
   "odom_xy": [
-    -1.937,
-    -2.795
+    0.775,
+    2.386
   ],
-  "yaw": -1.616,
+  "yaw": 1.427,
   "head_joints": {
-    "slide": 0.0060635446223042695,
-    "head_yaw": 0.0022074330975984905,
-    "head_pitch": 0.002766149072378905
+    "slide": 0.11606273563325173,
+    "head_yaw": 0.002081346559925694,
+    "head_pitch": -0.11630065313923003
   },
   "goal_xy": [
-    -1.94,
-    -2.9
+    0.852,
+    2.475
   ],
-  "goal_kind": "delivery_approach",
+  "goal_kind": "shelf_approach",
   "route": [
     [
-      -1.9,
-      -2.8
+      0.8,
+      2.4
     ],
     [
-      -1.94,
-      -2.9
+      0.852,
+      2.475
     ]
   ],
-  "elapsed_s": 4.81,
-  "elapsed_wall_s": 4.81,
+  "elapsed_s": 88.37,
+  "elapsed_wall_s": 88.37,
   "elapsed_sim_s": null,
   "failure_reason": "",
   "status": "arrived",
   "nav_state": "ARRIVED",
   "detours": 0,
-  "plan_id": 2,
-  "plan_attempts": 2,
-  "plan_commits": 2,
+  "plan_id": 10,
+  "plan_attempts": 13,
+  "plan_commits": 10,
   "plan_reason": "stuck",
   "geometry_version": "s0-20260906",
   "laser_tf": {
@@ -65,6 +65,6 @@
   "stop_dist": 0.43,
   "slow_dist": null,
   "blocked_by_scan": false,
-  "log_json": "/workspace/baseline/outputs/p4/delivery_20260906_094432.json",
-  "log_txt": "/workspace/baseline/outputs/p4/delivery_20260906_094432.log"
+  "log_json": "/workspace/baseline/outputs/p4/shelf_20260907_070010.json",
+  "log_txt": "/workspace/baseline/outputs/p4/shelf_20260907_070010.log"
 }

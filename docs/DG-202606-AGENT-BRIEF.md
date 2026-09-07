@@ -2,22 +2,22 @@
 
 比赛要求、项目背景、文档导读在同目录 **[AGENTS.md](./AGENTS.md)**。本文只讲怎么改代码、怎么跑、哪些文件能碰。
 
-更新：2026-09-01。**先做零售初赛，不要去收尾文旅 Client。** 截止 **2026-09-15**。
+更新：2026-09-07。**先做零售初赛，不要去收尾文旅 Client。** 截止 **2026-09-15**。
 
 ## 60 秒结论
 
 1. 工作区 `D:\DG` 里有两场比赛。当前只做 **DG-202606 智慧零售**。
-2. 改代码只动 `supermarket_sorting_baseline/`。文档先读 `docs/AGENTS.md`（本仓库）。`vlm_pipeline/` 是暂停的文旅工程，不要当零售 Client。
+2. 改代码只动 `supermarket_sorting/`（旧名 `supermarket_sorting_baseline` 已不用）。文档先读 `docs/AGENTS.md`。`vlm_pipeline/` 是暂停的文旅工程，不要当零售 Client。
 3. 评分程序是 ROS 2 **Client**，挂进官方 Docker，评测 **无网**。感知必须是本地 `.pt`，禁止 DashScope / Qwen / Genesis World / YOLO-World（除非把兼容依赖整包进仓库）。
 4. 任务 JSON **只有** `id` + `kind`，没有坐标。货位靠 ArUco 0–44，商品靠 9 类 YOLO，通道靠雷达。
-5. 已完成 P0–P3 平台与预览；缺：9 类数据与训练、走到货架、雷达导航、编排接真抓放。
+5. 已完成 P0–P3，以及 P4 配送接近点仿真到达（`delivery_20260906_094432`）。缺：9 类数据与训练、真抓真放、货架往返整段日志、评分主入口。
 6. 官方 `client_task_1.py` 是「固定货位抓一次可乐」演示，**不要改成评分主程序**。新逻辑放 `runtime/`。
 
 ## 两场比赛（禁止混用）
 
 | | 智慧零售 DG-202606（当前） | 文旅 DG-202612（暂停） |
 | --- | --- | --- |
-| 仓库 | `D:\DG\supermarket_sorting_baseline` | `D:\DG\vlm_pipeline` |
+| 仓库 | `D:\DG\supermarket_sorting` | `D:\DG\vlm_pipeline` |
 | 镜像 | `supermarket_sorting:server` / `:client` | `material_sorting` |
 | 任务 | `/supermarket_sorting/task` | `/material/instruction` |
 | 物体 | 9 类 × 5；`kind` 见下 | 粉/黄/褐三色箱 |
@@ -52,15 +52,15 @@ ArUco：`id//9` → 货架 A–E，`id%9//3` → 层 1–3，`id%3` → 列 1–
 - 补丁挂载（`screeninfo` 无 `is_primary`，否则 Server 崩）：
 
 ```text
--v /mnt/d/DG/supermarket_sorting_baseline/patches/simulator.py:/workspace/supermarket_sorting_task/discoverse/envs/simulator.py:ro
+-v /mnt/d/DG/supermarket_sorting/patches/simulator.py:/workspace/supermarket_sorting_task/discoverse/envs/simulator.py:ro
 ```
 
-Baseline 挂进 Client：`/mnt/d/DG/supermarket_sorting_baseline` → `/workspace/baseline`（开发用 `rw`）。完整 `docker run` 见该仓库 `README.md`。镜像 tar 在 `D:\DG\supermarket_sorting_{client,server}.tar`。
+Baseline 挂进 Client：`/mnt/d/DG/supermarket_sorting` → `/workspace/baseline`（开发用 `rw`）。完整 `docker run` 见该仓库 `README.md`。镜像 tar 在 `D:\DG\supermarket_sorting_{client,server}.tar`。
 
 ## 代码地图（只改零售仓库）
 
 ```text
-supermarket_sorting_baseline/
+supermarket_sorting/
   client_task_1.py          # 官方可乐演示。参考抓取，勿改成主入口
   runtime/
     ros_contract.py         # 话题名
@@ -71,6 +71,8 @@ supermarket_sorting_baseline/
     task_protocol.py        # 解析 task JSON，忽略未下发坐标
     orchestrator.py         # 取一件→送一件；尚未接运动
     scene_zones.py          # 420s、拣货区、送货台
+    p4_params.py / p4_nav.py / grid_planner.py
+    lidar_avoid.py / waypoint_nav.py / nav_geometry.py
     preflight.py / p2_preview.py / p3_preview.py
   perception/
     yolo_backend.py         # 现 CLASS_NAMES=["kele"]
@@ -78,12 +80,12 @@ supermarket_sorting_baseline/
     kele_detect.py          # 官方可乐检测封装
   kinematics/               # MMK2 FK/IK
   patches/simulator.py      # Server 运行时补丁
-  scripts/run_*.sh          # preflight / p2 / p3 / baseline
+  scripts/run_*.sh          # preflight / p2 / p3 / p4 / baseline
   weights/kele.pt           # 仅可乐
   test_*.py                 # 仓库根目录 unittest
 ```
 
-文档目录与导读见 [AGENTS.md](./AGENTS.md)。本文是操作手册；分工见 `DG-202606-分工总览.md`。P4 实现真值见 [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md)，开新 Agent 先贴 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)。
+文档目录与导读见 [AGENTS.md](./AGENTS.md)。本文是操作手册；分工见 `DG-202606-分工总览.md`。P4 现状先贴 [DG-202606-P4-AGENT-HANDOFF.md](./DG-202606-P4-AGENT-HANDOFF.md)；方案原文见 [DG-202606-P4-全图导航实现方案.md](./DG-202606-P4-全图导航实现方案.md)。
 
 ## 已完成 / 未做
 
@@ -92,10 +94,11 @@ supermarket_sorting_baseline/
 - P0 镜像可起；P1 预检：17 关节、odom、相机 TF、KDL、640×480 RGB-D、360 点雷达、任务 JSON。
 - P2 编排干跑：1× `kele` → `DONE`。固定 Baseline `count:1` 正常。
 - P3 ArUco+YOLO 绑定已实现。货架前、`GS=1` slim 可乐时能认出 `kele` 并绑槽。**不要**在 Server GS=1 时把 YOLO 放到 `cuda:0`（会挤死 Server）；`run_p3_preview.sh` 默认 CPU 且 `CUDA_VISIBLE_DEVICES=`。
+- P4 配送接近：`delivery_20260906_094432` 在 4.81 s 报 `arrived=true`（上一趟 `093534` 进了区但未到点）。目标是 `(-1.94,-2.90)` 朝南，不是桌心。`in_zone` 不是 `arrived`。
 
 **陷阱：** P3 预览若 `markers=[] products=[]`，先确认底盘是否对着货架（送货区 odom y≈−3.17）。`GS=0` 或 `SUPERMARKET_GS_NO_BACKGROUND=1` 时头相机没有货架/ArUco 贴图，空检测也不是「P3 代码坏了」。
 
-**未做：** 9 类采图/训练（A 必须分批加载 3DGS，见 A 线文档）；雷达绕障；编排接真实抓放；随机商品+障碍的 5 单；评分主入口脚本。
+**未做：** 9 类采图/训练（A 必须分批加载 3DGS，见 A 线文档）；真抓真放；编排接真实运动；出生/货架→配送整段新速度日志；随机商品+障碍的 5 单；评分主入口脚本。
 
 送货：桌 `(-1.940, -3.410)`，目标 z `0.807`；`delivery_base` x `[-2.42,-1.46]` y `[-3.88,-2.62]`；`delivery_box` y `[-3.63,-3.19]` z `[0.74,1.05]`。详见 `runtime/scene_zones.py`。
 
@@ -111,7 +114,7 @@ supermarket_sorting_baseline/
 ## Agent 工作方式
 
 - 实现 → 用户在仿真里验证。不要声称「已在浏览器验证」；这是 ROS/Docker 仿真。
-- 改完跑：`cd supermarket_sorting_baseline && python -m unittest discover -v`（上次约 28 个测试）。
+- 改完跑：`cd supermarket_sorting && python -m unittest discover -v`（2026-09-06 为 153 个测试）。
 - 运动相关改动：请用户跑对应 `scripts/run_preflight.sh` / `run_p2_preview.sh` / `run_p3_preview.sh`。
 - 不要提交除非用户明确要求。不要 `git commit --amend` 乱改。不要 `--force` push。
 - 不要升级 Client 里的 ultralytics。不要把文旅 hug / HSV / Task1-2-3 拷进零售。
@@ -121,7 +124,7 @@ supermarket_sorting_baseline/
 ## 建议下一刀（按用户意图选线）
 
 - **A：** `scripts/capture_yolo_frames.py`；**`GS=1` + `SUPERMARKET_GS_KINDS` 分批**对着货架采 RGB。不要用红几何体当 9 类训练集。
-- **B：** 底盘从送货区开到货架，让 P3 非空；P4 按 [全图导航实现方案](./DG-202606-P4-全图导航实现方案.md) 的 S0–S6 实现。
+- **B：** 用 `kele.pt` 做一次真抓真放；需要时补货架往返。P4 不要从 S0 重写，现状见 [P4-AGENT-HANDOFF](./DG-202606-P4-AGENT-HANDOFF.md)。
 - **联调：** A 的 `.pt` 就绪后改 `CLASS_NAMES` 为 9 类，换默认权重路径。
 
-Docker 命令、镜像 tag、正式 vs 固定 Baseline：以 `supermarket_sorting_baseline/README.md` 为准，不要凭记忆发明话题名。
+Docker 命令、镜像 tag、正式 vs 固定 Baseline：以 `supermarket_sorting/README.md` 为准，不要凭记忆发明话题名。

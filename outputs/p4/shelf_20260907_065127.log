@@ -1,0 +1,160 @@
+p4_shelf: start xy=(1.92,-3.17) yaw=1.57 goal=(0.852,2.475) kind=shelf_approach stop=0.43 planner=grid geom=s0-20260906 laser=TF_REQUIRED max_lin=2.40 max_ang=1.65 known=8.0x explore=4.0x cruise=1.0x
+p4_shelf: xy=(1.92,-3.17) yaw=1.57 wp=0/17 fwd=1.43 lin=0.00 ang=0.00 replan start state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=34.8
+p4_shelf: xy=(1.92,-3.12) yaw=1.57 wp=1/17 fwd=1.43 lin=2.40 ang=0.00 cruise state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=34.8
+p4_shelf: xy=(1.92,-3.00) yaw=1.57 wp=1/17 fwd=1.44 lin=2.39 ang=0.00 cruise state=FOLLOW plan_id=2 attempts=2 detours=0 plan_ms=26.5
+p4_shelf: xy=(1.92,-2.80) yaw=1.57 wp=2/17 fwd=1.44 lin=2.39 ang=0.00 cruise state=FOLLOW plan_id=2 attempts=2 detours=0 plan_ms=26.5
+p4_shelf: xy=(1.92,-2.47) yaw=1.57 wp=2/16 fwd=1.45 lin=2.38 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.92,-2.14) yaw=1.58 wp=2/16 fwd=1.46 lin=2.38 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.91,-1.69) yaw=1.58 wp=3/16 fwd=1.48 lin=2.37 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.91,-1.25) yaw=1.58 wp=4/16 fwd=1.50 lin=2.36 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.90,-0.78) yaw=1.58 wp=5/16 fwd=1.52 lin=2.35 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.90,-0.18) yaw=1.59 wp=7/16 fwd=1.55 lin=2.33 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.89,0.35) yaw=1.59 wp=8/16 fwd=1.58 lin=2.33 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.88,0.90) yaw=1.59 wp=9/16 fwd=1.61 lin=2.33 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.87,1.44) yaw=1.59 wp=10/16 fwd=1.63 lin=2.33 ang=-0.08 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.86,1.97) yaw=1.58 wp=12/16 fwd=1.12 lin=0.19 ang=0.96 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.86,2.41) yaw=1.57 wp=12/16 fwd=1.03 lin=0.53 ang=1.31 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.86,2.73) yaw=1.58 wp=1/5 fwd=0.90 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=79 attempts=79 detours=0 plan_ms=19.0
+p4_shelf: xy=(1.86,2.85) yaw=1.58 wp=1/5 fwd=0.77 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=177 attempts=177 detours=0 plan_ms=20.1
+p4_shelf: xy=(1.86,2.89) yaw=1.57 wp=1/5 fwd=0.74 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=274 attempts=274 detours=0 plan_ms=21.0
+p4_shelf: xy=(1.85,2.85) yaw=1.57 wp=1/5 fwd=0.77 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=367 attempts=367 detours=0 plan_ms=18.1
+p4_shelf: xy=(1.85,2.77) yaw=1.57 wp=1/5 fwd=0.84 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=461 attempts=461 detours=0 plan_ms=17.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=557 attempts=557 detours=0 plan_ms=16.6
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=654 attempts=654 detours=0 plan_ms=24.5
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=755 attempts=755 detours=0 plan_ms=16.2
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=856 attempts=856 detours=0 plan_ms=16.1
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=958 attempts=958 detours=0 plan_ms=19.6
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1060 attempts=1060 detours=0 plan_ms=15.5
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1164 attempts=1164 detours=0 plan_ms=20.6
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1260 attempts=1260 detours=0 plan_ms=17.4
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1356 attempts=1356 detours=0 plan_ms=17.6
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1454 attempts=1454 detours=0 plan_ms=17.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1551 attempts=1551 detours=0 plan_ms=21.1
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1655 attempts=1655 detours=0 plan_ms=16.5
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1757 attempts=1757 detours=0 plan_ms=16.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1860 attempts=1860 detours=0 plan_ms=17.6
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=1964 attempts=1964 detours=0 plan_ms=17.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2068 attempts=2068 detours=0 plan_ms=16.1
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2172 attempts=2172 detours=0 plan_ms=15.8
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2276 attempts=2276 detours=0 plan_ms=16.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2377 attempts=2377 detours=0 plan_ms=15.9
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2481 attempts=2481 detours=0 plan_ms=19.7
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2585 attempts=2585 detours=0 plan_ms=25.9
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2689 attempts=2689 detours=0 plan_ms=16.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2790 attempts=2790 detours=0 plan_ms=16.8
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2890 attempts=2890 detours=0 plan_ms=17.2
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=2986 attempts=2986 detours=0 plan_ms=20.1
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3085 attempts=3085 detours=0 plan_ms=16.8
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3182 attempts=3182 detours=0 plan_ms=18.7
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3283 attempts=3283 detours=0 plan_ms=15.8
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3382 attempts=3382 detours=0 plan_ms=15.7
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3483 attempts=3483 detours=0 plan_ms=15.9
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3582 attempts=3582 detours=0 plan_ms=17.1
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3679 attempts=3679 detours=0 plan_ms=19.9
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3779 attempts=3779 detours=0 plan_ms=20.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3879 attempts=3879 detours=0 plan_ms=24.2
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=3978 attempts=3978 detours=0 plan_ms=16.2
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4078 attempts=4078 detours=0 plan_ms=15.8
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4179 attempts=4179 detours=0 plan_ms=16.2
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4281 attempts=4281 detours=0 plan_ms=20.3
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4376 attempts=4376 detours=0 plan_ms=19.7
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.85 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4476 attempts=4476 detours=0 plan_ms=18.6
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4572 attempts=4572 detours=0 plan_ms=18.5
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4662 attempts=4662 detours=0 plan_ms=17.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4754 attempts=4754 detours=0 plan_ms=21.6
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4853 attempts=4853 detours=0 plan_ms=18.8
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=4952 attempts=4952 detours=0 plan_ms=16.1
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5051 attempts=5051 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5145 attempts=5145 detours=0 plan_ms=18.7
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5243 attempts=5243 detours=0 plan_ms=17.8
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5340 attempts=5340 detours=0 plan_ms=19.4
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5439 attempts=5439 detours=0 plan_ms=21.9
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5535 attempts=5535 detours=0 plan_ms=16.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5634 attempts=5634 detours=0 plan_ms=19.5
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5733 attempts=5733 detours=0 plan_ms=16.0
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5829 attempts=5829 detours=0 plan_ms=15.7
+p4_shelf: xy=(1.85,2.75) yaw=1.57 wp=1/5 fwd=0.86 lin=0.00 ang=0.00 CENTER_GUARD_VIOLATION state=RECOVER plan_id=5927 attempts=5927 detours=0 plan_ms=16.3
+
+{
+  "arrived": false,
+  "goal": "shelf",
+  "in_zone": true,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
+  "odom_xy": [
+    1.853,
+    2.751
+  ],
+  "yaw": 1.568,
+  "head_joints": {
+    "slide": 0.11577393676584069,
+    "head_yaw": -9.089666210345232e-05,
+    "head_pitch": -0.11629512731460151
+  },
+  "goal_xy": [
+    0.852,
+    2.475
+  ],
+  "goal_kind": "shelf_approach",
+  "route": [
+    [
+      1.853,
+      2.751
+    ],
+    [
+      1.9,
+      2.4
+    ],
+    [
+      1.45,
+      2.4
+    ],
+    [
+      1.0,
+      2.4
+    ],
+    [
+      0.852,
+      2.475
+    ]
+  ],
+  "elapsed_s": 151.52,
+  "elapsed_wall_s": 151.52,
+  "elapsed_sim_s": null,
+  "failure_reason": "CENTER_GUARD_VIOLATION",
+  "status": "CENTER_GUARD_VIOLATION",
+  "nav_state": "RECOVER",
+  "detours": 0,
+  "plan_id": 5969,
+  "plan_attempts": 5969,
+  "plan_commits": 5969,
+  "plan_reason": "recover_exit",
+  "geometry_version": "s0-20260906",
+  "laser_tf": {
+    "kind": "extrinsic",
+    "source": "unverified",
+    "status": "TF_REQUIRED",
+    "frame_parent": "base_link",
+    "frame_child": "laser",
+    "translation_xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 0.0,
+    "note": "Repo has no official T_base_laser. Runtime must look up TF; unit tests may pass an explicit identity. Do not silently guess zero."
+  },
+  "speed_scale": 8.0,
+  "known_speed_scale": 8.0,
+  "explore_speed_scale": 4.0,
+  "unknown_speed_scale": 1.0,
+  "max_lin": 2.4,
+  "explore_lin": 1.2,
+  "cruise_lin": 0.3,
+  "max_ang": 1.65,
+  "stop_dist": 0.43,
+  "slow_dist": null,
+  "blocked_by_scan": false,
+  "log_json": "/workspace/baseline/outputs/p4/shelf_20260907_065127.json",
+  "log_txt": "/workspace/baseline/outputs/p4/shelf_20260907_065127.log"
+}
+p4 log: /workspace/baseline/outputs/p4/shelf_20260907_065127.log

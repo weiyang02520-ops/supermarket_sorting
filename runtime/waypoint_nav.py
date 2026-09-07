@@ -344,7 +344,7 @@ class WaypointFollower:
         cross = ux * (float(y) - oy) - uy * (float(x) - ox)
         return path_yaw, cross
 
-    def _aim_error(self, x: float, y: float, yaw: float) -> Tuple[float, float, float, bool, float]:
+    def _aim_error(self, x: float, y: float, yaw: float) -> Tuple[float, float, float, bool, float, float]:
         """Route heading error, plus a small Stanley steer for cross-track.
 
         ``route_err`` is path_yaw − yaw (realign with the prescribed route).
@@ -356,32 +356,50 @@ class WaypointFollower:
         route_err = wrap_to_pi(path_yaw - float(yaw))
         steer = _clip(math.atan(1.2 * cross), 0.12 if abs(self.max_lin) > 1.0 else 0.22)
         steer_err = wrap_to_pi(path_yaw - steer - float(yaw))
-        corner = False
-        if self.idx + 1 < len(self.waypoints) and dist < max(1.60, self.brake_dist + 0.4):
-            nx, ny = self.waypoints[self.idx + 1]
-            out_yaw = math.atan2(ny - ty, nx - tx)
-            in_yaw = math.atan2(ty - float(y), tx - float(x))
-            if abs(wrap_to_pi(out_yaw - in_yaw)) > 0.55:
-                corner = True
         remain = dist
         for index in range(self.idx, len(self.waypoints) - 1):
             ax, ay = self.waypoints[index]
             bx, by = self.waypoints[index + 1]
             remain += math.hypot(bx - ax, by - ay)
-        return dist, route_err, steer_err, corner, remain
+        turn_m = self._meters_to_sharp_turn(x, y)
+        corner = math.isfinite(turn_m)
+        return dist, route_err, steer_err, corner, remain, turn_m
+
+    def _meters_to_sharp_turn(self, x: float, y: float) -> float:
+        """Path distance to the next >0.55 rad vertex, or inf if the rest is straight."""
+        if self.idx >= len(self.waypoints):
+            return float("inf")
+        tx, ty = self.waypoints[self.idx]
+        along = math.hypot(tx - float(x), ty - float(y))
+        prevx, prevy = float(x), float(y)
+        for index in range(self.idx, len(self.waypoints) - 1):
+            ax, ay = self.waypoints[index]
+            bx, by = self.waypoints[index + 1]
+            in_yaw = math.atan2(ay - prevy, ax - prevx)
+            out_yaw = math.atan2(by - ay, bx - ax)
+            if abs(wrap_to_pi(out_yaw - in_yaw)) > 0.55:
+                return along
+            along += math.hypot(bx - ax, by - ay)
+            prevx, prevy = ax, ay
+        return float("inf")
 
     def _linear_for_heading(
-        self, yaw_err: float, dist: float, corner: bool, remain: float
+        self, yaw_err: float, dist: float, corner: bool, remain: float, turn_m: float
     ) -> float:
         """Forward speed only when already close to the route heading."""
         err = abs(float(yaw_err))
         if err > self.in_place_yaw or math.cos(float(yaw_err)) <= 0.20:
             return 0.0
         last = self.idx + 1 >= len(self.waypoints)
-        brake = max(self.brake_dist, 1.60) if corner else self.brake_dist
+        brake = self.brake_dist
         # Dense A* vertices are 0.1–0.3 m. Braking to the next cell crawled
         # delivery_20260906_093534 at 0.11–0.50 m/s while fwd was still >2 m.
-        if last or corner:
+        # A later 90° (east aisle → yellow west) must still cap speed, or 8×
+        # overshoots into the racks (shelf_20260907_065127).
+        if math.isfinite(turn_m):
+            brake = max(brake, 1.60)
+            speed_dist = float(turn_m)
+        elif last:
             speed_dist = float(dist)
         else:
             speed_dist = max(float(dist), float(remain))
@@ -405,13 +423,58 @@ class WaypointFollower:
         kd = 0.40 if abs(self.max_lin) > 1.0 else 0.15
         return _clip(self.ang_gain * float(yaw_err) + kd * d_err, self.max_ang)
 
+    def _route_heads_west(self, x: float) -> bool:
+        for px, _py in self.waypoints[self.idx :]:
+            if float(px) < float(x) - 0.30:
+                return True
+        return False
+
+    def _leave_north_racks(
+        self, x: float, y: float, yaw: float
+    ) -> Tuple[float, float]:
+        """Back out of y>=2.48. Do not zero both lin and ang (shelf_20260907_065127)."""
+        west_err = wrap_to_pi(math.pi - float(yaw))
+        south_err = wrap_to_pi(-math.pi / 2.0 - float(yaw))
+        back = min(0.45, max(0.18, 0.20 * abs(self.max_lin)))
+        if self._route_heads_west(x):
+            if math.sin(float(yaw)) > 0.20:
+                return -back, _clip(self.ang_gain * west_err, self.max_ang)
+            return 0.0, _clip(self.ang_gain * west_err, self.max_ang)
+        if math.sin(float(yaw)) > 0.12:
+            return -back, _clip(self.ang_gain * south_err, self.max_ang)
+        if abs(south_err) > 0.25:
+            return 0.0, _clip(self.ang_gain * south_err, self.max_ang)
+        return min(0.30, abs(self.max_lin)), _clip(self.ang_gain * south_err, self.max_ang)
+
     def _corridor_guard(
         self, x: float, y: float, yaw: float, linear: float, angular: float
     ) -> Tuple[float, float]:
         if self.global_mode:
-            if in_center_wall_band(x, y) or in_north_racks(x, y) or in_south_east_stub(x, y):
+            if in_north_racks(x, y) or in_east_shelf_stub(x, y):
+                self.last_guard_event = ""
+                return self._leave_north_racks(x, y, yaw)
+            if in_south_east_stub(x, y):
+                self.last_guard_event = ""
+                west_err = wrap_to_pi(math.pi - float(yaw))
+                if math.sin(float(yaw)) < -0.25:
+                    return -min(0.45, 0.20 * abs(self.max_lin)), _clip(
+                        self.ang_gain * west_err, self.max_ang
+                    )
+                return 0.0, _clip(self.ang_gain * west_err, self.max_ang)
+            if in_center_wall_band(x, y):
                 self.last_guard_event = "CENTER_GUARD_VIOLATION"
                 return 0.0, 0.0
+            # Yellow lane is only ~0.16 m south of the rack line. At 8× the
+            # west turn must start before WEST_LANE_Y, for shelf and delivery.
+            if (
+                float(x) >= EAST_STUB_X_MIN
+                and float(y) >= WEST_LANE_Y - 0.25
+                and math.sin(float(yaw)) > 0.12
+                and self._route_heads_west(x)
+            ):
+                self.last_guard_event = ""
+                west_err = wrap_to_pi(math.pi - float(yaw))
+                return 0.0, _clip(self.ang_gain * west_err, self.max_ang)
             self.last_guard_event = ""
             return linear, angular
         if in_east_shelf_stub(x, y):
@@ -514,7 +577,7 @@ class WaypointFollower:
                     if abs(yaw_err) < self.turn_tol:
                         return 0.0, 0.0, True
                     return 0.0, _clip(self.ang_gain * yaw_err, self.max_ang), False
-            dist, route_err, steer_err, corner, remain = self._aim_error(x, y, yaw)
+            dist, route_err, steer_err, corner, remain, turn_m = self._aim_error(x, y, yaw)
             if self.mode == "turn":
                 if abs(route_err) <= self.drive_yaw:
                     self.mode = "drive"
@@ -527,7 +590,7 @@ class WaypointFollower:
                 linear = 0.0
                 angular = self._heading_command(route_err)
             else:
-                linear = self._linear_for_heading(route_err, dist, corner, remain)
+                linear = self._linear_for_heading(route_err, dist, corner, remain, turn_m)
                 angular = self._heading_command(steer_err)
             linear, angular = self._corridor_guard(x, y, yaw, linear, angular)
             return linear, angular, False

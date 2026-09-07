@@ -402,7 +402,7 @@ class CorridorFollower:
             dodge = 0.35
         if dodge == 0.0 or self.follower.idx >= len(self.follower.waypoints):
             return 0.0
-        _dist, route_err, _steer_err, _corner, _remain = self.follower._aim_error(x, y, yaw)
+        _dist, route_err, _steer_err, _corner, _remain, _turn = self.follower._aim_error(x, y, yaw)
         if abs(route_err) > 0.30:
             return 0.0
         return dodge

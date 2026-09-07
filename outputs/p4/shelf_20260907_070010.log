@@ -1,0 +1,116 @@
+p4_shelf: start xy=(1.92,-3.17) yaw=1.57 goal=(0.852,2.475) kind=shelf_approach stop=0.43 planner=grid geom=s0-20260906 laser=TF_REQUIRED max_lin=2.40 max_ang=1.65 known=8.0x explore=4.0x cruise=1.0x
+p4_shelf: xy=(1.92,-3.17) yaw=1.57 wp=0/17 fwd=1.43 lin=0.00 ang=0.00 replan start state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=25.1
+p4_shelf: xy=(1.92,-3.13) yaw=1.57 wp=1/17 fwd=1.43 lin=2.40 ang=0.00 cruise state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=25.1
+p4_shelf: xy=(1.92,-3.02) yaw=1.57 wp=1/17 fwd=1.44 lin=2.40 ang=0.00 cruise state=FOLLOW plan_id=2 attempts=2 detours=0 plan_ms=29.4
+p4_shelf: xy=(1.92,-2.83) yaw=1.57 wp=1/16 fwd=1.44 lin=2.39 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=27.0
+p4_shelf: xy=(1.92,-2.58) yaw=1.57 wp=2/16 fwd=1.45 lin=2.38 ang=0.00 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=27.0
+p4_shelf: xy=(1.92,-2.21) yaw=1.58 wp=1/15 fwd=1.46 lin=2.38 ang=0.00 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.92,-1.83) yaw=1.58 wp=2/15 fwd=1.47 lin=2.37 ang=0.00 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.91,-1.41) yaw=1.58 wp=3/15 fwd=1.49 lin=2.36 ang=0.00 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.91,-0.95) yaw=1.58 wp=4/15 fwd=1.51 lin=2.35 ang=0.00 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.90,-0.37) yaw=1.59 wp=5/15 fwd=1.54 lin=2.34 ang=0.00 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.89,0.16) yaw=1.59 wp=7/15 fwd=1.57 lin=2.33 ang=0.00 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.88,0.70) yaw=1.59 wp=8/15 fwd=1.60 lin=2.04 ang=0.00 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.87,1.18) yaw=1.60 wp=9/15 fwd=1.66 lin=1.31 ang=-0.09 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.86,1.56) yaw=1.60 wp=10/15 fwd=1.51 lin=0.77 ang=-0.11 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=23.9
+p4_shelf: xy=(1.85,1.82) yaw=1.62 wp=1/6 fwd=1.27 lin=0.32 ang=-0.16 cruise state=FOLLOW plan_id=5 attempts=5 detours=0 plan_ms=12.6
+p4_shelf: xy=(1.84,1.98) yaw=1.64 wp=0/5 fwd=1.17 lin=0.44 ang=-0.11 cruise state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.84,2.09) yaw=1.62 wp=0/5 fwd=1.06 lin=0.00 ang=1.65 turn state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.83,2.15) yaw=1.84 wp=1/5 fwd=0.98 lin=0.00 ang=1.65 turn state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.83,2.16) yaw=2.27 wp=1/5 fwd=0.98 lin=0.00 ang=1.26 turn state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.83,2.15) yaw=2.54 wp=1/5 fwd=1.54 lin=0.00 ang=0.88 turn state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.83,2.15) yaw=2.75 wp=1/5 fwd=1.55 lin=0.00 ang=0.56 turn state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.83,2.15) yaw=2.89 wp=1/5 fwd=1.59 lin=0.00 ang=0.36 turn state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.83,2.15) yaw=2.97 wp=1/5 fwd=2.32 lin=0.00 ang=0.25 turn state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=15.4
+p4_shelf: xy=(1.83,2.15) yaw=3.03 wp=1/5 fwd=2.32 lin=0.48 ang=0.34 cruise state=FOLLOW plan_id=7 attempts=7 detours=0 plan_ms=16.2
+p4_shelf: xy=(1.78,2.16) yaw=3.07 wp=1/5 fwd=2.28 lin=0.46 ang=0.29 cruise state=FOLLOW plan_id=7 attempts=7 detours=0 plan_ms=16.2
+p4_shelf: xy=(1.70,2.16) yaw=3.12 wp=1/5 fwd=3.02 lin=0.41 ang=0.26 cruise state=FOLLOW plan_id=8 attempts=8 detours=0 plan_ms=16.4
+p4_shelf: xy=(1.60,2.16) yaw=-3.10 wp=1/4 fwd=1.10 lin=0.90 ang=0.17 cruise state=FOLLOW plan_id=9 attempts=9 detours=0 plan_ms=18.4
+p4_shelf: xy=(1.41,2.14) yaw=-3.00 wp=2/4 fwd=0.87 lin=0.20 ang=-0.91 cruise state=FOLLOW plan_id=9 attempts=10 detours=0 plan_ms=8.3
+p4_shelf: xy=(1.24,2.12) yaw=-2.97 wp=2/4 fwd=0.73 lin=0.16 ang=-1.14 cruise state=FOLLOW plan_id=9 attempts=10 detours=0 plan_ms=8.3
+p4_shelf: xy=(1.18,2.11) yaw=-3.14 wp=2/4 fwd=3.02 lin=0.19 ang=-0.93 cruise state=FOLLOW plan_id=9 attempts=10 detours=0 plan_ms=8.3
+p4_shelf: xy=(1.13,2.11) yaw=2.93 wp=2/4 fwd=2.52 lin=0.21 ang=-0.61 cruise state=FOLLOW plan_id=9 attempts=10 detours=0 plan_ms=8.3
+p4_shelf: xy=(1.08,2.13) yaw=2.77 wp=2/4 fwd=1.68 lin=0.30 ang=-0.39 cruise state=FOLLOW plan_id=9 attempts=11 detours=0 plan_ms=7.5
+p4_shelf: xy=(1.02,2.15) yaw=2.67 wp=2/4 fwd=1.62 lin=0.33 ang=-0.24 cruise state=FOLLOW plan_id=9 attempts=12 detours=0 plan_ms=6.5
+p4_shelf: xy=(0.96,2.19) yaw=2.61 wp=2/4 fwd=1.55 lin=0.30 ang=-0.15 cruise state=FOLLOW plan_id=9 attempts=12 detours=0 plan_ms=6.5
+p4_shelf: xy=(0.90,2.23) yaw=2.56 wp=3/4 fwd=1.47 lin=0.11 ang=-0.78 cruise state=FOLLOW plan_id=9 attempts=12 detours=0 plan_ms=6.5
+p4_shelf: xy=(0.86,2.25) yaw=2.40 wp=3/4 fwd=1.43 lin=0.11 ang=-0.54 cruise state=FOLLOW plan_id=9 attempts=12 detours=0 plan_ms=6.5
+p4_shelf: xy=(0.84,2.28) yaw=2.24 wp=3/4 fwd=0.84 lin=0.16 ang=-0.32 cruise state=FOLLOW plan_id=9 attempts=12 detours=0 plan_ms=6.5
+p4_shelf: xy=(0.82,2.31) yaw=2.16 wp=3/4 fwd=0.80 lin=0.17 ang=-0.20 cruise state=FOLLOW plan_id=9 attempts=12 detours=0 plan_ms=6.5
+p4_shelf: xy=(0.80,2.34) yaw=2.10 wp=3/4 fwd=0.75 lin=0.12 ang=-0.12 cruise state=FOLLOW plan_id=9 attempts=12 detours=0 plan_ms=6.5
+p4_shelf: xy=(0.78,2.37) yaw=2.07 wp=3/4 fwd=0.72 lin=0.00 ang=-1.58 turn state=FOLLOW plan_id=9 attempts=12 detours=0 plan_ms=6.5
+p4_shelf: xy=(0.78,2.38) yaw=1.79 wp=2/2 fwd=0.70 lin=0.00 ang=-0.75 ALIGN_GOAL state=ALIGN_GOAL plan_id=10 attempts=13 detours=0 plan_ms=17.7
+p4_shelf: xy=(0.78,2.39) yaw=1.58 wp=2/2 fwd=0.71 lin=0.00 ang=-0.36 ALIGN_GOAL state=ALIGN_GOAL plan_id=10 attempts=13 detours=0 plan_ms=17.7
+p4_shelf: xy=(0.78,2.39) yaw=1.47 wp=2/2 fwd=1.00 lin=0.00 ang=-0.17 ALIGN_GOAL state=ALIGN_GOAL plan_id=10 attempts=13 detours=0 plan_ms=17.7
+
+{
+  "arrived": true,
+  "goal": "shelf",
+  "in_zone": true,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
+  "odom_xy": [
+    0.775,
+    2.386
+  ],
+  "yaw": 1.427,
+  "head_joints": {
+    "slide": 0.11606273563325173,
+    "head_yaw": 0.002081346559925694,
+    "head_pitch": -0.11630065313923003
+  },
+  "goal_xy": [
+    0.852,
+    2.475
+  ],
+  "goal_kind": "shelf_approach",
+  "route": [
+    [
+      0.8,
+      2.4
+    ],
+    [
+      0.852,
+      2.475
+    ]
+  ],
+  "elapsed_s": 88.37,
+  "elapsed_wall_s": 88.37,
+  "elapsed_sim_s": null,
+  "failure_reason": "",
+  "status": "arrived",
+  "nav_state": "ARRIVED",
+  "detours": 0,
+  "plan_id": 10,
+  "plan_attempts": 13,
+  "plan_commits": 10,
+  "plan_reason": "stuck",
+  "geometry_version": "s0-20260906",
+  "laser_tf": {
+    "kind": "extrinsic",
+    "source": "unverified",
+    "status": "TF_REQUIRED",
+    "frame_parent": "base_link",
+    "frame_child": "laser",
+    "translation_xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 0.0,
+    "note": "Repo has no official T_base_laser. Runtime must look up TF; unit tests may pass an explicit identity. Do not silently guess zero."
+  },
+  "speed_scale": 8.0,
+  "known_speed_scale": 8.0,
+  "explore_speed_scale": 4.0,
+  "unknown_speed_scale": 1.0,
+  "max_lin": 2.4,
+  "explore_lin": 1.2,
+  "cruise_lin": 0.3,
+  "max_ang": 1.65,
+  "stop_dist": 0.43,
+  "slow_dist": null,
+  "blocked_by_scan": false,
+  "log_json": "/workspace/baseline/outputs/p4/shelf_20260907_070010.json",
+  "log_txt": "/workspace/baseline/outputs/p4/shelf_20260907_070010.log"
+}
+p4 log: /workspace/baseline/outputs/p4/shelf_20260907_070010.log

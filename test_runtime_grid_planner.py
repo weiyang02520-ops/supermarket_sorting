@@ -224,15 +224,16 @@ class GridPlannerTests(unittest.TestCase):
             max_ang=0.55,
         )
         ranges, amin, inc = _scan(hit=8.0)
-        statuses = []
+        saw_reverse = False
         for step in range(8):
-            _lin, _ang, done, status = nav.step(
+            lin, _ang, done, status = nav.step(
                 1.066, 2.486, 2.155, ranges, amin, inc, dt=0.05, now=0.2 + 0.05 * step, scan_id=step + 1,
             )
-            statuses.append(status)
+            if lin < 0.0:
+                saw_reverse = True
             self.assertFalse(done)
             self.assertNotEqual(status, "hold")
-        self.assertTrue(any("RECOVER" in item or "CENTER_GUARD" in item or item.startswith("replan") for item in statuses))
+        self.assertTrue(saw_reverse)
 
     def test_set_goal_keeps_the_map(self):
         nav = GridNavController(
@@ -362,6 +363,29 @@ class GridPlannerTests(unittest.TestCase):
             self.assertNotIn("recover", status.lower())
             self.assertNotEqual(status, "scan_stop")
         self.assertGreater(seen_ang, 0.10)
+
+    def test_shelf_east_aisle_turns_west_before_racks(self):
+        nav = GridNavController(
+            goal_xy=SHELF_APPROACH_XY,
+            final_yaw=math.pi / 2.0,
+            max_lin=2.4,
+            max_ang=1.65,
+            cruise_lin=0.30,
+        )
+        nav._commit_route(
+            [(1.92, 2.32), (0.85, 2.32), SHELF_APPROACH_XY],
+            1.92,
+            2.14,
+            "shelf",
+        )
+        ranges, amin, inc = _scan(hit=8.0)
+        linear, angular, done, status = nav.step(
+            1.92, 2.14, math.pi / 2.0, ranges, amin, inc, dt=0.05, now=1.0, scan_id=1,
+        )
+        self.assertFalse(done)
+        self.assertLessEqual(linear, 0.05)
+        self.assertGreater(abs(angular), 0.10)
+        self.assertNotEqual(status, "CENTER_GUARD_VIOLATION")
 
     def test_east_aisle_goes_north_to_yellow_lane_before_west(self):
         nav = GridNavController(
