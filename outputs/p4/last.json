@@ -5,14 +5,14 @@
   "in_picking_zone": true,
   "in_delivery_base": false,
   "odom_xy": [
-    0.775,
-    2.386
+    0.923,
+    2.4
   ],
-  "yaw": 1.427,
+  "yaw": 1.428,
   "head_joints": {
-    "slide": 0.11606273563325173,
-    "head_yaw": 0.002081346559925694,
-    "head_pitch": -0.11630065313923003
+    "slide": 0.11606276113400316,
+    "head_yaw": 0.0021004530400033296,
+    "head_pitch": -0.11630098962238174
   },
   "goal_xy": [
     0.852,
@@ -21,7 +21,7 @@
   "goal_kind": "shelf_approach",
   "route": [
     [
-      0.8,
+      0.9,
       2.4
     ],
     [
@@ -29,16 +29,16 @@
       2.475
     ]
   ],
-  "elapsed_s": 88.37,
-  "elapsed_wall_s": 88.37,
+  "elapsed_s": 83.65,
+  "elapsed_wall_s": 83.65,
   "elapsed_sim_s": null,
   "failure_reason": "",
   "status": "arrived",
   "nav_state": "ARRIVED",
   "detours": 0,
-  "plan_id": 10,
-  "plan_attempts": 13,
-  "plan_commits": 10,
+  "plan_id": 18,
+  "plan_attempts": 18,
+  "plan_commits": 18,
   "plan_reason": "stuck",
   "geometry_version": "s0-20260906",
   "laser_tf": {
@@ -65,6 +65,7 @@
   "stop_dist": 0.43,
   "slow_dist": null,
   "blocked_by_scan": false,
-  "log_json": "/workspace/baseline/outputs/p4/shelf_20260907_070010.json",
-  "log_txt": "/workspace/baseline/outputs/p4/shelf_20260907_070010.log"
+  "carry_hold": false,
+  "log_json": "/workspace/baseline/outputs/p4/shelf_20260909_070042.json",
+  "log_txt": "/workspace/baseline/outputs/p4/shelf_20260909_070042.log"
 }

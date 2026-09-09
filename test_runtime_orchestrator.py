@@ -72,12 +72,64 @@ class OrchestratorTests(unittest.TestCase):
         self.assertEqual(len(orch.remaining()), 5)
         self.assertEqual(orch.start_pick().kind, "kele")
 
-    def test_cannot_replace_task_during_open_cycle(self):
+    def test_cannot_replace_different_task_during_open_cycle(self):
         orch = MissionOrchestrator()
         orch.load_task(five_order())
         orch.start_pick()
+        resent = orch.load_task(five_order())
+        self.assertEqual(resent.run_prefix, "run_test")
+        self.assertEqual(orch.state, MissionState.PICKING)
+        other = parse_task_payload({
+            "schema_version": 1,
+            "run_prefix": "run_other",
+            "count": 1,
+            "targets": [{"id": "x1", "kind": "kele"}],
+        })
         with self.assertRaises(MissionStateError):
-            orch.load_task(five_order())
+            orch.load_task(other)
+
+    def test_task_resend_does_not_reset_records_or_clock(self):
+        orch = MissionOrchestrator()
+        orch.load_task(five_order())
+        orch.start_pick()
+        orch.complete_pick(True)
+        orch.tick(12.0)
+        orch.load_task(five_order())
+        self.assertEqual(orch.elapsed_seconds, 12.0)
+        self.assertEqual(orch.state, MissionState.DELIVERING)
+        self.assertEqual(len(orch.records), 1)
+        self.assertTrue(orch.holding)
+
+    def test_delivery_blocked_keeps_holding_and_order(self):
+        orch = MissionOrchestrator()
+        orch.load_task(five_order())
+        orch.start_pick()
+        orch.complete_pick(True)
+        orch.mark_delivery_blocked("scan_blocked")
+        self.assertEqual(orch.state, MissionState.DELIVERING)
+        self.assertTrue(orch.holding)
+        self.assertEqual(len(orch.remaining()), 5)
+        with self.assertRaises(MissionStateError):
+            orch.start_pick()
+
+    def test_unverified_place_blocks_next_order(self):
+        orch = MissionOrchestrator()
+        orch.load_task(five_order())
+        orch.start_pick()
+        orch.complete_pick(True)
+        orch.note_place_unverified("c3_timeout")
+        with self.assertRaises(MissionStateError):
+            orch.start_pick()
+        self.assertEqual(orch.state, MissionState.DELIVERING)
+        self.assertEqual(len(orch.remaining()), 5)
+
+    def test_hold_unknown_blocks_next_pick(self):
+        orch = MissionOrchestrator()
+        orch.load_task(five_order())
+        orch.start_pick()
+        orch.mark_hold_unknown("c2_unknown")
+        with self.assertRaises(MissionStateError):
+            orch.start_pick()
 
     def test_time_limit_matches_server_referee(self):
         orch = MissionOrchestrator()

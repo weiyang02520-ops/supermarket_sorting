@@ -207,6 +207,13 @@ class SensorCache:
         self.camera_frame = ""
         self.joint_names = ()
         self.joint_positions = np.empty(0)
+        self.joint_stamp = None
+        self.joint_received_at = None
+        self.joint_history: deque = deque(maxlen=40)
+        self.rgb_id = 0
+        self.depth_id = 0
+        self._last_rgb_stamp = None
+        self._last_depth_stamp = None
         self.odom = None
         self.odom_received_at = None
         self.odom_history: deque = deque(maxlen=80)
@@ -220,8 +227,12 @@ class SensorCache:
 
     def update_rgb(self, message) -> None:
         value = decode_image(message)
+        stamp = message_stamp(message)
         with self._condition:
-            self.rgb, self.rgb_stamp = value, message_stamp(message)
+            if self._last_rgb_stamp is None or abs(stamp - self._last_rgb_stamp) > 1e-9:
+                self.rgb_id += 1
+                self._last_rgb_stamp = stamp
+            self.rgb, self.rgb_stamp = value, stamp
             self.rgb_received_at = time.monotonic()
             self.rgb_frame = message_frame(message) or self.rgb_frame
             self.camera_frame = self.rgb_frame or self.camera_frame
@@ -229,8 +240,12 @@ class SensorCache:
 
     def update_depth(self, message) -> None:
         value = decode_depth(message)
+        stamp = message_stamp(message)
         with self._condition:
-            self.depth, self.depth_stamp = value, message_stamp(message)
+            if self._last_depth_stamp is None or abs(stamp - self._last_depth_stamp) > 1e-9:
+                self.depth_id += 1
+                self._last_depth_stamp = stamp
+            self.depth, self.depth_stamp = value, stamp
             self.depth_received_at = time.monotonic()
             self.depth_frame = message_frame(message) or self.depth_frame
             self.camera_frame = self.depth_frame or self.camera_frame
@@ -248,9 +263,17 @@ class SensorCache:
         positions = np.asarray(message.position, dtype=float)
         if len(names) != len(positions) or len(names) == 0 or not np.all(np.isfinite(positions)):
             raise SensorDataError("joint state names/positions are missing or non-finite")
+        stamp = message_stamp(message)
+        received = time.monotonic()
         with self._condition:
             self.joint_names = names
             self.joint_positions = positions.copy()
+            self.joint_stamp = stamp
+            self.joint_received_at = received
+            self.joint_history.append((stamp, received, names, positions.copy()))
+            cutoff = received - 2.0
+            while self.joint_history and self.joint_history[0][1] < cutoff:
+                self.joint_history.popleft()
             self._condition.notify_all()
 
     def update_odom(self, message) -> None:
@@ -372,6 +395,50 @@ class SensorCache:
                         detail = f"RGB-depth skew={skew:.3f}s"
                     raise TimeoutError(f"sensor snapshot timeout: {detail}")
                 self._condition.wait(min(remaining, 0.1))
+
+    def rgbd_skew(self) -> float:
+        with self._condition:
+            if self.rgb_stamp is None or self.depth_stamp is None:
+                return float("inf")
+            return abs(float(self.rgb_stamp) - float(self.depth_stamp))
+
+    def rgbd_ready(self, max_skew: float = 0.05, max_age: float = 0.50) -> bool:
+        with self._condition:
+            ready = self.rgb is not None and self.depth is not None and self.intrinsics is not None
+            if not ready:
+                return False
+            skew = abs(float(self.rgb_stamp) - float(self.depth_stamp))
+            age = max(
+                time.monotonic() - float(self.rgb_received_at),
+                time.monotonic() - float(self.depth_received_at),
+            )
+            frames_match = not self.rgb_frame or not self.depth_frame or self.rgb_frame == self.depth_frame
+            return skew <= max_skew and age <= max_age and frames_match and self.rgb.shape[:2] == self.depth.shape
+
+    def clock_sim(self) -> Optional[float]:
+        with self._condition:
+            if self.last_pose_sample is not None:
+                return float(self.last_pose_sample.stamp_sim)
+            if self.rgb_stamp is not None:
+                return float(self.rgb_stamp)
+            return self.joint_stamp
+
+    def snapshot_meta(self) -> dict:
+        with self._condition:
+            return {
+                "rgb_id": int(self.rgb_id),
+                "depth_id": int(self.depth_id),
+                "rgb_stamp": self.rgb_stamp,
+                "depth_stamp": self.depth_stamp,
+                "joint_stamp": self.joint_stamp,
+                "rgbd_skew": (
+                    None if self.rgb_stamp is None or self.depth_stamp is None
+                    else abs(float(self.rgb_stamp) - float(self.depth_stamp))
+                ),
+                "clock_sim": (
+                    float(self.last_pose_sample.stamp_sim) if self.last_pose_sample is not None else self.rgb_stamp
+                ),
+            }
 
     def joint_vector(self, names: Iterable[str]) -> np.ndarray:
         with self._condition:

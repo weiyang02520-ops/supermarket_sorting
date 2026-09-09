@@ -1,0 +1,71 @@
+{
+  "arrived": true,
+  "goal": "shelf",
+  "in_zone": true,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
+  "odom_xy": [
+    0.907,
+    2.389
+  ],
+  "yaw": 1.417,
+  "head_joints": {
+    "slide": 0.11606276632848449,
+    "head_yaw": -8.280082960110678e-05,
+    "head_pitch": -0.1162945258821661
+  },
+  "goal_xy": [
+    0.852,
+    2.475
+  ],
+  "goal_kind": "shelf_approach",
+  "route": [
+    [
+      0.9,
+      2.4
+    ],
+    [
+      0.852,
+      2.475
+    ]
+  ],
+  "elapsed_s": 1.55,
+  "elapsed_wall_s": 1.55,
+  "elapsed_sim_s": null,
+  "failure_reason": "",
+  "status": "arrived",
+  "nav_state": "ARRIVED",
+  "detours": 0,
+  "plan_id": 1,
+  "plan_attempts": 1,
+  "plan_commits": 1,
+  "plan_reason": "start",
+  "geometry_version": "s0-20260906",
+  "laser_tf": {
+    "kind": "extrinsic",
+    "source": "unverified",
+    "status": "TF_REQUIRED",
+    "frame_parent": "base_link",
+    "frame_child": "laser",
+    "translation_xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 0.0,
+    "note": "Repo has no official T_base_laser. Runtime must look up TF; unit tests may pass an explicit identity. Do not silently guess zero."
+  },
+  "speed_scale": 8.0,
+  "known_speed_scale": 8.0,
+  "explore_speed_scale": 4.0,
+  "unknown_speed_scale": 1.0,
+  "max_lin": 2.4,
+  "explore_lin": 1.2,
+  "cruise_lin": 0.3,
+  "max_ang": 1.65,
+  "stop_dist": 0.43,
+  "slow_dist": null,
+  "blocked_by_scan": false,
+  "carry_hold": false,
+  "log_json": "/workspace/baseline/outputs/p4/shelf_20260907_092331.json",
+  "log_txt": "/workspace/baseline/outputs/p4/shelf_20260907_092331.log"
+}

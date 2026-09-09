@@ -406,6 +406,52 @@ class GridPlannerTests(unittest.TestCase):
         self.assertLess(abs(first[0] - 1.91), 0.08)
         self.assertGreater(max(px for px, _py in nav.follower.waypoints), 1.20)
 
+    def test_spawn_shelf_route_hits_yellow_lane_before_cutting_west(self):
+        nav = GridNavController(
+            goal_xy=SHELF_APPROACH_XY,
+            final_yaw=math.pi / 2.0,
+            max_lin=2.4,
+            max_ang=1.65,
+            cruise_lin=0.30,
+        )
+        north = [(1.9, y) for y in (-2.6, -1.7, -0.8, 0.1, 1.0, 1.9)]
+        nav._commit_route(
+            north + [(1.6, 2.4), (1.15, 2.4), SHELF_APPROACH_XY],
+            1.92,
+            -3.17,
+            "start",
+        )
+        waypoints = nav.follower.waypoints
+        self.assertTrue(
+            any(abs(px - 1.92) < 0.15 and abs(py - WEST_LANE_Y) < 0.12 for px, py in waypoints)
+        )
+        westbound = [(px, py) for px, py in waypoints if px < 1.50]
+        self.assertTrue(westbound)
+        self.assertGreaterEqual(min(py for _px, py in westbound), WEST_LANE_Y - 0.12)
+
+    def test_shelf_corner_already_facing_west_keeps_moving(self):
+        nav = GridNavController(
+            goal_xy=SHELF_APPROACH_XY,
+            final_yaw=math.pi / 2.0,
+            max_lin=2.4,
+            max_ang=1.65,
+            cruise_lin=0.30,
+        )
+        nav._commit_route(
+            [(1.6, 2.4), (1.15, 2.4), SHELF_APPROACH_XY],
+            1.85,
+            2.43,
+            "stuck",
+        )
+        ranges, amin, inc = _scan(hit=8.0)
+        linear, angular, done, status = nav.step(
+            1.85, 2.43, 2.99, ranges, amin, inc, dt=0.05, now=1.0, scan_id=1,
+        )
+        self.assertFalse(done)
+        self.assertGreater(linear, 0.15)
+        self.assertGreater(angular, 0.0)
+        self.assertNotEqual(status, "CENTER_GUARD_VIOLATION")
+
     def test_turn_timer_does_not_reenter_recover_after_replan(self):
         nav = GridNavController(
             goal_xy=DELIVERY_APPROACH_XY,

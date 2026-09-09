@@ -47,6 +47,26 @@ class SensorUtilityTests(unittest.TestCase):
             cache.update_joint_state(SimpleNamespace(name=["joint"], position=[np.nan]))
         np.testing.assert_allclose(cache.joint_vector(["joint"]), [0.25])
 
+    def test_joint_history_and_rgbd_ids(self):
+        cache = SensorCache()
+        joints = SimpleNamespace(
+            name=["slide_joint"],
+            position=[0.11],
+            header=SimpleNamespace(stamp=SimpleNamespace(sec=2, nanosec=0), frame_id=""),
+        )
+        cache.update_joint_state(joints)
+        self.assertAlmostEqual(cache.joint_stamp, 2.0)
+        self.assertEqual(len(cache.joint_history), 1)
+        rgb = image_message(np.zeros((2, 2, 3), dtype=np.uint8), "rgb8", stamp=3.0)
+        depth = image_message(np.ones((2, 2), dtype=np.float32), "32FC1", stamp=3.02)
+        cache.update_rgb(rgb)
+        cache.update_depth(depth)
+        self.assertEqual(cache.rgb_id, 1)
+        cache.update_rgb(rgb)
+        self.assertEqual(cache.rgb_id, 1)
+        self.assertAlmostEqual(cache.rgbd_skew(), 0.02, places=5)
+        self.assertFalse(cache.rgbd_ready(max_skew=0.05, max_age=5.0))
+
     def test_scan_id_does_not_advance_on_the_same_stamp(self):
         cache = SensorCache()
         header = SimpleNamespace(stamp=SimpleNamespace(sec=1, nanosec=0), frame_id="laser")

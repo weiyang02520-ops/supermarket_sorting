@@ -466,15 +466,21 @@ class WaypointFollower:
                 return 0.0, 0.0
             # Yellow lane is only ~0.16 m south of the rack line. At 8× the
             # west turn must start before WEST_LANE_Y, for shelf and delivery.
+            # sin(yaw)>0.12 stays true at yaw≈2.99 (already west) and held
+            # lin=0 for the rest of shelf_20260909_060912.
             if (
                 float(x) >= EAST_STUB_X_MIN
                 and float(y) >= WEST_LANE_Y - 0.25
-                and math.sin(float(yaw)) > 0.12
                 and self._route_heads_west(x)
             ):
-                self.last_guard_event = ""
                 west_err = wrap_to_pi(math.pi - float(yaw))
-                return 0.0, _clip(self.ang_gain * west_err, self.max_ang)
+                self.last_guard_event = ""
+                if abs(west_err) > 0.40:
+                    return 0.0, _clip(self.ang_gain * west_err, self.max_ang)
+                cruise = min(abs(self.max_lin), 1.20)
+                if linear < 0.15:
+                    linear = cruise * max(0.40, math.cos(west_err) ** 2)
+                return linear, _clip(self.ang_gain * west_err, self.max_ang)
             self.last_guard_event = ""
             return linear, angular
         if in_east_shelf_stub(x, y):

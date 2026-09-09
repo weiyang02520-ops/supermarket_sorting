@@ -455,6 +455,23 @@ class WaypointNavTests(unittest.TestCase):
         self.assertEqual(linear, 0.0)
         self.assertGreater(abs(angular), 0.20)
 
+    def test_global_mode_drives_west_once_facing_the_yellow_lane(self):
+        follower = WaypointFollower(
+            [(1.9, 1.9), (1.6, 2.4), (1.15, 2.4), SHELF_APPROACH_XY],
+            final_yaw=SHELF_FACE_YAW,
+            max_lin=2.4,
+            max_ang=1.65,
+            global_mode=True,
+        )
+        follower.in_place_yaw = 0.85
+        follower.drive_yaw = 0.45
+        follower.mode = "turn"
+        follower.idx = 1
+        linear, angular, done = follower.step(1.85, 2.43, 2.99)
+        self.assertFalse(done)
+        self.assertGreater(linear, 0.15)
+        self.assertGreater(angular, 0.0)
+
     def test_global_mode_north_racks_reverse_instead_of_zeroing(self):
         follower = WaypointFollower(
             [(1.86, 2.32), (0.85, 2.32), SHELF_APPROACH_XY],

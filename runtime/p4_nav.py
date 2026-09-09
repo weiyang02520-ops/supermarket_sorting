@@ -107,6 +107,11 @@ def _goal_spec(goal: str, final_xy=None, final_yaw=None):
     raise ValueError("goal must be shelf or delivery")
 
 
+def public_report(report: dict) -> dict:
+    """JSON-safe snapshot. Internal handles such as ``_planner`` stay off stdout."""
+    return {key: value for key, value in report.items() if not str(key).startswith("_")}
+
+
 def navigate(
     rclpy_mod,
     goal: str = "shelf",
@@ -114,6 +119,10 @@ def navigate(
     final_xy=None,
     final_yaw=None,
     speed_scale: float = KNOWN_SPEED_SCALE,
+    max_lin: float = None,
+    max_ang: float = None,
+    hold_joints: dict = None,
+    planner=None,
 ) -> dict:
     from geometry_msgs.msg import Twist
     from nav_msgs.msg import Odometry
@@ -122,10 +131,10 @@ def navigate(
 
     spec = _goal_spec(goal, final_xy=final_xy, final_yaw=final_yaw)
     scale = max(0.1, float(speed_scale))
-    max_lin = BASE_LIN * scale
-    max_ang = min(MAX_ANG_CAP, BASE_ANG * scale)
-    cruise_lin = BASE_LIN * min(scale, UNKNOWN_SPEED_SCALE)
-    explore_lin = BASE_LIN * min(scale, EXPLORE_SPEED_SCALE)
+    max_lin = float(max_lin) if max_lin is not None else BASE_LIN * scale
+    max_ang = float(max_ang) if max_ang is not None else min(MAX_ANG_CAP, BASE_ANG * scale)
+    cruise_lin = min(max_lin, BASE_LIN * min(scale, UNKNOWN_SPEED_SCALE))
+    explore_lin = min(max_lin, BASE_LIN * min(scale, EXPLORE_SPEED_SCALE))
     node = rclpy_mod.create_node(f"supermarket_p4_{spec['name']}")
     sensors = SensorCache()
     controller = RosRobotController(
@@ -161,15 +170,22 @@ def navigate(
             rclpy_mod.spin_once(node, timeout_sec=0.05)
         x, y, yaw = pose_from_odom(sensors.odom)
         goal_xy = spec["xy"]
-        nav = GridNavController(
-            goal_xy=goal_xy,
-            final_yaw=spec["yaw"],
-            max_lin=max_lin,
-            max_ang=max_ang,
-            cruise_lin=cruise_lin,
-            explore_lin=explore_lin,
-            goal_kind=spec["kind"],
-        )
+        if planner is None:
+            nav = GridNavController(
+                goal_xy=goal_xy,
+                final_yaw=spec["yaw"],
+                max_lin=max_lin,
+                max_ang=max_ang,
+                cruise_lin=cruise_lin,
+                explore_lin=explore_lin,
+                goal_kind=spec["kind"],
+            )
+        else:
+            nav = planner
+            nav.max_lin = max_lin
+            nav.max_ang = max_ang
+            nav.cruise_lin = cruise_lin
+            nav.explore_lin = explore_lin
         nav.set_goal(
             NavGoal(
                 goal_id=spec["kind"],
@@ -215,7 +231,16 @@ def navigate(
                 now=time.monotonic() - start,
                 scan_id=sensors.scan_id or None,
             )
-            if spec["aim_head"]:
+            if hold_joints:
+                controller.hold_targets(
+                    hold_joints["slide"],
+                    (hold_joints["head_yaw"], hold_joints["head_pitch"]),
+                    hold_joints["left_arm"],
+                    hold_joints["left_grip"],
+                    hold_joints["right_arm"],
+                    hold_joints["right_grip"],
+                )
+            elif spec["aim_head"]:
                 controller.command_spine(AISLE_SCAN_SPINE)
                 controller.command_head(AISLE_SCAN_HEAD)
             controller.publish_velocity(linear, angular)
@@ -239,7 +264,7 @@ def navigate(
             if arrived:
                 break
         controller.stop_base()
-        if spec["aim_head"]:
+        if spec["aim_head"] and not hold_joints:
             settle_until = time.monotonic() + HEAD_SETTLE_S
             while time.monotonic() < settle_until:
                 controller.command_spine(AISLE_SCAN_SPINE)
@@ -288,15 +313,18 @@ def navigate(
             "stop_dist": STOP_DIST,
             "slow_dist": None,
             "blocked_by_scan": last_status.startswith("safety") or last_status.startswith("BLOCKED"),
+            "carry_hold": bool(hold_joints),
             "log_json": str(json_path),
             "log_txt": str(log_path),
         }
-        text = json.dumps(report, indent=2)
+        json_report = public_report(report)
+        text = json.dumps(json_report, indent=2)
         json_path.write_text(text + "\n", encoding="utf-8")
         (LOG_DIR / "last.json").write_text(text + "\n", encoding="utf-8")
         log_file.write("\n" + text + "\n")
         log_file.flush()
         print(f"p4 log: {log_path}", file=sys.stderr)
+        report["_planner"] = nav
         return report
     finally:
         controller.stop_base()
@@ -345,7 +373,7 @@ def main(argv=None) -> int:
             timeout_sec=args.timeout,
             speed_scale=args.speed_scale,
         )
-        print(json.dumps(report, indent=2))
+        print(json.dumps(public_report(report), indent=2))
         if report["arrived"] and report["in_zone"]:
             return 0
         return 1

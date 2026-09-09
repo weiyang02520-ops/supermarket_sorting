@@ -1,0 +1,117 @@
+{
+  "grasped": false,
+  "placed": false,
+  "kind": "kele",
+  "used_json_xyz": false,
+  "nav_shelf": null,
+  "nav_delivery": null,
+  "log_json": "/workspace/baseline/outputs/p5/p5_20260909_063928.json",
+  "place_sequence_done": false,
+  "place_verified_local": false,
+  "referee_confirmed": null,
+  "note": "placed/place_verified_local are client evidence, not Server referee",
+  "target_id": "item_run_481f227f2bad_32",
+  "phase": "paused",
+  "slot_hint": null,
+  "lock_attempt": 1,
+  "object_world": [
+    0.9169,
+    3.2379,
+    0.9114
+  ],
+  "deploy_world": [
+    0.883,
+    3.0205,
+    0.9014
+  ],
+  "approach_world": [
+    0.1542,
+    0.988,
+    0.0
+  ],
+  "recipe_version": "kele-v1",
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "hold_state": "unknown",
+  "place_target_in_box": false,
+  "phase_timings": [
+    {
+      "phase": "init",
+      "t0": 0.6257743835449219,
+      "t1": 1.1708621978759766,
+      "elapsed_s": 0.545
+    },
+    {
+      "phase": "aim",
+      "t0": 1.1708621978759766,
+      "t1": 3.7914390563964844,
+      "elapsed_s": 2.621
+    },
+    {
+      "phase": "deploy",
+      "t0": 3.7914390563964844,
+      "t1": 29.04164719581604,
+      "elapsed_s": 25.25
+    },
+    {
+      "phase": "creep",
+      "t0": 29.04164719581604,
+      "t1": 30.624783277511597,
+      "elapsed_s": 1.583
+    },
+    {
+      "phase": "close",
+      "t0": 30.624783277511597,
+      "t1": 31.54183602333069,
+      "elapsed_s": 0.917
+    },
+    {
+      "phase": "lift",
+      "t0": 31.54183602333069,
+      "t1": 50.25011682510376,
+      "elapsed_s": 18.708
+    },
+    {
+      "phase": "paused",
+      "t0": 50.25011682510376
+    }
+  ],
+  "close_attempts": 1,
+  "reason": "c2_unknown",
+  "elapsed_s": 47.24,
+  "elapsed_wall_s": 47.24,
+  "elapsed_sim_s": 50.25,
+  "odom_xy": [
+    0.885,
+    2.158
+  ],
+  "yaw": 1.418,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
+  "failed": false,
+  "paused": true,
+  "look_hint": [
+    0.0,
+    -0.28
+  ],
+  "infer_s_mean": 0.07,
+  "infer_frames": 288,
+  "yolo_hits": 2,
+  "depth_hits": 2,
+  "last_yolo_n": 0,
+  "last_depth_n": 0,
+  "lock_timeout_rgb": null,
+  "control_dt_max": 0.05,
+  "control_dt_mean": 0.008,
+  "snapshot": {
+    "rgb_id": 1143,
+    "depth_id": 1143,
+    "rgb_stamp": 1788936024.461553,
+    "depth_stamp": 1788936024.461553,
+    "joint_stamp": 1788936024.5032558,
+    "rgbd_skew": 0.0,
+    "clock_sim": 1788936024.5032558
+  },
+  "failure_reason": "c2_unknown"
+}

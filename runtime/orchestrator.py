@@ -18,6 +18,12 @@ class MissionState(str, Enum):
     TIMEOUT = "TIMEOUT"
 
 
+class ObjectHoldState(str, Enum):
+    EMPTY = "empty"
+    HELD = "held"
+    UNKNOWN = "unknown"
+
+
 class MissionStateError(RuntimeError):
     pass
 
@@ -42,21 +48,30 @@ class MissionOrchestrator:
     pending: List[Target] = field(default_factory=list)
     current: Optional[Target] = None
     holding: bool = False
+    hold_state: ObjectHoldState = ObjectHoldState.EMPTY
     elapsed_seconds: float = 0.0
     records: List[CycleRecord] = field(default_factory=list)
     context: Dict[str, Any] = field(default_factory=dict)
+    place_verified_local: bool = False
 
     def load_task(self, payload: Any) -> TaskList:
+        task = payload if isinstance(payload, TaskList) else parse_task_payload(payload)
+        if self.task is not None and task.run_prefix == self.task.run_prefix:
+            self.context["task_resent"] = True
+            return self.task
         if self.state in (MissionState.PICKING, MissionState.DELIVERING):
             raise MissionStateError("cannot replace the task list during an open pick-deliver cycle")
-        task = payload if isinstance(payload, TaskList) else parse_task_payload(payload)
+        if self.hold_state != ObjectHoldState.EMPTY:
+            raise MissionStateError("cannot replace the task list while holding or hold-unknown")
         self.task = task
         self.state = MissionState.WAITING_TASK
         self.pending = list(task.targets)
         self.current = None
         self.holding = False
+        self.hold_state = ObjectHoldState.EMPTY
         self.elapsed_seconds = 0.0
         self.records.clear()
+        self.place_verified_local = False
         self.context = {"run_prefix": task.run_prefix}
         return task
 
@@ -75,6 +90,10 @@ class MissionOrchestrator:
             raise MissionStateError("no /supermarket_sorting/task loaded")
         if self.state == MissionState.TIMEOUT:
             raise MissionStateError("time limit reached")
+        if self.hold_state == ObjectHoldState.UNKNOWN:
+            raise MissionStateError("cannot pick another item while hold state is UNKNOWN")
+        if not self.place_verified_local and self.state == MissionState.DELIVERING:
+            raise MissionStateError("cannot pick another item until the current place is verified")
         if self.holding or self.state in (MissionState.PICKING, MissionState.DELIVERING):
             raise MissionStateError("must finish the open pick-deliver cycle before picking another")
         if self.state == MissionState.DONE:
@@ -98,10 +117,13 @@ class MissionOrchestrator:
         self.records.append(CycleRecord(self.current.id, self.current.kind, "pick", success, reason))
         if success:
             self.holding = True
+            self.hold_state = ObjectHoldState.HELD
             self.state = MissionState.DELIVERING
+            self.place_verified_local = False
         else:
             # Stay on the same remaining target. Physics is not reset.
             self.holding = False
+            self.hold_state = ObjectHoldState.EMPTY
             self.state = MissionState.WAITING_TASK
 
     def complete_deliver(self, success: bool, reason: Optional[str] = None) -> Optional[Target]:
@@ -112,13 +134,36 @@ class MissionOrchestrator:
         if success:
             self.pending = [item for item in self.pending if item.id != finished.id]
             self.holding = False
+            self.hold_state = ObjectHoldState.EMPTY
+            self.place_verified_local = True
             self.current = None
             self.state = MissionState.DONE if not self.pending else MissionState.WAITING_TASK
             return finished
-        # Drop / misplace: cycle scores 0, item may still be somewhere in the scene.
+        # Confirmed drop / misplace: cycle scores 0, item may still be somewhere in the scene.
         self.holding = False
+        self.hold_state = ObjectHoldState.EMPTY
+        self.place_verified_local = False
         self.state = MissionState.WAITING_TASK
         return None
+
+    def mark_hold_unknown(self, reason: str) -> None:
+        self.hold_state = ObjectHoldState.UNKNOWN
+        self.holding = True
+        self.context["hold_unknown_reason"] = reason
+
+    def mark_delivery_blocked(self, reason: str) -> None:
+        if self.state != MissionState.DELIVERING or self.current is None:
+            raise MissionStateError("mark_delivery_blocked requires an active delivery")
+        self.context["delivery_blocked"] = reason
+        self.records.append(CycleRecord(self.current.id, self.current.kind, "deliver_blocked", False, reason))
+
+    def note_place_unverified(self, reason: str) -> None:
+        self.place_verified_local = False
+        self.context["place_unverified"] = reason
+        if self.state == MissionState.DELIVERING:
+            self.holding = True
+            if self.hold_state == ObjectHoldState.EMPTY:
+                self.hold_state = ObjectHoldState.UNKNOWN
 
     def planned_cycles(self) -> List[dict]:
         return [

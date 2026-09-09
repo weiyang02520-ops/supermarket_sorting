@@ -102,6 +102,21 @@ class RosRobotController:
             raise ControlSafetyError("arm must be 'l' or 'r'")
         self._publish_array(publisher, values, 7, 2 * math.pi, f"{arm} arm")
 
+    def hold_targets(
+        self,
+        slide: float,
+        head_yaw_pitch,
+        left_arm,
+        left_grip: float,
+        right_arm,
+        right_grip: float,
+    ) -> None:
+        """Keep a carried pose. Does not change the spine/head scan defaults."""
+        self.command_spine(slide)
+        self.command_head(head_yaw_pitch)
+        self.command_arm("l", left_arm, left_grip)
+        self.command_arm("r", right_arm, right_grip)
+
     def hold_current_joints(self) -> None:
         if self.sensor_cache is None or not self.sensor_cache.joint_names:
             return

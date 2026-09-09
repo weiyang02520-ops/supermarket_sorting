@@ -949,8 +949,13 @@ def _nearest_index(points: Sequence[Point], x: float, y: float) -> int:
 
 
 def _east_aisle_then_west(points: Sequence[Point], x: float, y: float) -> List[Point]:
-    """Reach the yellow lane on the east side before cutting west toward delivery."""
-    if float(x) < 1.35 or float(y) < 1.70 or float(y) >= WEST_LANE_Y - 0.06:
+    """Reach the yellow lane on the east side before cutting west.
+
+    Must apply from spawn too. Skipping ``y < 1.70`` left the A* diagonal
+    ``(1.9, 1.9) → (1.6, 2.4)``, which drove northwest into the rack corner
+    (shelf_20260909_060912).
+    """
+    if float(x) < 1.35 or float(y) >= WEST_LANE_Y - 0.06:
         return list(points)
     later_west = any(px < float(x) - 0.30 and py > 1.70 for px, py in points)
     if not later_west:

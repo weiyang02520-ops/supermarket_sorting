@@ -1,0 +1,90 @@
+p4_shelf: start xy=(1.85,2.42) yaw=3.01 goal=(0.852,2.475) kind=shelf_approach stop=0.43 planner=grid geom=s0-20260906 laser=TF_REQUIRED max_lin=2.40 max_ang=1.65 known=8.0x explore=4.0x cruise=1.0x
+p4_shelf: xy=(1.85,2.42) yaw=3.01 wp=0/4 fwd=1.42 lin=0.00 ang=0.00 replan start state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=16.6
+p4_shelf: xy=(1.81,2.43) yaw=3.02 wp=1/4 fwd=2.20 lin=0.93 ang=0.17 cruise state=FOLLOW plan_id=1 attempts=1 detours=0 plan_ms=16.6
+p4_shelf: xy=(1.70,2.44) yaw=3.09 wp=1/4 fwd=2.10 lin=1.07 ang=0.08 cruise state=FOLLOW plan_id=2 attempts=2 detours=0 plan_ms=16.6
+p4_shelf: xy=(1.48,2.45) yaw=3.14 wp=2/4 fwd=1.90 lin=0.86 ang=0.01 cruise state=FOLLOW plan_id=2 attempts=2 detours=0 plan_ms=16.6
+p4_shelf: xy=(1.26,2.45) yaw=-3.14 wp=1/3 fwd=2.53 lin=0.19 ang=0.16 cruise state=FOLLOW plan_id=3 attempts=3 detours=0 plan_ms=15.3
+p4_shelf: xy=(1.18,2.44) yaw=-3.11 wp=1/3 fwd=2.43 lin=0.16 ang=0.17 cruise state=FOLLOW plan_id=4 attempts=4 detours=0 plan_ms=15.6
+p4_shelf: xy=(1.13,2.44) yaw=-3.07 wp=1/2 fwd=2.39 lin=0.18 ang=-0.26 cruise state=FOLLOW plan_id=5 attempts=5 detours=0 plan_ms=14.6
+p4_shelf: xy=(1.08,2.44) yaw=-3.13 wp=1/2 fwd=2.35 lin=0.18 ang=-0.20 cruise state=FOLLOW plan_id=5 attempts=5 detours=0 plan_ms=14.6
+p4_shelf: xy=(1.04,2.44) yaw=3.10 wp=1/2 fwd=2.31 lin=0.15 ang=-0.18 cruise state=FOLLOW plan_id=6 attempts=6 detours=0 plan_ms=14.6
+p4_shelf: xy=(1.00,2.44) yaw=3.05 wp=1/2 fwd=2.27 lin=0.12 ang=-0.17 cruise state=FOLLOW plan_id=7 attempts=7 detours=0 plan_ms=15.4
+p4_shelf: xy=(0.97,2.45) yaw=3.01 wp=2/2 fwd=1.42 lin=0.00 ang=-1.65 ALIGN_GOAL state=ALIGN_GOAL plan_id=8 attempts=8 detours=0 plan_ms=19.2
+p4_shelf: xy=(0.95,2.45) yaw=2.76 wp=2/2 fwd=1.40 lin=0.00 ang=-1.65 ALIGN_GOAL state=ALIGN_GOAL plan_id=8 attempts=8 detours=0 plan_ms=19.2
+p4_shelf: xy=(0.95,2.45) yaw=2.28 wp=2/2 fwd=0.72 lin=0.00 ang=-1.63 ALIGN_GOAL state=ALIGN_GOAL plan_id=8 attempts=8 detours=0 plan_ms=19.2
+p4_shelf: xy=(0.95,2.45) yaw=1.82 wp=2/2 fwd=0.73 lin=0.00 ang=-0.80 ALIGN_GOAL state=ALIGN_GOAL plan_id=8 attempts=8 detours=0 plan_ms=19.2
+p4_shelf: xy=(0.95,2.45) yaw=1.57 wp=2/2 fwd=0.99 lin=0.00 ang=-0.35 ALIGN_GOAL state=ALIGN_GOAL plan_id=8 attempts=8 detours=0 plan_ms=19.2
+p4_shelf: xy=(0.95,2.45) yaw=1.47 wp=2/2 fwd=0.97 lin=0.00 ang=-0.16 ALIGN_GOAL state=ALIGN_GOAL plan_id=8 attempts=8 detours=0 plan_ms=19.2
+
+{
+  "arrived": true,
+  "goal": "shelf",
+  "in_zone": true,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
+  "odom_xy": [
+    0.953,
+    2.448
+  ],
+  "yaw": 1.428,
+  "head_joints": {
+    "slide": 0.11606278066670495,
+    "head_yaw": 0.0019110875944329119,
+    "head_pitch": -0.11629960317474454
+  },
+  "goal_xy": [
+    0.852,
+    2.475
+  ],
+  "goal_kind": "shelf_approach",
+  "route": [
+    [
+      0.972,
+      2.446
+    ],
+    [
+      0.852,
+      2.475
+    ]
+  ],
+  "elapsed_s": 33.22,
+  "elapsed_wall_s": 33.22,
+  "elapsed_sim_s": null,
+  "failure_reason": "",
+  "status": "arrived",
+  "nav_state": "ARRIVED",
+  "detours": 0,
+  "plan_id": 8,
+  "plan_attempts": 8,
+  "plan_commits": 8,
+  "plan_reason": "stuck",
+  "geometry_version": "s0-20260906",
+  "laser_tf": {
+    "kind": "extrinsic",
+    "source": "unverified",
+    "status": "TF_REQUIRED",
+    "frame_parent": "base_link",
+    "frame_child": "laser",
+    "translation_xy": [
+      0.0,
+      0.0
+    ],
+    "yaw": 0.0,
+    "note": "Repo has no official T_base_laser. Runtime must look up TF; unit tests may pass an explicit identity. Do not silently guess zero."
+  },
+  "speed_scale": 8.0,
+  "known_speed_scale": 8.0,
+  "explore_speed_scale": 4.0,
+  "unknown_speed_scale": 1.0,
+  "max_lin": 2.4,
+  "explore_lin": 1.2,
+  "cruise_lin": 0.3,
+  "max_ang": 1.65,
+  "stop_dist": 0.43,
+  "slow_dist": null,
+  "blocked_by_scan": false,
+  "carry_hold": false,
+  "log_json": "/workspace/baseline/outputs/p4/shelf_20260909_061800.json",
+  "log_txt": "/workspace/baseline/outputs/p4/shelf_20260909_061800.log"
+}
+p4 log: /workspace/baseline/outputs/p4/shelf_20260909_061800.log

@@ -86,6 +86,16 @@ class P4ParamsTests(unittest.TestCase):
         self.assertEqual(snap["explore_speed_scale"], 4.0)
         self.assertEqual(snap["unknown_speed_scale"], 1.0)
 
+    def test_public_report_can_json_dump_with_a_planner_handle(self):
+        import json
+
+        from runtime.p4_nav import public_report
+
+        blob = public_report({"arrived": True, "_planner": object()})
+        self.assertTrue(blob["arrived"])
+        self.assertNotIn("_planner", blob)
+        json.dumps(blob)
+
 
 if __name__ == "__main__":
     unittest.main()

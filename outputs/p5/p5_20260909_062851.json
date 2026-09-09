@@ -1,0 +1,111 @@
+{
+  "grasped": false,
+  "placed": false,
+  "kind": "kele",
+  "used_json_xyz": false,
+  "nav_shelf": null,
+  "nav_delivery": null,
+  "log_json": "/workspace/baseline/outputs/p5/p5_20260909_062851.json",
+  "place_sequence_done": false,
+  "place_verified_local": false,
+  "referee_confirmed": null,
+  "note": "placed/place_verified_local are client evidence, not Server referee",
+  "target_id": "item_run_49eeaa43d221_32",
+  "phase": "failed",
+  "slot_hint": "D-L1-C2",
+  "lock_attempt": 1,
+  "object_world": [
+    0.9124,
+    3.2466,
+    0.9678
+  ],
+  "deploy_world": [
+    0.8679,
+    3.0309,
+    0.9578
+  ],
+  "approach_world": [
+    0.1527,
+    0.9883,
+    0.0
+  ],
+  "recipe_version": "kele-v1",
+  "c1": true,
+  "c2": false,
+  "c3": false,
+  "hold_state": "unknown",
+  "place_target_in_box": false,
+  "phase_timings": [
+    {
+      "phase": "init",
+      "t0": 0.16656827926635742,
+      "t1": 0.7086138725280762,
+      "elapsed_s": 0.542
+    },
+    {
+      "phase": "aim",
+      "t0": 0.7086138725280762,
+      "t1": 3.042222023010254,
+      "elapsed_s": 2.334
+    },
+    {
+      "phase": "deploy",
+      "t0": 3.042222023010254,
+      "t1": 17.291470527648926,
+      "elapsed_s": 14.249
+    },
+    {
+      "phase": "creep",
+      "t0": 17.291470527648926,
+      "t1": 18.87679934501648,
+      "elapsed_s": 1.585
+    },
+    {
+      "phase": "close",
+      "t0": 18.87679934501648,
+      "t1": 19.71610951423645,
+      "elapsed_s": 0.839
+    },
+    {
+      "phase": "lift",
+      "t0": 19.71610951423645
+    }
+  ],
+  "close_attempts": 1,
+  "reason": "grasp_timeout",
+  "elapsed_s": 56.75,
+  "elapsed_wall_s": 56.75,
+  "elapsed_sim_s": 62.67,
+  "odom_xy": [
+    0.916,
+    2.204
+  ],
+  "yaw": 1.42,
+  "in_picking_zone": true,
+  "in_delivery_base": false,
+  "failed": true,
+  "paused": false,
+  "look_hint": [
+    0.0,
+    -0.12
+  ],
+  "infer_s_mean": 0.072,
+  "infer_frames": 529,
+  "yolo_hits": 24,
+  "depth_hits": 24,
+  "last_yolo_n": 0,
+  "last_depth_n": 0,
+  "lock_timeout_rgb": null,
+  "control_dt_max": 0.041,
+  "control_dt_mean": 0.009,
+  "snapshot": {
+    "rgb_id": 1360,
+    "depth_id": 1360,
+    "rgb_stamp": 1788935397.4815133,
+    "depth_stamp": 1788935397.4815133,
+    "joint_stamp": 1788935400.4431813,
+    "rgbd_skew": 0.0,
+    "clock_sim": 1788935400.4431813
+  },
+  "failure_reason": "grasp_timeout"
+}

@@ -5,36 +5,123 @@
   "used_json_xyz": false,
   "nav_shelf": null,
   "nav_delivery": null,
-  "log_json": "/workspace/baseline/outputs/p5/p5_20260907_070153.json",
-  "note": "placed is the client sequence, not Server referee",
-  "target_id": "item_run_d29fd8aa0112_32",
+  "log_json": "/workspace/baseline/outputs/p5/p5_20260909_070221.json",
+  "place_sequence_done": false,
+  "place_verified_local": false,
+  "referee_confirmed": null,
+  "note": "placed/place_verified_local are client evidence, not Server referee",
+  "target_id": "item_run_d20eb3385640_32",
   "phase": "held",
   "slot_hint": null,
   "lock_attempt": 1,
   "object_world": [
-    0.9204,
-    3.2431,
-    0.9576
+    0.9176,
+    3.2401,
+    0.9152
   ],
   "deploy_world": [
-    0.9094,
-    3.0231,
-    0.9476
+    0.8841,
+    3.0227,
+    0.9052
   ],
-  "creep_stop_y": 3.2781,
+  "approach_world": [
+    0.1523,
+    0.9883,
+    0.0
+  ],
+  "recipe_version": "kele-v1",
+  "c1": true,
+  "c2": true,
+  "c3": false,
+  "hold_state": "held",
   "place_target_in_box": false,
-  "reason": "held",
-  "elapsed_s": 48.27,
-  "odom_xy": [
-    0.802,
-    2.525
+  "phase_timings": [
+    {
+      "phase": "init",
+      "t0": 0.0,
+      "t1": 0.925182580947876,
+      "elapsed_s": 0.925
+    },
+    {
+      "phase": "aim",
+      "t0": 0.925182580947876,
+      "t1": 1.5046155452728271,
+      "elapsed_s": 0.579
+    },
+    {
+      "phase": "deploy",
+      "t0": 1.5046155452728271,
+      "t1": 4.175908327102661,
+      "elapsed_s": 2.671
+    },
+    {
+      "phase": "creep",
+      "t0": 4.175908327102661,
+      "t1": 29.083647966384888,
+      "elapsed_s": 24.908
+    },
+    {
+      "phase": "close",
+      "t0": 29.083647966384888,
+      "t1": 30.66767144203186,
+      "elapsed_s": 1.584
+    },
+    {
+      "phase": "lift",
+      "t0": 30.66767144203186,
+      "t1": 32.2500216960907,
+      "elapsed_s": 1.582
+    },
+    {
+      "phase": "retreat",
+      "t0": 32.2500216960907,
+      "t1": 46.708765506744385,
+      "elapsed_s": 14.459
+    },
+    {
+      "phase": "held",
+      "t0": 46.708765506744385
+    }
   ],
-  "yaw": 1.378,
+  "close_attempts": 1,
+  "reason": "held",
+  "head_cmd": [
+    0.0,
+    -0.6
+  ],
+  "slide_cmd": -0.04,
+  "elapsed_s": 43.94,
+  "elapsed_wall_s": 43.94,
+  "elapsed_sim_s": 46.71,
+  "odom_xy": [
+    0.883,
+    2.147
+  ],
+  "yaw": 1.418,
   "in_picking_zone": true,
   "in_delivery_base": false,
   "failed": false,
+  "paused": false,
   "look_hint": [
     0.0,
     -0.6
-  ]
+  ],
+  "infer_s_mean": 0.068,
+  "infer_frames": 194,
+  "yolo_hits": 122,
+  "depth_hits": 122,
+  "last_yolo_n": 0,
+  "last_depth_n": 0,
+  "lock_timeout_rgb": null,
+  "control_dt_max": 0.049,
+  "control_dt_mean": 0.01,
+  "snapshot": {
+    "rgb_id": 974,
+    "depth_id": 973,
+    "rgb_stamp": 1788937394.2273712,
+    "depth_stamp": 1788937394.2273712,
+    "joint_stamp": 1788937394.2690105,
+    "rgbd_skew": 0.0,
+    "clock_sim": 1788937394.2273712
+  }
 }

@@ -9,7 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 
-from runtime.p4_nav import DEFAULT_TIMEOUT_S, SPEED_SCALE, drive_to_shelf
+from runtime.p4_nav import DEFAULT_TIMEOUT_S, SPEED_SCALE, drive_to_shelf, public_report
 from runtime.scene_zones import SHELF_APPROACH_XY
 
 
@@ -36,7 +36,7 @@ def main(argv=None) -> int:
             final_xy=(args.final_x, args.final_y),
             speed_scale=args.speed_scale,
         )
-        print(json.dumps(report, indent=2))
+        print(json.dumps(public_report(report), indent=2))
         if report["arrived"] and report["in_picking_zone"]:
             return 0
         return 1
